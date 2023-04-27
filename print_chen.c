@@ -39,7 +39,7 @@ void print_chen(BITMAP *page) {
                 rest(500);
                 memset(display, 0, sizeof(display));
                 i = 0;
-                if(current_phrase <4x){
+                if(current_phrase <4){
                     current_phrase = current_phrase + 1;
                 }
             }
