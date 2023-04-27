@@ -13,7 +13,7 @@ void print_chen(BITMAP *page) {
     int i = 0;
     int yrec =0;
     int xrec=0;
-    char* texte[] = {"Bonjour je suis le professeur chen ","Tu vas bien?","comment t'appelles tu?"};
+    char* texte[] = {"Bonjour je suis le professeur chen ","Tu vas bien?","comment t'appelles tu?","a","b"};
     bool text = true;
     bool flag = false;
     BITMAP *chen;
@@ -27,7 +27,7 @@ void print_chen(BITMAP *page) {
 
 
         if (text) {
-            if (i < strlen(texte[current_phrase]) && current_phrase <=2) {
+            if (i < strlen(texte[current_phrase]) && current_phrase <=3) {
                 display[i] = texte[current_phrase][i];
                 i++;
             }
@@ -39,7 +39,7 @@ void print_chen(BITMAP *page) {
                 rest(500);
                 memset(display, 0, sizeof(display));
                 i = 0;
-                if(current_phrase <4){
+                if(current_phrase <= 3){
                     current_phrase = current_phrase + 1;
                 }
             }

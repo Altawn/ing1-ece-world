@@ -13,6 +13,7 @@ typedef struct player{
         int x;
         int y;
         int mouv;
+        char name[50];
 }t_player;
 
 void print_chen(BITMAP*page);
