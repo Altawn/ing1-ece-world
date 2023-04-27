@@ -45,8 +45,8 @@ int main() {
     player1.y=0;
     player1.mouv=0;
 
+    //////////////////BITMAP/////////////////
     page = create_bitmap(640,480);
-
     fond = create_bitmap(SCREEN_W,SCREEN_H);
     clear_to_color(fond,255);
     t0 = load_bitmap("../t1.bmp",NULL);
@@ -67,6 +67,7 @@ int main() {
         printf("erreur");
     }
 
+    print_chen(page);
     while (!key[KEY_A])
     {
         depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
