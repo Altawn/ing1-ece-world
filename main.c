@@ -1,76 +1,129 @@
-
-#include "head.h"
-
-typedef struct objet{
-    int x1, y1, x2, y2;
-}t_objet;
+#include <stdio.h>
+#include <allegro.h>
 
 
-/*void colision(int x, int y, int x1, int y1, int x2, int y2){
-
-    if((x >= x2 ) ){
-        x =0;
-        y =0;
-
-         if (x -2 < x1)
-             x = x - 2;
-         if (x - 2 < x2)
-            x = x + 2;
-        if (y -2 < y1)
-            y = y - 2;
-        if (y - 2 < y2)
-            y = y + 2;
-    }
-}*/
-
-int main() {
-
-    t_player player1;
-    t_objet rectangle;
-
+void initialisation_allegro() {
     allegro_init();
     install_keyboard();
-    srand(time(NULL));
-    set_color_depth(desktop_color_depth());
-    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,640,480,0,0)!=0)
-    {
-        allegro_message("prb gfx mode");
+    install_mouse();
+
+    if (install_mouse() == -1) {
+        allegro_message("prb mouse\n :%s", allegro_error);
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+    if (install_keyboard() == -1) {
+        allegro_message("prb clavier\n :%s", allegro_error);
         allegro_exit();
         exit(EXIT_FAILURE);
     }
 
-    BITMAP* fond;BITMAP* t0;BITMAP* t1;BITMAP* t2;BITMAP* tup0;BITMAP* tup1;BITMAP* tup2;BITMAP* ts0;BITMAP* ts1;BITMAP* ts2;BITMAP * page;
-
-    player1.x=0;
-    player1.y=0;
-    player1.mouv=0;
-
-    page = create_bitmap(640,480);
-
-    fond = create_bitmap(SCREEN_W,SCREEN_H);
-    clear_to_color(fond,255);
-    t0 = load_bitmap("../t1.bmp",NULL);
-    t1 = load_bitmap("../t2.bmp",NULL);
-    t2 = load_bitmap("../t3.bmp",NULL);
-    ts0 = load_bitmap("../ts1.bmp",NULL);
-    ts1 = load_bitmap("../ts2.bmp",NULL);
-    ts2= load_bitmap("../ts3.bmp",NULL);
-    tup0 = load_bitmap("../tu1.bmp",NULL);
-    tup1 = load_bitmap("../tu2.bmp",NULL);
-    tup2= load_bitmap("../tu3.bmp",NULL);
-
-    blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-    draw_sprite(page,t0,0,0);
-    blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-
-    if(!fond){
-        printf("erreur");
+    set_color_depth(desktop_color_depth());
+    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640, 480, 0, 0) != 0) {
+        allegro_message("prb gfx mode\n :%s", allegro_error);
+        allegro_exit();
+        exit(EXIT_FAILURE);
     }
+    show_mouse(screen);
+}
 
-    while (!key[KEY_A])
-    {
-        depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
+
+
+
+
+int main() {
+    initialisation_allegro();
+
+    BITMAP* page=NULL;
+    BITMAP* fond_ecran;
+    BITMAP* pikachu;
+
+    page=create_bitmap(SCREEN_W,SCREEN_H);
+
+    if (!page){
+        allegro_message("Erreur creation page");}
+
+    clear_bitmap(screen);
+    fond_ecran=load_bitmap("../fond_ecran.bmp",NULL);
+    pikachu=load_bitmap("../tete_pikachu.bmp",NULL);
+
+
+
+    draw_sprite(fond_ecran,pikachu,17,0);
+
+
+    /*
+    circlefill(fond_ecran,64,430,35,makeacol(0,0,0,0));
+    circlefill(fond_ecran,192,430,35,makeacol(0,0,0,0));
+    circlefill(fond_ecran,318,430,35,makeacol(0,0,0,0));
+    circlefill(fond_ecran,446,430,35,makeacol(0,0,0,0));
+    circlefill(fond_ecran,574,430,35,makeacol(0,0,0,0));
+    */
+
+
+    int y_pikachu=-100;
+    while(!key[KEY_ESC]){
+
+
+
+        fond_ecran=load_bitmap("../fond_ecran.bmp",NULL);
+        for (int i = 0; i < 5; ++i) {
+            circlefill(fond_ecran,64+i*128,430,40,makecol(0,0,0));
+        }
+        draw_sprite(fond_ecran,pikachu,17,y_pikachu);
+
+        blit(fond_ecran,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
+
+if(keypressed()) {
+
+
+
+    if (key[KEY_Q]) {
+
+
+        if (y_pikachu > 290) {
+            y_pikachu = -100;
+
+
+        } else if (y_pikachu >= 0) {
+
+        }
+
+
+    } else if (key[KEY_W]) {
+
+        circlefill(fond_ecran, 192, 430, 50, makecol(0, 0, 0));
+
+
+    } else if (key[KEY_E]) {
+
+        circlefill(fond_ecran, 318, 430, 50, makecol(0, 0, 0));
+
+
+    } else if (key[KEY_R]) {
+
+        circlefill(fond_ecran, 446, 430, 50, makecol(0, 0, 0));
+
+
+    } else if (key[KEY_T]) {
+
+        circlefill(fond_ecran, 574, 430, 50, makecol(0, 0, 0));
+
+
+    }
+}
+
+
+        clear(fond_ecran);
+        y_pikachu+=2;
+        if(y_pikachu==480){
+            y_pikachu=-100;
+        }
+vsync();
     }
     return 0;
-}END_OF_MAIN()
 
+
+}END_OF_MAIN()
