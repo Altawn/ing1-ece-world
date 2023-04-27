@@ -2,13 +2,18 @@
 
 void print_chen(BITMAP *page) {
 
-    bool swap = false;
+    char nom_perso[256] = "";
+    int position_lettre = 0;
+
+    bool swap1 = false;
+    bool swap2 = false;
+
     bool circle = false;
     int pos = 113;
     int i = 0;
     int yrec =0;
     int xrec=0;
-    char* texte[] = {"Bonjour je suis le professeur chen ","Tu vas bien?"};
+    char* texte[] = {"Bonjour je suis le professeur chen ","Tu vas bien?","comment t'appelles tu?"};
     bool text = true;
     bool flag = false;
     BITMAP *chen;
@@ -22,10 +27,11 @@ void print_chen(BITMAP *page) {
 
 
         if (text) {
-            if (i < strlen(texte[current_phrase])) {
+            if (i < strlen(texte[current_phrase]) && current_phrase <=2) {
                 display[i] = texte[current_phrase][i];
                 i++;
             }
+
             else {
                 while (!key[KEY_ENTER]) {
                     rest(10);
@@ -33,11 +39,15 @@ void print_chen(BITMAP *page) {
                 rest(500);
                 memset(display, 0, sizeof(display));
                 i = 0;
-                current_phrase = current_phrase + 1;
+                if(current_phrase <4){
+                    current_phrase = current_phrase + 1;
+                }
             }
 
-            if(current_phrase >= 2 && swap == false ){
-                swap = true;
+            ///////////BULLE 1///////
+
+            if(current_phrase == 2 && swap1 == false ){
+                swap1 = true;
                 while (!key[KEY_ENTER]) {
                     circle = false;
                     if(key[KEY_UP]){
@@ -66,19 +76,48 @@ void print_chen(BITMAP *page) {
                 }
             }
 
+            ///////// BULLE 2///////
+            if(current_phrase == 3 && swap2 == false ){
+                swap2 = true;
+                while (!key[KEY_ENTER]) {
+                    if ( xrec<150){
+                        rectfill(screen,445,85,(455+xrec),(95+yrec), 0);
+                        rectfill(screen,450,90,(450+xrec),(90+yrec), makecol(255,255,255));
+                        rest(10);
+                        yrec++;
+                        xrec= xrec+6;
+                    }
+                    if (keypressed()) {
+                        int key_code = readkey();
+                        char lettre_nom = key_code & 0xFF;
+                        if (lettre_nom >= ' ' && lettre_nom <= '~' && position_lettre < 255) {
+                            nom_perso[position_lettre++] = lettre_nom;
+                            nom_perso[position_lettre] = '\0';
+                        }
+                        if(key[KEY_BACKSPACE]){
+                            if(position_lettre > 0){
+                                for (int j = position_lettre; j != -1; j--) {
+                                    nom_perso[j] = '\0';
+                                }
+                                rectfill(screen,450,90,(440+xrec),(80+yrec), makecol(255,255,255));
+                                position_lettre=0;
+                            }
+                        }
+                    }
+                    textout_ex(screen, font, nom_perso, 460, 100, makecol(0, 0, 0), -1);
+                }
+            }
+
             clear_bitmap(page);
             blit(chen, page, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 
-            if(current_phrase <=1){
-                textout_ex(screen, font, display, 40, 400, makecol(0, 0, 0), -1);
-            } else{
-                textout_ex(screen, font, texte[1], 40, 400, makecol(0, 0, 0), -1);
-            }
+            textout_ex(screen, font, display, 40, 400, makecol(0, 0, 0), -1);
+
             rest(25);
 
 
-            if (key[KEY_D]) {
+            if (key[KEY_1_PAD]) {
                 flag = true;
             }
         }
