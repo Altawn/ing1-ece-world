@@ -59,14 +59,11 @@ int main() {
     tup1 = load_bitmap("../tu2.bmp",NULL);
     tup2= load_bitmap("../tu3.bmp",NULL);
 
-    blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-    draw_sprite(page,t0,0,0);
-    blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-
     if(!fond){
         printf("erreur");
     }
 
+    ecran();
     print_chen(page);
     while (!key[KEY_A])
     {

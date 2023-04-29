@@ -16,6 +16,7 @@ typedef struct player{
         char name[50];
 }t_player;
 
+void ecran();
 void print_chen(BITMAP*page);
 void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BITMAP* t2,BITMAP* tup0,BITMAP* tup1,BITMAP* tup2,BITMAP* ts0,BITMAP* ts1,BITMAP* ts2);
 
