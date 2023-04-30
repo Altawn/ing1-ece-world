@@ -1,32 +1,11 @@
 
 #include "head.h"
 
-typedef struct objet{
-    int x1, y1, x2, y2;
-}t_objet;
-
-
-/*void colision(int x, int y, int x1, int y1, int x2, int y2){
-
-    if((x >= x2 ) ){
-        x =0;
-        y =0;
-
-         if (x -2 < x1)
-             x = x - 2;
-         if (x - 2 < x2)
-            x = x + 2;
-        if (y -2 < y1)
-            y = y - 2;
-        if (y - 2 < y2)
-            y = y + 2;
-    }
-}*/
 
 int main() {
 
     t_player player1;
-    t_objet rectangle;
+    t_objet rectangle ={320,240,360,260,0,0};
 
     allegro_init();
     install_keyboard();
@@ -63,11 +42,14 @@ int main() {
         printf("erreur");
     }
 
+    calc(&rectangle);
     ecran();
-    print_chen(page);
+    //print_chen(page);
     while (!key[KEY_A])
     {
+        rectfill(fond,rectangle.x,rectangle.y,rectangle.x+rectangle.w,rectangle.y+rectangle.h,0);
         depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
+        colision(&player1,&rectangle);
     }
     return 0;
 }END_OF_MAIN()

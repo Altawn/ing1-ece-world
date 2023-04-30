@@ -216,5 +216,4 @@ void print_chen(BITMAP *page) {
     }
     strcpy(nom_perso1,stock_nom1);
     strcpy(nom_perso2,stock_nom2);
-
 }

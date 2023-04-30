@@ -2,7 +2,6 @@
 
 void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BITMAP* t2,BITMAP* tup0,BITMAP* tup1,BITMAP* tup2,BITMAP* ts0,BITMAP* ts1,BITMAP* ts2){
 
-
     if(player->mouv <= 5 && key[KEY_RIGHT] ){
         blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
         draw_sprite(page,ts0,player->x,player->y);
