@@ -9,7 +9,7 @@ void ecran(){
        // draw_sprite(page,logo,10,0);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
 
-        textout_centre_ex(screen, font, "press enter to continue",320,350, makecol(0, 0, 0), -1);
+        textout_centre_ex(screen, font, "press enter to continue",512,445, makecol(0, 0, 0), -1);
         rest(100);
 
     }
@@ -203,8 +203,8 @@ void print_chen(BITMAP *page) {
 
 
 
-            clear_bitmap(page);
-            blit(chen, page, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            clear_to_color(page, makecol(82,107,231));
+            blit(chen, page, 0, 0, 192, 144, SCREEN_W, SCREEN_H);
             blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
             textout_ex(screen, font, display, 40, 400, makecol(0, 0, 0), -1);
 

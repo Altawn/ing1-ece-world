@@ -11,7 +11,7 @@ int main() {
     install_keyboard();
     srand(time(NULL));
     set_color_depth(desktop_color_depth());
-    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,640,480,0,0)!=0)
+    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,1024,768,0,0)!=0)
     {
         allegro_message("prb gfx mode");
         allegro_exit();
@@ -25,7 +25,7 @@ int main() {
     player1.mouv=0;
 
     //////////////////BITMAP/////////////////
-    page = create_bitmap(640,480);
+    page = create_bitmap(1024,768);
     fond = create_bitmap(SCREEN_W,SCREEN_H);
     clear_to_color(fond,255);
     t0 = load_bitmap("../t1.bmp",NULL);
@@ -44,7 +44,7 @@ int main() {
 
     calc(&rectangle);
     ecran();
-    //print_chen(page);
+    print_chen(page);
     while (!key[KEY_A])
     {
         rectfill(fond,rectangle.x,rectangle.y,rectangle.x+rectangle.w,rectangle.y+rectangle.h,0);
