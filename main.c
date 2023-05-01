@@ -7,6 +7,11 @@ int main() {
     t_player player1;
     t_objet rectangle ={320,240,360,260,0,0};
 
+    bool swap1 = false;
+    bool swap2 = false;
+    bool swap3 = false;
+    bool swap4 = false;
+
     allegro_init();
     install_keyboard();
     srand(time(NULL));
@@ -45,12 +50,32 @@ int main() {
     calc(&rectangle);
     ecran();
     print_chen(page);
+
     while (!key[KEY_A])
     {
         rectfill(fond,rectangle.x,rectangle.y,rectangle.x+rectangle.w,rectangle.y+rectangle.h,0);
         depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
         colision(&player1,&rectangle);
+        if (swap1 == true){
 
+            // jeux 1
+            swap1 = false;
+        }
+        if (swap2 == true){
+
+            // jeux 2
+            swap2 = false;
+        }
+        if (swap3 == true){
+
+            // jeux 3
+            swap3 = false;
+        }
+        if (swap4 == true){
+
+            // jeux 4
+            swap4 =false;
+        }
 
 
     }
