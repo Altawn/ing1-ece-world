@@ -4,6 +4,7 @@
 
 #define TRAINER_W 44
 #define TRAINER_H 46
+
 #include <stdio.h>
 #include "allegro.h"
 #include "time.h"

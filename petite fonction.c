@@ -12,7 +12,7 @@ void colision(t_player* player,t_objet* ob) {
     {
         if(player->x < ob->x){
             player->x =player->x-3;
-            swap = false; // ah non celle la marcha aussi
+            swap = false;
         }
         if(player->x > ob->x + ob->w && swap == true){
             player->x= player->x+3;
@@ -20,7 +20,7 @@ void colision(t_player* player,t_objet* ob) {
         }
         if(player->y < ob->y && swap == true){
            player->y =player->y-3;
-            swap = false;// seule condition qui marche
+            swap = false;
         }
         if(player->y > ob->y + ob->h && swap == true){
             player->y= player->y+3;

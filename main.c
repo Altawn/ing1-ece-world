@@ -50,6 +50,9 @@ int main() {
         rectfill(fond,rectangle.x,rectangle.y,rectangle.x+rectangle.w,rectangle.y+rectangle.h,0);
         depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
         colision(&player1,&rectangle);
+
+
+
     }
     return 0;
 }END_OF_MAIN()
