@@ -24,21 +24,28 @@ int main()
 
     //Autres variables
     Pok Magicarpe;
+    BITMAP * page = NULL;
 
     //Initialisation Allegro + structures
     init_allegro();
     Magicarpe = init_magicarpe();
 
+
+    //Double buffer
+    page = create_bitmap(800, 600);
+    clear_bitmap(page);
+    if(!page) allegro_message("Erreur creation page");
+
+    draw_sprite(page, Magicarpe->im_1, 0, 0);
+    blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
     //Boucle d'evenements
     while (!key[KEY_ESC])
     {
-        //1. Effacage position actuelle
-        rectfill(screen,Magicarpe->posx,Magicarpe->posy,Magicarpe->posx+Magicarpe->tx,Magicarpe->posy+Magicarpe->ty,makecol(0,0,0));
-        //2. Determiner nouvelle position
-        //3. Affichage nouvelle position
-        blit(Magicarpe->im_1,screen,0,0,Magicarpe->posx,Magicarpe->posy,Magicarpe->tx,Magicarpe->ty);
-        //4. Petite pause
-        rest(20);
+        clear_bitmap(page);
+        clear_to_color(page, makecol(255, 255, 255));
+        draw_sprite(page,Magicarpe->im_1,0,0);
+        blit(page,screen,0, 0, 0, 0, SCREEN_W,SCREEN_H);
     }
 
     allegro_exit();
@@ -65,11 +72,11 @@ Pok init_magicarpe()
     Magicarpe->tx = Magicarpe->im_1->w;
     Magicarpe->tx = Magicarpe->im_1->h;
 
-    Magicarpe->posx = 0;
-    Magicarpe->posy = 0;
+    Magicarpe->posx = SCREEN_W/2-Magicarpe->tx/2;;
+    Magicarpe->posy = SCREEN_H/2-Magicarpe->ty/2;
 
-    Magicarpe->depx = 0;
-    Magicarpe->depy = 0;
+    Magicarpe->depx = 9;
+    Magicarpe->depy = 5;
 
     return Magicarpe;
 }
