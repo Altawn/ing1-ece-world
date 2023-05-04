@@ -36,7 +36,9 @@ int main()
     clear_bitmap(page);
     if(!page) allegro_message("Erreur creation page");
 
-    draw_sprite(page, Magicarpe.im_1, 0, 0);
+    //draw_sprite(page, Magicarpe.im_1, 0, 0);
+    //draw_sprite(page, Papillusion.im_1, 100, 0);
+
     blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
 
     //Boucle d'evenements
@@ -45,6 +47,7 @@ int main()
         clear_bitmap(page);
         clear_to_color(page, makecol(255, 255, 255));
         draw_sprite(page,Magicarpe.im_1,0,0);
+        draw_sprite(page, Papillusion.im_1, 0, 100);
         blit(page,screen,0, 0, 0, 0, SCREEN_W,SCREEN_H);
     }
 
@@ -76,6 +79,31 @@ Pokemon init_magicarpe()
         exit(EXIT_FAILURE);
     }
     return Magicarpe;
+}
+
+Pokemon init_papillusion()
+{
+    Pokemon Papillusion =
+            {
+                    .im_1 = load_bitmap("80x95-Papillon.bmp",  NULL),
+                    .im_2 = load_bitmap("80x95-Papillon2.bmp",  NULL),
+                    .im_3 = load_bitmap("80x95-Papillon3.bmp", NULL),
+                    .im_4 = load_bitmap("80x95-Papillon4.bmp", NULL),
+                    .im_5 = load_bitmap("80x95-Papillon5.bmp", NULL),
+                    .tx = 0,
+                    .ty = 0,
+                    .posx = 0,
+                    .posy = 0,
+                    .depx = 0,
+                    .depy = 0
+            };
+    if(!Papillusion.im_1 || !Papillusion.im_2 || !Papillusion.im_3 || !Papillusion.im_4 || !Papillusion.im_5)
+    {
+        allegro_message("pb chargement image Papillusion");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+    return Papillusion;
 }
 
 void init_allegro()
