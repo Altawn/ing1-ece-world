@@ -1,21 +1,22 @@
 #include <stdio.h>
 #include <allegro.h>
+#define NIMAGE 5
 
 typedef struct
 {
-    BITMAP * im_1;
-    BITMAP * im_2;
-    BITMAP * im_3;
-    BITMAP * im_4;
-    BITMAP * im_5;
+    BITMAP * img[NIMAGE];
     int posx, posy;
     int tx, ty;
     int depx, depy;
+    int frame_act; //frame actuelle du pokemon
+    int compteur;
 }Pokemon, *Pok;
 
 Pokemon init_magicarpe();
 Pokemon init_papillusion();
 void init_allegro();
+void dessin_frame(Pokemon* animation, int x, int y, BITMAP * page);
+void animation_sprite(Pokemon*animation);
 
 int main()
 {
@@ -28,7 +29,7 @@ int main()
 
     //Autres variables + structures
     Pokemon Magicarpe = init_magicarpe();
-    Pokemon Papillusion = init_papillusion();
+    //Pokemon Papillusion = init_papillusion();
     BITMAP * page = NULL;
 
     //Double buffer
@@ -39,16 +40,23 @@ int main()
     //draw_sprite(page, Magicarpe.im_1, 0, 0);
     //draw_sprite(page, Papillusion.im_1, 100, 0);
 
-    blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-
     //Boucle d'evenements
     while (!key[KEY_ESC])
     {
         clear_bitmap(page);
-        clear_to_color(page, makecol(255, 255, 255));
-        draw_sprite(page,Magicarpe.im_1,0,0);
-        draw_sprite(page, Papillusion.im_1, 0, 100);
-        blit(page,screen,0, 0, 0, 0, SCREEN_W,SCREEN_H);
+        draw_sprite(page, Magicarpe.img[Magicarpe.frame_act], 0, 0);
+        //acquire_screen();
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        //release_screen();
+        //clear_to_color(page, makecol(255, 255, 255));
+        //animation_sprite(&Magicarpe);
+        //dessin_frame(&Magicarpe, 100, 100, page);
+        rest(200);
+        Magicarpe.frame_act++;
+        if(Magicarpe.frame_act >= NIMAGE) Magicarpe.frame_act = 0;
+        //draw_sprite(page,Magicarpe.im_1,0,0);
+        //draw_sprite(page, Papillusion.im_1, 0, 100);
+        //blit(page,screen,0, 0, 0, 0, SCREEN_W,SCREEN_H);
     }
 
     allegro_exit();
@@ -57,31 +65,34 @@ int main()
 
 Pokemon init_magicarpe()
 {
+    char nomfichier[256];
+
     Pokemon Magicarpe =
             {
-                    .im_1 = load_bitmap("80x95-Magicarpe.bmp",  NULL),
-                    .im_2 = load_bitmap("80x95-Magicarpe2.bmp",  NULL),
-                    .im_3 = load_bitmap("80x95-Magicarpe3.bmp", NULL),
-                    .im_4 = load_bitmap("80x95-Magicarpe4.bmp", NULL),
-                    .im_5 = load_bitmap("80x95-Magicarpe5.bmp", NULL),
-                    .tx = 0,
-                    .ty = 0,
+                    .tx = 80,
+                    .ty = 95,
                     .posx = 0,
                     .posy = 0,
                     .depx = 0,
-                    .depy = 0
+                    .depy = 0,
+                    .frame_act = 0,
+                    .compteur = 0
             };
 
-    if(!Magicarpe.im_1 || !Magicarpe.im_2 || !Magicarpe.im_3 || !Magicarpe.im_4 || !Magicarpe.im_5)
-    {
-        allegro_message("pb chargement image Magicarpe");
-        allegro_exit();
-        exit(EXIT_FAILURE);
+    for (int i = 0; i < NIMAGE; ++i) {
+        sprintf(nomfichier, "80x95-Magicarpe%d.bmp", i + 1);
+
+        Magicarpe.img[i] = load_bitmap(nomfichier, NULL);
+        if (!Magicarpe.img[i]) {
+            allegro_message("Fichier %s non existant", nomfichier);
+            exit(EXIT_FAILURE);
+
+        }
     }
     return Magicarpe;
 }
 
-Pokemon init_papillusion()
+/*Pokemon init_papillusion()
 {
     Pokemon Papillusion =
             {
@@ -105,6 +116,7 @@ Pokemon init_papillusion()
     }
     return Papillusion;
 }
+*/
 
 void init_allegro()
 {
@@ -119,4 +131,17 @@ void init_allegro()
         allegro_exit();
         exit(EXIT_FAILURE);
     }
+}
+
+void dessin_frame(Pokemon* animation, int x, int y, BITMAP * page)
+{
+    BITMAP * frame = animation->img[animation->frame_act];
+    masked_blit(frame, page, 0, 0, x, y, 80, 95);
+}
+
+void animation_sprite(Pokemon*animation)
+{
+    rest(20);
+    animation->frame_act += 1;
+    if(animation->frame_act > NIMAGE) animation->frame_act = 0;
 }
