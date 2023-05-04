@@ -49,15 +49,20 @@ int main() {
 
     calc(&rectangle);
     ecran();
-    print_chen(page);
+    //print_chen(page);
 
     while (!key[KEY_A])
     {
         rectfill(fond,rectangle.x,rectangle.y,rectangle.x+rectangle.w,rectangle.y+rectangle.h,0);
         depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
-        colision(&player1,&rectangle);
-        if (swap1 == true){
 
+        if(colision(&player1,&rectangle)){
+            swap1 = true;
+        }
+
+        if (swap1 == true){
+            clear(page);
+            snake();
             // jeux 1
             swap1 = false;
         }

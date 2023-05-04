@@ -3,8 +3,6 @@
 void ecran(){
     BITMAP* page;
     page = load_bitmap("../pokepark.bmp",NULL);
-    BITMAP* logo;
-    //logo = load_bitmap("../Pokemon-ECE-version.bmp",NULL);
     while(!key[KEY_ENTER]){
        // draw_sprite(page,logo,10,0);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);

@@ -1,12 +1,11 @@
 #include "head.h"
 
-void colision(t_player* player,t_objet* ob) {
+bool colision(t_player* player,t_objet* ob) {
 
     bool swap = true;
 
     if (player->x - 5 < ob->x + ob->w &&
-        player->x + 25
-        > ob->x &&
+        player->x + 25> ob->x &&
         player->y - 5 < ob->y + ob->h &&
         player->y + 30 > ob->y  )
     {
@@ -26,7 +25,9 @@ void colision(t_player* player,t_objet* ob) {
             player->y= player->y+3;
             swap = false;
         }
+        return true;
     }
+    return false;
 }
 
 void calc(t_objet* ob){
