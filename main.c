@@ -28,15 +28,15 @@ int main()
 
     //Initialisation Allegro + structures
     init_allegro();
-    Magicarpe = init_magicarpe();
-
+    //Magicarpe = init_magicarpe();
+    BITMAP * test = load_bitmap("80x95-Magicarpe.bmp", NULL);
 
     //Double buffer
     page = create_bitmap(800, 600);
     clear_bitmap(page);
     if(!page) allegro_message("Erreur creation page");
 
-    draw_sprite(page, Magicarpe->im_1, 0, 0);
+    draw_sprite(page, test, 0, 0);
     blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
 
     //Boucle d'evenements
@@ -44,7 +44,7 @@ int main()
     {
         clear_bitmap(page);
         clear_to_color(page, makecol(255, 255, 255));
-        draw_sprite(page,Magicarpe->im_1,0,0);
+        draw_sprite(page,test,0,0);
         blit(page,screen,0, 0, 0, 0, SCREEN_W,SCREEN_H);
     }
 
@@ -72,7 +72,7 @@ Pok init_magicarpe()
     Magicarpe->tx = Magicarpe->im_1->w;
     Magicarpe->tx = Magicarpe->im_1->h;
 
-    Magicarpe->posx = SCREEN_W/2-Magicarpe->tx/2;;
+    Magicarpe->posx = SCREEN_W/2-Magicarpe->tx/2;
     Magicarpe->posy = SCREEN_H/2-Magicarpe->ty/2;
 
     Magicarpe->depx = 9;
