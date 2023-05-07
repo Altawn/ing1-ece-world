@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <allegro.h>
+#include <stdlib.h>
+
 
 
 void initialisation_allegro() {
@@ -36,7 +38,8 @@ int main() {
 
     BITMAP* page=NULL;
     BITMAP* fond_ecran;
-    BITMAP* pikachu;
+    BITMAP* fond_ecran2;
+    BITMAP* pikachu[3];
 
     page=create_bitmap(SCREEN_W,SCREEN_H);
 
@@ -44,12 +47,14 @@ int main() {
         allegro_message("Erreur creation page");}
 
     clear_bitmap(screen);
+    for (int i = 0; i < 3; ++i) {
+        pikachu[i]=load_bitmap("../tete_pikachu.bmp",NULL);
+    }
+
     fond_ecran=load_bitmap("../fond_ecran.bmp",NULL);
-    pikachu=load_bitmap("../tete_pikachu.bmp",NULL);
+    fond_ecran2=load_bitmap("../fond_ecran.bmp",NULL);
 
 
-
-    draw_sprite(fond_ecran,pikachu,17,0);
 
 
     /*
@@ -61,16 +66,25 @@ int main() {
     */
 
 
-    int y_pikachu=-100;
+    int y_pikachu[3];
+    int vitesse=1;
+    int temp=0;
+    for (int i = 0; i < 3; ++i) {
+        y_pikachu[i]=-100;
+    }
+    int nb[3];
     while(!key[KEY_ESC]){
 
+        blit(fond_ecran2,fond_ecran,0,0,0,0,SCREEN_W,SCREEN_H);
 
 
-        fond_ecran=load_bitmap("../fond_ecran.bmp",NULL);
         for (int i = 0; i < 5; ++i) {
-            circlefill(fond_ecran,64+i*128,430,40,makecol(0,0,0));
+            circlefill(fond_ecran,64+i*128,430,40,makecol(255,0,0));
         }
-        draw_sprite(fond_ecran,pikachu,17,y_pikachu);
+        for (int i = 0; i < 3; ++i) {
+            draw_sprite(fond_ecran,pikachu[i],17,y_pikachu[i]);
+        }
+       // draw_sprite(fond_ecran,pikachu,17,y_pikachu);
 
         blit(fond_ecran,page,0,0,0,0,SCREEN_W,SCREEN_H);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
@@ -81,17 +95,26 @@ if(keypressed()) {
 
 
     if (key[KEY_Q]) {
-
-
-        if (y_pikachu > 290) {
-            y_pikachu = -100;
-
-
-        } else if (y_pikachu >= 0) {
-
+int verification_touche=0;
+        for (int i = 0; i < 3; ++i) {
+            if (y_pikachu[i] > 290) {
+                y_pikachu[i] = -100;
+                verification_touche=1;
+            }
         }
+        if(verification_touche==0){
 
 
+            }
+
+    /*    if (y_pikachu[0] > 290) {
+            y_pikachu[0] = -100;
+        }else if (y_pikachu[1] > 290) {
+            y_pikachu[1] = -100;
+        }else if (y_pikachu[2] > 290) {
+            y_pikachu[2] = -100;
+        }
+*/
     } else if (key[KEY_W]) {
 
         circlefill(fond_ecran, 192, 430, 50, makecol(0, 0, 0));
@@ -116,12 +139,35 @@ if(keypressed()) {
 }
 
 
-        clear(fond_ecran);
-        y_pikachu+=2;
-        if(y_pikachu==480){
-            y_pikachu=-100;
+        clear_bitmap(fond_ecran);
+
+        for (int i = 0; i < 3; ++i) {
+
+
+if(y_pikachu[i]==-100){
+
+    nb[i]=rand()%200;
+    if(nb[i]==5 && (y_pikachu[0]>1 || y_pikachu[0]==-100) && (y_pikachu[1]>1 || y_pikachu[1]==-100) && (y_pikachu[2]>1 || y_pikachu[2]==-100)){
+        y_pikachu[i]=-99;
+
+    }
+}else if(y_pikachu[i]>-100){
+        y_pikachu[i]+=vitesse;}
+
+         if(y_pikachu[i]>450){
+
+
         }
+
+        }
+
+        temp+=1;
+        if(temp % 1000 ==0){
+            vitesse+=1;
+        }
+
 vsync();
+
     }
     return 0;
 
