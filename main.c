@@ -1,4 +1,3 @@
-
 #include "head.h"
 
 
@@ -57,7 +56,7 @@ int main() {
         depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
 
         if(colision(&player1,&rectangle)){
-            swap1 = true;
+            swap2 = true;
         }
 
         if (swap1 == true){
@@ -67,7 +66,9 @@ int main() {
             swap1 = false;
         }
         if (swap2 == true){
-
+            clear(page);
+            guitar_hero();
+            depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
             // jeux 2
             swap2 = false;
         }

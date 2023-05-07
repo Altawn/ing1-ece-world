@@ -1,6 +1,8 @@
-
 #ifndef PROJET_HEAD_H
 #define PROJET_HEAD_H
+#define NB_poke_guitare 5
+
+
 
 #define TRAINER_W 44
 #define TRAINER_H 46
@@ -58,5 +60,8 @@ t_liste *initialisation(BITMAP* base);
 void add_part(t_liste* liste,BITMAP* base);
 void move_snake(t_liste* serpent,int mouvement);
 
-
+///////////jeux de matthias//////
+void deplacement(int y_poke[NB_poke_guitare], int vitesse,int *perreur);
+void verification_touche(int y_poke[NB_poke_guitare],int *perreur);
+void guitar_hero();
 #endif //PROJET_HEAD_H
