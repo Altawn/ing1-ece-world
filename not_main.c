@@ -62,7 +62,7 @@ void init_allegro()
     install_mouse();
 
     set_color_depth(desktop_color_depth());
-    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,800,600,0,0)!=0)
+    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,1024,768,0,0)!=0)
     {
         allegro_message("probleme mode graphique");
         allegro_exit();
@@ -83,17 +83,52 @@ Pokemon * init_pokemon(int tx, int ty, int xdx, int posx, int posy, int pok, int
     random->tx = tx;      random->ty = ty;
     random->pok = pok;    random->frame_act = 0;
     random->cptimg = 0;
-    for (int i = 0; i < NIMAGE; ++i)
-    {
-        sprintf(nomfichier, "80x95-Magicarpe%d.bmp", i + 1);
-        random->img[i] = load_bitmap(nomfichier, NULL);
-        if (!random->img[i])
-        {
-            allegro_message("Fichier %s non existant", nomfichier);
-            exit(EXIT_FAILURE);
-        }
 
+    if(random->pok == 0)
+    {
+        for (int i = 0; i < NIMAGE; ++i)
+        {
+            sprintf(nomfichier, "80x95-Magicarpe%d.bmp", i + 1);
+            random->img[i] = load_bitmap(nomfichier, NULL);
+            if (!random->img[i])
+            {
+                allegro_message("Fichier %s non existant", nomfichier);
+                exit(EXIT_FAILURE);
+            }
+
+        }
     }
+
+    if(random->pok == 1)
+    {
+        for (int i = 0; i < NIMAGE; ++i)
+        {
+            sprintf(nomfichier, "80x95-Papillon%d.bmp", i + 1);
+            random->img[i] = load_bitmap(nomfichier, NULL);
+            if (!random->img[i])
+            {
+                allegro_message("Fichier %s non existant", nomfichier);
+                exit(EXIT_FAILURE);
+            }
+
+        }
+    }
+
+    else
+    {
+        for (int i = 0; i < NIMAGE; ++i)
+        {
+            sprintf(nomfichier, "80x95-Magicarpe%d.bmp", i + 1);
+            random->img[i] = load_bitmap(nomfichier, NULL);
+            if (!random->img[i])
+            {
+                allegro_message("Fichier %s non existant", nomfichier);
+                exit(EXIT_FAILURE);
+            }
+
+        }
+    }
+
     return random;
 }
 
@@ -108,9 +143,6 @@ void remp_tab_pok(Pokemon * tab_rand[NPOK])
 
 void Actu_Pok(Pokemon * random)
 {
-    //Gestion du bord
-    if (random->posx > SCREEN_W) random->posx = 0; //-> j'en ai techniquement besoin qu'apres que les joueurs relancent la partie
-
     //Enchainement images
     random->cptimg++;
     if(random->cptimg >= random->tmpimg)
