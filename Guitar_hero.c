@@ -1,32 +1,5 @@
 #include "head.h"
 
-void initialisation_allegro() {
-    allegro_init();
-    install_keyboard();
-    install_mouse();
-
-    if (install_mouse() == -1) {
-        allegro_message("prb mouse\n :%s", allegro_error);
-        allegro_exit();
-        exit(EXIT_FAILURE);
-    }
-    if (install_keyboard() == -1) {
-        allegro_message("prb clavier\n :%s", allegro_error);
-        allegro_exit();
-        exit(EXIT_FAILURE);
-    }
-
-    set_color_depth(desktop_color_depth());
-    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED, 1024, 768, 0, 0) != 0) {
-        allegro_message("prb gfx mode\n :%s", allegro_error);
-        allegro_exit();
-        exit(EXIT_FAILURE);
-    }
-    show_mouse(screen);
-}
-
-
-
 
 void deplacement(int y_poke[NB_poke_guitare], int vitesse,int *perreur){
     int i,j;
@@ -81,10 +54,7 @@ void verification_touche(int y_poke[NB_poke_guitare],int *perreur){
 
 }
 
-
-void guitar_hero() {
-    initialisation_allegro();
-
+int partie(BITMAP* page){
     int y_pikachu[NB_poke_guitare];
     int y_carapuce[NB_poke_guitare];
     int y_dracaufeu[NB_poke_guitare];
@@ -97,16 +67,17 @@ void guitar_hero() {
     int temp_touche=0;
     int erreur=0;
 
-    BITMAP* page=NULL;
+
     BITMAP* fond_ecran;
     BITMAP* fond_ecran2;
+
     BITMAP* pikachu[NB_poke_guitare];
     BITMAP* carapuce[NB_poke_guitare];
     BITMAP* dracaufeu[NB_poke_guitare];
     BITMAP* evoli[NB_poke_guitare];
     BITMAP* rondoudou[NB_poke_guitare];
 
-    page=create_bitmap(SCREEN_W,SCREEN_H);
+
 
     if (!page){
         allegro_message("Erreur creation page");}
@@ -128,6 +99,7 @@ void guitar_hero() {
 
 
 
+
     for ( i = 0; i < NB_poke_guitare; ++i) {
         y_pikachu[i]=-100;
         y_carapuce[i]=-100;
@@ -137,7 +109,6 @@ void guitar_hero() {
     }
 
     srand(time(NULL));
-
     while(!key[KEY_ESC] && erreur==0 ){
 
         blit(fond_ecran2,fond_ecran,0,0,0,0,SCREEN_W,SCREEN_H);
@@ -199,5 +170,40 @@ void guitar_hero() {
         vsync();
 
     }
+    return temp;
+}
+
+void guitar_hero() {
+
+
+
+    BITMAP* game_over;
+    BITMAP* page=NULL;
+
+    game_over=load_bitmap("../game_over.bmp",NULL);
+    page=create_bitmap(SCREEN_W,SCREEN_H);
+
+    int temp[2];
+    int i;
+
+    for ( i = 0; i < 2; ++i) {
+        temp[i]=0;
+        temp[i]=partie(page);
+
+        while(!key[KEY_X]){
+
+            blit(game_over,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
+        }
+    }
+
+
+    if(temp[0]>temp[1]){
+        printf("le premier a gagne");
+    }else{
+        printf("le deuxieme a gagne");
+    }
+
 
 }
