@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <allegro.h>
+
+void jeu_maximiliano(){
+    allegro_init();
+    /*int position_x = 100;
+    int position_y = 200;
+    BITMAP *sprite_pikachu_tete;
+    sprite_pikachu_tete = load_bitmap("../pikachu_lataupe.bmp", NULL);
+    if(!sprite_pikachu_tete){
+        allegro_message("l'image ne charge pas");
+        exit(1);
+    }
+    draw_sprite(screen,sprite_pikachu_tete,SCREEN_W/2-sprite_pikachu_tete->w/2,SCREEN_H-sprite_pikachu_tete->h);
+    /*BITMAP *taupe_la_map;
+    BITMAP  *buffer;
+    buffer = create_bitmap(SCREEN_W,SCREEN_H);
+    clear_bitmap(buffer) ;*/
+}
+
+int main() {
+    jeu_maximiliano();
+
+
+    return 0;
+}END_OF_MAIN();
