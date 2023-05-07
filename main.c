@@ -24,14 +24,26 @@ int main()
     while (!key[KEY_ESC])
     {
         clear_bitmap(page);
-        draw_sprite(page, tab_pok[0]->img[tab_pok[0]->frame_act], 0, 0);
-        draw_sprite(page, tab_pok[1]->img[tab_pok[1]->frame_act], 0, 100);
+        for (int i = 0; i < NPOK*100; i = i+100)
+        {
+            draw_sprite(page, tab_pok[i/100]->img[tab_pok[i/100]->frame_act], 0, i);
+        }
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
         rest(100);
-        tab_pok[0]->frame_act++;
-        tab_pok[1]->frame_act++;
-        if(tab_pok[0]->frame_act >= NIMAGE) tab_pok[0]->frame_act = 0;
-        if(tab_pok[1]->frame_act >= NIMAGE) tab_pok[1]->frame_act = 1;
+
+        for (int i = 0; i < NPOK; ++i)
+        {
+            if(tab_pok[i]->pok == 2)
+            {
+                tab_pok[i]->frame_act++;
+                if(tab_pok[i]->frame_act >= 4) tab_pok[i]->frame_act = 0;
+            }
+            else
+            {
+                tab_pok[i]->frame_act++;
+                if(tab_pok[i]->frame_act >= NIMAGE) tab_pok[i]->frame_act = 0;
+            }
+        }
     }
 
     for (int i = 0; i < NPOK; ++i)

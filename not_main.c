@@ -99,7 +99,7 @@ Pokemon * init_pokemon(int tx, int ty, int xdx, int posx, int posy, int pok, int
         }
     }
 
-    if(random->pok == 1)
+    else if(random->pok == 1)
     {
         for (int i = 0; i < NIMAGE; ++i)
         {
@@ -114,11 +114,11 @@ Pokemon * init_pokemon(int tx, int ty, int xdx, int posx, int posy, int pok, int
         }
     }
 
-    else
+    else if(random->pok == 2)
     {
-        for (int i = 0; i < NIMAGE; ++i)
+        for (int i = 0; i < 4; ++i)
         {
-            sprintf(nomfichier, "80x95-Magicarpe%d.bmp", i + 1);
+            sprintf(nomfichier, "90x95-toreau%d.bmp", i + 1);
             random->img[i] = load_bitmap(nomfichier, NULL);
             if (!random->img[i])
             {
@@ -129,6 +129,35 @@ Pokemon * init_pokemon(int tx, int ty, int xdx, int posx, int posy, int pok, int
         }
     }
 
+    else if(random->pok == 3)
+    {
+        for (int i = 0; i < NIMAGE; ++i)
+        {
+            sprintf(nomfichier, "90x95-ponita%d.bmp", i + 1);
+            random->img[i] = load_bitmap(nomfichier, NULL);
+            if (!random->img[i])
+            {
+                allegro_message("Fichier %s non existant", nomfichier);
+                exit(EXIT_FAILURE);
+            }
+
+        }
+    }
+
+    else
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            sprintf(nomfichier, "90x95-toreau%d.bmp", i + 1);
+            random->img[i] = load_bitmap(nomfichier, NULL);
+            if (!random->img[i])
+            {
+                allegro_message("Fichier %s non existant", nomfichier);
+                exit(EXIT_FAILURE);
+            }
+
+        }
+    }
     return random;
 }
 
@@ -136,7 +165,7 @@ void remp_tab_pok(Pokemon * tab_rand[NPOK])
 {
     tab_rand[0] = init_pokemon(80, 95, 1, 0,   0, 0, 1, 5);
     tab_rand[1] = init_pokemon(80, 95, 1, 0, 100, 1, 1, 5);
-    tab_rand[2] = init_pokemon(80, 95, 1, 0, 200, 2, 1, 5);
+    tab_rand[2] = init_pokemon(90, 95, 1, 0, 200, 2, 1, 4);
     tab_rand[3] = init_pokemon(80, 95, 1, 0, 300, 3, 1, 5);
     tab_rand[4] = init_pokemon(80, 95, 1, 0, 400, 4, 1, 5);
 }
