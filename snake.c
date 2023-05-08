@@ -2,16 +2,16 @@
 
 void pomme_init(BITMAP* base2,t_pomme* apple){
     apple->base = base2;
-    apple->y = (rand()%13)*60;
-    apple->x = (rand()%17)*60;
+    apple->y = (rand()%12)*64;
+    apple->x = (rand()%16)*64;
 
 }
 
 bool colision_snake(t_liste* liste,t_pomme* pomme,BITMAP* base) {
-    if (liste->head->x < pomme->x +60 &&
-        liste->head->x + 60> pomme->x &&
-        liste->head->y  < pomme->y +60 &&
-        liste->head->y + 60 > pomme->y  ){
+    if (liste->head->x < pomme->x +64 &&
+        liste->head->x + 64> pomme->x &&
+        liste->head->y  < pomme->y +64 &&
+        liste->head->y + 64 > pomme->y  ){
         pomme_init(base,pomme);
         return true;
     }
@@ -30,8 +30,8 @@ t_liste *initialisation(BITMAP* base)
         exit(EXIT_FAILURE);
     }
 
-    element->x = 0;
-    element->y =0;
+    element->x = 64;
+    element->y =64;
     element->next = NULL;
     element->base = base;
     liste->head = element;
@@ -50,7 +50,7 @@ void add_part(t_liste* liste,BITMAP* base)
     {
         actuel = actuel->next;
     }
-    nouvel_element->x= actuel->x-60;
+    nouvel_element->x= actuel->x-64;
     nouvel_element->y= actuel->y;
     actuel->next = nouvel_element;
 
@@ -60,12 +60,9 @@ void add_part(t_liste* liste,BITMAP* base)
 void move_snake(t_liste* serpent,int mouvement) {
     if (mouvement == 1) { // Déplacement vers la gauche
         t_snake* actuel = serpent->head;
-        if(serpent->head->x <= 0){
-            serpent->head->x = SCREEN_W;
-        }
         int prev_x = serpent->head->x;
         int prev_y = serpent->head->y;
-        serpent->head->x -= 60;
+        serpent->head->x -= 64;
         actuel = actuel->next;
         while (actuel != NULL) {
             int temp_x = actuel->x;
@@ -79,12 +76,9 @@ void move_snake(t_liste* serpent,int mouvement) {
     }
     else if (mouvement == 2) { // Déplacement vers la droite
         t_snake* actuel = serpent->head;
-        if(serpent->head->x >= SCREEN_W){
-            serpent->head->x = 0;
-        }
         int prev_x = serpent->head->x;
         int prev_y = serpent->head->y;
-        serpent->head->x += 60;
+        serpent->head->x += 64;
         actuel = actuel->next;
         while (actuel != NULL) {
             int temp_x = actuel->x;
@@ -98,12 +92,9 @@ void move_snake(t_liste* serpent,int mouvement) {
     }
     else if (mouvement == 4) { // Déplacement vers le bas
         t_snake* actuel = serpent->head;
-        if(serpent->head->y >= SCREEN_H){
-            serpent->head->y = 0;
-        }
         int prev_x = serpent->head->x;
         int prev_y = serpent->head->y;
-        serpent->head->y += 60;
+        serpent->head->y += 64;
         actuel = actuel->next;
         while (actuel != NULL) {
             int temp_x = actuel->x;
@@ -117,12 +108,9 @@ void move_snake(t_liste* serpent,int mouvement) {
     }
     else if (mouvement == 3) { // Déplacement vers le haut
         t_snake* actuel = serpent->head;
-        if(serpent->head->y <= 0){
-            serpent->head->y = SCREEN_H;
-        }
         int prev_x = serpent->head->x;
         int prev_y = serpent->head->y;
-        serpent->head->y -= 60;
+        serpent->head->y -= 64;
         actuel = actuel->next;
         while (actuel != NULL) {
             int temp_x = actuel->x;
@@ -139,8 +127,21 @@ void move_snake(t_liste* serpent,int mouvement) {
 
 }
 
-void afficherListe(t_liste *liste,BITMAP* page)
+void afficherListe(t_liste *liste,BITMAP* page,BITMAP* head1,BITMAP* head2,BITMAP* head3,BITMAP* head4,int mouvement)
 {
+    if(mouvement == 1){
+        liste->head->base = head1;
+    }
+    if(mouvement == 3){
+        liste->head->base = head2;
+    }
+    if(mouvement == 2){
+        liste->head->base = head3;
+    }
+    if(mouvement == 4){
+        liste->head->base = head4;
+    }
+
     if (liste == NULL)
     {
         exit(EXIT_FAILURE);
@@ -155,22 +156,42 @@ void afficherListe(t_liste *liste,BITMAP* page)
     }
 }
 
+bool snake_defeat(int nbpart, t_liste* serpent) {
+
+    t_snake* head = serpent->head;
+    t_snake* actuel = head->next;
+
+    for (int i = 1; i < nbpart; i++) {
+        if (head->x == actuel->x && head->y == actuel->y) {
+            return true;
+        }
+        actuel= actuel->next;
+    }
+    return false;
+}
+
+
 
 void snake() {
+   BITMAP* head1= load_bitmap("../onyx_head1.bmp",NULL);
+   BITMAP* head2= load_bitmap("../onyx_head2.bmp",NULL);
+   BITMAP* head3= load_bitmap("../onyx_head3.bmp",NULL);
+   BITMAP* head4= load_bitmap("../onyx_head4.bmp",NULL);
 
-    BITMAP* base = create_bitmap(60,60);
-    BITMAP* base2 = create_bitmap(60,60);
+    BITMAP* base = load_bitmap("../onyx_part.bmp",NULL);
+    BITMAP* base2 = create_bitmap(64,64);
     BITMAP* page = create_bitmap(1024,768);
-    clear_to_color(base,255);
     clear_to_color(base2, makecol(255,0,0));
     t_pomme * apple = malloc(sizeof(t_pomme*));
     int mouvement =2;
+    int nb_part = 1;
+    bool end =true ;
     t_liste* serpent = initialisation(base);
     pomme_init(base2,apple);
 
     add_part(serpent,base);
 
-    while(!key[KEY_SPACE]){
+    while(!key[KEY_SPACE] && end){
 
         if(key[KEY_LEFT]){
             mouvement = 1;
@@ -188,16 +209,25 @@ void snake() {
         clear_to_color(page, makecol(255,255,255));
         move_snake(serpent,mouvement);
         if(colision_snake(serpent,apple,base2) == true){
+            nb_part++;
             add_part(serpent,base);
         }
         if(key[KEY_E]){
+            nb_part++;
             add_part(serpent,base);
             rest(100);
         }
-        afficherListe(serpent,page);
+        if(serpent->head->x == SCREEN_W || serpent->head->x == 0 || serpent->head->y == SCREEN_H || serpent->head->y == 0){
+            end =false;
+        }
+
+        if (snake_defeat(nb_part,serpent)){
+            end =false;
+        }
+
+        afficherListe(serpent,page,head1,head2,head3,head4,mouvement);
         draw_sprite(page,apple->base,apple->x,apple->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_W);
     }
 }
-
 
