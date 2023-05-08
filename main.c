@@ -26,6 +26,7 @@ int main() {
     allegro_init();
     install_keyboard();
     install_mouse();
+    install_sound(DIGI_AUTODETECT, MIDI_AUTODETECT, NULL);
     srand(time(NULL));
     set_color_depth(desktop_color_depth());
     if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,1024,768,0,0)!=0)
@@ -69,10 +70,10 @@ int main() {
     calc(&rectangle9);
     calc(&gym);
 
+    MIDI* midi = load_midi("../Pokemon_sound.mid");
+    play_midi(midi, true);
     ecran();
-   // print_chen(page);
-   snake();
-
+   // print_chen(page)
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
     draw_sprite(page,ts0,player1.x,player1.y);
     blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
@@ -90,12 +91,14 @@ int main() {
 
         if(colision(&player1,&snake_game)){
             if(bulle(&player1)){
+                stop_midi();
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
                 draw_sprite(page,tup0,player1.x,player1.y);
                 blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
                 door_one(tup0,&player1);
                 swap1= true;
-            } else{
+            }
+            else{
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
                 draw_sprite(page,tup0,player1.x,player1.y);
                 blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
@@ -111,6 +114,7 @@ int main() {
             // jeux 1
             clear(page);
             snake();
+            play_midi(midi, true);
             depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
             swap1 = false;
         }
