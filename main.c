@@ -1,3 +1,4 @@
+
 #include "head.h"
 
 
@@ -5,7 +6,7 @@
 int main() {
 
     t_player player1;
-    t_objet rectangle ={320,240,360,260,0,0};
+    t_objet snake_game ={707,415,727,415,0,0};
     t_objet rectangle2 ={420,240,460,260,0,0};
     t_objet rectangle3 ={0,85,1024,85,0,0};
     t_objet rectangle4 ={55,0,55,768,0,0};
@@ -14,6 +15,7 @@ int main() {
     t_objet rectangle7 ={345,700,1024,768,0,0};
     t_objet rectangle8 ={220,768,220,700,0,0};
     t_objet rectangle9 ={340,768,340,700,0,0};
+    t_objet gym ={570,290,970,415,0,0};
 
 
     bool swap1 = false;
@@ -56,7 +58,7 @@ int main() {
         printf("erreur");
     }
 
-    calc(&rectangle);
+    calc(&snake_game);
     calc(&rectangle2);
     calc(&rectangle3);
     calc(&rectangle4);
@@ -65,12 +67,17 @@ int main() {
     calc(&rectangle7);
     calc(&rectangle8);
     calc(&rectangle9);
-    ecran();
-    //print_chen(page);
+    calc(&gym);
 
+    ecran();
+   // print_chen(page);
+   snake();
+
+    blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+    draw_sprite(page,ts0,player1.x,player1.y);
+    blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
     while (!key[KEY_A])
     {
-        rectfill(screen,rectangle3.x,rectangle3.y,rectangle3.x2,rectangle3.y2,0);
         colision(&player1,&rectangle3);
         colision(&player1,&rectangle4);
         colision(&player1,&rectangle5);
@@ -78,10 +85,21 @@ int main() {
         colision(&player1,&rectangle7);
         colision(&player1,&rectangle8);
         colision(&player1,&rectangle9);
+        colision(&player1,&gym);
         depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
 
-        if(colision(&player1,&rectangle)){
-            swap1 = true;
+        if(colision(&player1,&snake_game)){
+            if(bulle(&player1)){
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+                door_one(tup0,&player1);
+                swap1= true;
+            } else{
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            }
         }
 
         if(colision(&player1,&rectangle2)){

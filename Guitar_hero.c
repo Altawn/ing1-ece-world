@@ -83,7 +83,6 @@ void verification_touche(int y_poke[NB_poke_guitare],int *perreur){
 
 
 void guitar_hero() {
-    initialisation_allegro();
 
     int y_pikachu[NB_poke_guitare];
     int y_carapuce[NB_poke_guitare];

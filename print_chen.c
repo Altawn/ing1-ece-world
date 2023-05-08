@@ -4,7 +4,6 @@ void ecran(){
     BITMAP* page;
     page = load_bitmap("../pokepark.bmp",NULL);
     while(!key[KEY_ENTER]){
-       // draw_sprite(page,logo,10,0);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
 
         textout_centre_ex(screen, font, "press enter to continue",512,445, makecol(0, 0, 0), -1);
@@ -29,8 +28,7 @@ void print_chen(BITMAP *page) {
     bool swap4 = false;
 
     bool circle = false;
-    int k=0;
-    int pos = 113;
+    int pos = 257;
     int i = 0;
     int yrec =0;
     int xrec=0;
@@ -68,27 +66,27 @@ void print_chen(BITMAP *page) {
                 while (!key[KEY_ENTER]) {
                     circle = false;
                     if(key[KEY_UP]){
-                        pos = 113;
+                        pos = 257;
                         circle = true;
                     }
                     if(key[KEY_DOWN]){
                         circle = true;
-                        pos = 133;
+                        pos = 277;
                     }
                     if ( xrec<100){
-                        rectfill(screen,45,95,(55+xrec),(105+yrec), 0);
-                        rectfill(screen,50,100,(50+xrec),(100+yrec), makecol(255,255,255));
+                        rectfill(screen,237,239,(247+xrec),(249+yrec), 0);
+                        rectfill(screen,242,244,(242+xrec),(244+yrec), makecol(255,255,255));
                         rest(10);
                         yrec++;
                         xrec= xrec+2;
                     }
                     if(xrec ==100){
                         if(circle == true){
-                            rectfill(screen,50,100,(69),(90+yrec), makecol(255,255,255));
+                            rectfill(screen,242,244,(242+xrec),(244+yrec), makecol(255,255,255));
                         }
-                        textprintf_ex(screen,font,70,110,0,-1,"OUI");
-                        textprintf_ex(screen,font,70,130,0,-1,"NON");
-                        circlefill(screen,60,pos,2,0);
+                        textprintf_ex(screen,font,262,254,0,-1,"OUI");
+                        textprintf_ex(screen,font,262,274,0,-1,"NON");
+                        circlefill(screen,252,pos,2,0);
                     }
                 }
             }
@@ -98,8 +96,8 @@ void print_chen(BITMAP *page) {
                 swap2 = true;
                 while (!key[KEY_ENTER]) {
                     if ( xrec<150){
-                        rectfill(screen,445,85,(455+xrec),(95+yrec), 0);
-                        rectfill(screen,450,90,(450+xrec),(90+yrec), makecol(255,255,255));
+                        rectfill(screen,637,229,(647+xrec),(239+yrec), 0);
+                        rectfill(screen,642,234,(642+xrec),(234+yrec), makecol(255,255,255));
                         rest(10);
                         yrec++;
                         xrec= xrec+6;
@@ -116,12 +114,12 @@ void print_chen(BITMAP *page) {
                                 for (int j = position_lettre; j != -1; j--) {
                                     nom_perso1[j] = '\0';
                                 }
-                                rectfill(screen,450,90,(440+xrec),(80+yrec), makecol(255,255,255));
+                                rectfill(screen,642,234,(632+xrec),(224+yrec), makecol(255,255,255));
                                 position_lettre=0;
                             }
                         }
                     }
-                    textout_ex(screen, font, nom_perso1, 460, 100, makecol(0, 0, 0), -1);
+                    textout_ex(screen, font, nom_perso2, 652, 244, makecol(0, 0, 0), -1);
                 }
             }
 
@@ -130,8 +128,8 @@ void print_chen(BITMAP *page) {
                 swap3 = true;
                 while (!key[KEY_ENTER]) {
                     if (draw){
-                        rectfill(screen,445,85,(455+xrec),(95+yrec), 0);
-                        rectfill(screen,450,90,(450+xrec),(90+yrec), makecol(255,255,255));
+                        rectfill(screen,637,229,(647+xrec),(239+yrec), 0);
+                        rectfill(screen,642,234,(642+xrec),(234+yrec), makecol(255,255,255));
                         draw = false;
                     }
                     if (keypressed()) {
@@ -146,12 +144,12 @@ void print_chen(BITMAP *page) {
                                 for (int j = position_lettre2; j != -1; j--) {
                                     nom_perso2[j] = '\0';
                                 }
-                                rectfill(screen,450,90,(440+xrec),(80+yrec), makecol(255,255,255));
+                                rectfill(screen,642,234,(632+xrec),(224+yrec), makecol(255,255,255));
                                 position_lettre2=0;
                             }
                         }
                     }
-                    textout_ex(screen, font, nom_perso2, 460, 100, makecol(0, 0, 0), -1);
+                    textout_ex(screen, font, nom_perso2, 652, 244, makecol(0, 0, 0), -1);
                 }
             }
 
@@ -163,31 +161,31 @@ void print_chen(BITMAP *page) {
                 while (!key[KEY_ENTER]) {
                     circle = false;
                     if(key[KEY_UP]){
-                        pos = 113;
+                        pos = 257;
                         circle = true;
                     }
                     if(key[KEY_DOWN]){
                         circle = true;
-                        pos = 133;
+                        pos = 277;
                     }
                     if ( xrec<100){
-                        rectfill(screen,45,95,(55+xrec),(105+yrec), 0);
-                        rectfill(screen,50,100,(50+xrec),(100+yrec), makecol(255,255,255));
+                        rectfill(screen,237,239,(247+xrec),(249+yrec), 0);
+                        rectfill(screen,242,244,(242+xrec),(244+yrec), makecol(255,255,255));
                         rest(10);
                         yrec++;
                         xrec= xrec+2;
                     }
                     if(xrec ==100){
                         if(circle == true){
-                            rectfill(screen,50,100,(69),(90+yrec), makecol(255,255,255));
+                            rectfill(screen,242,244,(242+xrec),(244+yrec), makecol(255,255,255));
                         }
-                        textprintf_ex(screen,font,70,110,0,-1,"OUI");
-                        textprintf_ex(screen,font,70,130,0,-1,"NON");
-                        circlefill(screen,60,pos,2,0);
+                        textprintf_ex(screen,font,262,254,0,-1,"OUI");
+                        textprintf_ex(screen,font,262,274,0,-1,"NON");
+                        circlefill(screen,252,pos,2,0);
                     }
                 }
 
-                if(pos == 113){
+                if(pos == 257){
                     flag = true;
                 }
 
@@ -204,7 +202,7 @@ void print_chen(BITMAP *page) {
             clear_to_color(page, makecol(82,107,231));
             blit(chen, page, 0, 0, 192, 144, SCREEN_W, SCREEN_H);
             blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-            textout_ex(screen, font, display, 40, 400, makecol(0, 0, 0), -1);
+            textout_ex(screen, font, display, 232, 544, makecol(0, 0, 0), -1);
 
 
             rest(25);
