@@ -11,7 +11,8 @@ int main()
 
     //Autres variables + structures
     BITMAP * page = NULL;
-    Pokemon * tab_pok[NPOK] = {0,0,0,0,0};
+    Pokemon * tab_pok[NPOK];
+    int pas = 0;
 
     remp_tab_pok(tab_pok);
 
@@ -24,26 +25,32 @@ int main()
     while (!key[KEY_ESC])
     {
         clear_bitmap(page);
-        for (int i = 0; i < NPOK*100; i = i+100)
-        {
-            draw_sprite(page, tab_pok[i/100]->img[tab_pok[i/100]->frame_act], 0, i);
-        }
-        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-        rest(100);
 
-        for (int i = 0; i < NPOK; ++i)
+        for (int i = 0; i < NPOK; i++)
         {
-            if(tab_pok[i]->pok == 2)
-            {
-                tab_pok[i]->frame_act++;
-                if(tab_pok[i]->frame_act >= 4) tab_pok[i]->frame_act = 0;
-            }
-            else
-            {
-                tab_pok[i]->frame_act++;
-                if(tab_pok[i]->frame_act >= NIMAGE) tab_pok[i]->frame_act = 0;
-            }
+            draw_sprite(page, tab_pok[i]->img[tab_pok[i]->frame_act], 0, pas);
+            tab_pok[i]->frame_act++;
+            if(tab_pok[i]->frame_act >= NIMAGE) tab_pok[i]->frame_act = 0;
+            pas = pas+100;
         }
+        rest(100);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
+        //blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        //rest(100);
+        /*
+        tab_pok[0]->frame_act++;
+        tab_pok[1]->frame_act++;
+        tab_pok[2]->frame_act++;
+        tab_pok[3]->frame_act++;
+        tab_pok[4]->frame_act++;
+        if(tab_pok[0]->frame_act >= NIMAGE) tab_pok[0]->frame_act = 0;
+        if(tab_pok[1]->frame_act >= NIMAGE) tab_pok[1]->frame_act = 0;
+        if(tab_pok[2]->frame_act >= NIMAGE) tab_pok[2]->frame_act = 0;
+        if(tab_pok[3]->frame_act >= NIMAGE) tab_pok[3]->frame_act = 0;
+        if(tab_pok[4]->frame_act >= NIMAGE) tab_pok[4]->frame_act = 0;
+        */
+        pas = 0; 
     }
 
     for (int i = 0; i < NPOK; ++i)

@@ -17,7 +17,7 @@ typedef struct
     int pok; //quel pokemon ?
     int tmpimg; //?
     int cptimg; //?
-    BITMAP **img;
+    BITMAP *img[NIMAGE-1];
 }Pokemon;
 
 //Allouer + Initialisation d'acteurs
