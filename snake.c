@@ -151,7 +151,19 @@ void afficherListe(t_liste *liste,BITMAP* page,BITMAP* head1,BITMAP* head2,BITMA
 
     while ( actuel->next !=NULL)
     {
-        draw_sprite(page,actuel->base,actuel->x,actuel->y);
+        if(actuel == liste->head){
+            if(mouvement == 1)
+                draw_sprite(page,actuel->base,actuel->x+5,actuel->y-15);
+            if(mouvement == 2)
+                draw_sprite(page,actuel->base,actuel->x+2,actuel->y-15);
+            if(mouvement == 3)
+                draw_sprite(page,actuel->base,actuel->x+15,actuel->y+5);
+            if(mouvement == 4)
+                draw_sprite(page,actuel->base,actuel->x+15,actuel->y+2);
+
+        }
+        else
+            draw_sprite(page,actuel->base,actuel->x,actuel->y);
         actuel = actuel->next;
     }
 }
@@ -173,6 +185,10 @@ bool snake_defeat(int nbpart, t_liste* serpent) {
 
 
 void snake() {
+
+    MIDI* snake_music = load_midi("../snake_music.mid");
+    play_midi(snake_music, true);
+   BITMAP* fond = load_bitmap("../cave_background.bmp",NULL);
    BITMAP* head1= load_bitmap("../onyx_head1.bmp",NULL);
    BITMAP* head2= load_bitmap("../onyx_head2.bmp",NULL);
    BITMAP* head3= load_bitmap("../onyx_head3.bmp",NULL);
@@ -187,7 +203,7 @@ void snake() {
     int nb_part = 1;
     bool end =true ;
     t_liste* serpent = initialisation(base);
-    pomme_init(base2,apple);
+    pomme_init(base,apple);
 
     add_part(serpent,base);
 
@@ -206,9 +222,9 @@ void snake() {
             mouvement = 4;
         }
 
-        clear_to_color(page, makecol(255,255,255));
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
         move_snake(serpent,mouvement);
-        if(colision_snake(serpent,apple,base2) == true){
+        if(colision_snake(serpent,apple,base) == true){
             nb_part++;
             add_part(serpent,base);
         }
@@ -217,12 +233,17 @@ void snake() {
             add_part(serpent,base);
             rest(100);
         }
-        if(serpent->head->x == SCREEN_W || serpent->head->x == 0 || serpent->head->y == SCREEN_H || serpent->head->y == 0){
+        if(serpent->head->x == SCREEN_W || serpent->head->x == -64 || serpent->head->y == SCREEN_H || serpent->head->y == -64){
             end =false;
         }
 
         if (snake_defeat(nb_part,serpent)){
             end =false;
+        }
+        if(key[KEY_P]){
+            while(!key[KEY_ENTER]){
+                rest(1);
+            }
         }
 
         afficherListe(serpent,page,head1,head2,head3,head4,mouvement);
