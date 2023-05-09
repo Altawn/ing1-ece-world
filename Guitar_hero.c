@@ -1,5 +1,6 @@
 #include "head.h"
 
+
 void initialisation_allegro() {
     allegro_init();
     install_keyboard();
@@ -24,6 +25,7 @@ void initialisation_allegro() {
     }
     show_mouse(screen);
 }
+
 
 
 
@@ -81,9 +83,7 @@ void verification_touche(int y_poke[NB_poke_guitare],int *perreur){
 
 }
 
-
-void guitar_hero() {
-
+int partie_guitar_hero(BITMAP* page){
     int y_pikachu[NB_poke_guitare];
     int y_carapuce[NB_poke_guitare];
     int y_dracaufeu[NB_poke_guitare];
@@ -96,16 +96,17 @@ void guitar_hero() {
     int temp_touche=0;
     int erreur=0;
 
-    BITMAP* page=NULL;
+
     BITMAP* fond_ecran;
     BITMAP* fond_ecran2;
+
     BITMAP* pikachu[NB_poke_guitare];
     BITMAP* carapuce[NB_poke_guitare];
     BITMAP* dracaufeu[NB_poke_guitare];
     BITMAP* evoli[NB_poke_guitare];
     BITMAP* rondoudou[NB_poke_guitare];
 
-    page=create_bitmap(SCREEN_W,SCREEN_H);
+
 
     if (!page){
         allegro_message("Erreur creation page");}
@@ -127,6 +128,7 @@ void guitar_hero() {
 
 
 
+
     for ( i = 0; i < NB_poke_guitare; ++i) {
         y_pikachu[i]=-100;
         y_carapuce[i]=-100;
@@ -136,11 +138,10 @@ void guitar_hero() {
     }
 
     srand(time(NULL));
-
     while(!key[KEY_ESC] && erreur==0 ){
 
         blit(fond_ecran2,fond_ecran,0,0,0,0,SCREEN_W,SCREEN_H);
-
+        textprintf_ex(fond_ecran, font, 450, 180, makecol(0,0,0), -1, "SCORE : %d points", temp/10);
 
         for ( i = 0; i < NB_poke_guitare; ++i) {
             draw_sprite(fond_ecran,pikachu[i],52,y_pikachu[i]);
@@ -184,6 +185,8 @@ void guitar_hero() {
 
         clear_bitmap(fond_ecran);
 
+
+
         deplacement(y_pikachu,vitesse,&erreur);
         deplacement(y_carapuce,vitesse,&erreur);
         deplacement(y_dracaufeu,vitesse,&erreur);
@@ -191,6 +194,7 @@ void guitar_hero() {
         deplacement(y_rondoudou,vitesse,&erreur);
 
         temp+=1;
+
         if(temp % 1000 ==0){
             vitesse+=1;
         }
@@ -198,5 +202,42 @@ void guitar_hero() {
         vsync();
 
     }
+    return temp;
+}
+
+void guitar_hero() {
+
+    BITMAP* game_over;
+    BITMAP* game_over2;
+    BITMAP* page=NULL;
+
+    game_over=load_bitmap("../game_over_V2.bmp",NULL);
+    game_over2=load_bitmap("../game_over_V2.bmp",NULL);
+    page=create_bitmap(SCREEN_W,SCREEN_H);
+
+    int temp[2];
+    int i;
+
+    for ( i = 0; i < 2; ++i) {
+        temp[i]=0;
+        temp[i]=partie_guitar_hero(page);
+        blit(game_over2,game_over,0,0,0,0,SCREEN_W,SCREEN_H);
+
+        while(!key[KEY_ENTER]){
+
+            blit(game_over,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            textprintf_ex(game_over, font, 140, 80, makecol(0,0,0), -1, "SCORE : %d points", temp[i]/10);
+            textprintf_ex(game_over, font, 390, 450, makecol(255,0,0), -1, "CLIQUEZ SUR ENTREE POUR CONTINUER");
+        }
+    }
+
+
+    if(temp[0]>temp[1]){
+        printf("le premier a gagne");
+    }else{
+        printf("le deuxieme a gagne");
+    }
+
 
 }

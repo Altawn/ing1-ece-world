@@ -7,7 +7,7 @@ int main() {
 
     t_player player1;
     t_objet snake_game ={707,415,727,415,0,0};
-    t_objet rectangle2 ={420,240,460,260,0,0};
+    t_objet hero_game ={420,240,460,260,0,0};
     t_objet rectangle3 ={0,85,1024,85,0,0};
     t_objet rectangle4 ={55,0,55,768,0,0};
     t_objet rectangle5 ={965,0,965,768,0,0};
@@ -60,7 +60,7 @@ int main() {
     }
 
     calc(&snake_game);
-    calc(&rectangle2);
+    calc(&hero_game);
     calc(&rectangle3);
     calc(&rectangle4);
     calc(&rectangle5);
@@ -77,6 +77,7 @@ int main() {
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
     draw_sprite(page,ts0,player1.x,player1.y);
     blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
     while (!key[KEY_A])
     {
         colision(&player1,&rectangle3);
@@ -87,6 +88,7 @@ int main() {
         colision(&player1,&rectangle8);
         colision(&player1,&rectangle9);
         colision(&player1,&gym);
+        rectfill(screen,hero_game.x,hero_game.y,hero_game.x2,hero_game.y2,0);
         depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
 
         if(colision(&player1,&snake_game)){
@@ -105,8 +107,20 @@ int main() {
             }
         }
 
-        if(colision(&player1,&rectangle2)){
-            swap2 = true;
+        if(colision(&player1,&hero_game)){
+            if(bulle(&player1)){
+                stop_midi();
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+                door_one(tup0,&player1);
+                swap2= true;
+            }
+            else{
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            }
         }
 
 
