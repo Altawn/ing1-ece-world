@@ -51,9 +51,10 @@ typedef struct snake{
 typedef struct liste{
     t_snake* head;
 }t_liste;
-
+bool bulle(t_player* player);
+void door_one(BITMAP* bit,t_player* player1);
 void snake();
-void afficherListe(t_liste *liste,BITMAP* page);
+void afficherListe(t_liste *liste,BITMAP* page,BITMAP* head1,BITMAP* head2,BITMAP* head3,BITMAP* head4,int mouvement);
 void pomme_init(BITMAP* base2,t_pomme* apple);
 bool colision_snake(t_liste* liste,t_pomme* pomme,BITMAP* base);
 t_liste *initialisation(BITMAP* base);

@@ -123,7 +123,7 @@ void move_snake(t_liste* serpent,int mouvement) {
 
         }
     }
-    rest(100);
+    rest(150);
 
 }
 
@@ -188,6 +188,7 @@ void snake() {
 
     MIDI* snake_music = load_midi("../snake_music.mid");
     play_midi(snake_music, true);
+    BITMAP* over = load_bitmap("../game-over1.bmp",NULL);
    BITMAP* fond = load_bitmap("../cave_background.bmp",NULL);
    BITMAP* head1= load_bitmap("../onyx_head1.bmp",NULL);
    BITMAP* head2= load_bitmap("../onyx_head2.bmp",NULL);
@@ -202,6 +203,7 @@ void snake() {
     int mouvement =2;
     int nb_part = 1;
     bool end =true ;
+    bool zeb = true;
     t_liste* serpent = initialisation(base);
     pomme_init(base,apple);
 
@@ -209,6 +211,7 @@ void snake() {
 
     while(!key[KEY_SPACE] && end){
 
+        textprintf_ex(screen,font,980,10,makecol(255,255,255),-1,"%d",nb_part-1);
         if(key[KEY_LEFT]){
             mouvement = 1;
         }
@@ -249,6 +252,13 @@ void snake() {
         afficherListe(serpent,page,head1,head2,head3,head4,mouvement);
         draw_sprite(page,apple->base,apple->x,apple->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_W);
+    }
+    clear(screen);
+
+    while(!key[KEY_ENTER]){
+        blit(over,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        textprintf_ex(screen,font,512,600,makecol(255,255,255),-1,"%d",nb_part-1);
     }
 }
 
