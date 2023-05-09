@@ -115,6 +115,9 @@ int main() {
             clear(page);
             snake();
             play_midi(midi, true);
+            blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            draw_sprite(page,tup0,player1.x,player1.y);
+            blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
             depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
             swap1 = false;
         }
@@ -122,6 +125,9 @@ int main() {
         if (swap2 == true){
             clear(page);
             guitar_hero();
+            blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            draw_sprite(page,tup0,player1.x,player1.y);
+            blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
             depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
             // jeux 2
             swap2 = false;

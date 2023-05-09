@@ -203,7 +203,6 @@ void snake() {
     int mouvement =2;
     int nb_part = 1;
     bool end =true ;
-    bool zeb = true;
     t_liste* serpent = initialisation(base);
     pomme_init(base,apple);
 
