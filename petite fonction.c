@@ -4,24 +4,24 @@ bool colision(t_player* player,t_objet* ob) {
 
     bool swap = true;
 
-    if (player->x - 5 < ob->x + ob->w &&
-        player->x + 25> ob->x &&
-        player->y - 5 < ob->y + ob->h &&
-        player->y + 30 > ob->y  )
+    if (player->x-5 < ob->x2 &&
+        player->x + 28> ob->x &&
+        player->y-5  < ob->y2 &&
+        player->y + 35 > ob->y  )
     {
         if(player->x < ob->x){
             player->x =player->x-3;
             swap = false;
         }
-        if(player->x > ob->x + ob->w && swap == true){
+        if(player->x > ob->x2 && swap == true){
             player->x= player->x+3;
             swap = false;
         }
         if(player->y < ob->y && swap == true){
-           player->y =player->y-3;
+            player->y =player->y-3;
             swap = false;
         }
-        if(player->y > ob->y + ob->h && swap == true){
+        if(player->y> ob->y2 && swap == true){
             player->y= player->y+3;
             swap = false;
             return true;
@@ -30,10 +30,6 @@ bool colision(t_player* player,t_objet* ob) {
     return false;
 }
 
-void calc(t_objet* ob){
-    ob->h = ob->y2 - ob->y;
-    ob->w = ob->x2 - ob->x;
-}
 
 bool bulle(t_player* player){
     int pos = player->y -38;
@@ -79,6 +75,13 @@ bool bulle(t_player* player){
 void door_one(BITMAP* bit,t_player* player1){
     for (int i = 0; i < 13; ++i) {
         rectfill(screen,725-i,405,725+i,429,0);
+        draw_sprite(screen,bit,player1->x,player1->y);
+        rest(100);
+    }
+}
+void door_two(BITMAP* bit,t_player* player1){
+    for (int i = 0; i < 13; ++i) {
+        rectfill(screen,431-i,349,431+i,365,0);
         draw_sprite(screen,bit,player1->x,player1->y);
         rest(100);
     }

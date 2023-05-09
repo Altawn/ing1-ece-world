@@ -206,7 +206,7 @@ void snake() {
     t_liste* serpent = initialisation(base);
     pomme_init(base,apple);
 
-    add_part(serpent,base);
+    add_part(serpent,base);add_part(serpent,base);
 
     while(!key[KEY_SPACE] && end){
 
@@ -253,7 +253,7 @@ void snake() {
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_W);
     }
     clear(screen);
-
+    stop_midi();
     while(!key[KEY_ENTER]){
         blit(over,page,0,0,0,0,SCREEN_W,SCREEN_H);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
