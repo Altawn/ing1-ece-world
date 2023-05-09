@@ -1,61 +1,6 @@
 #include "not_main.h"
 
-/*Pokemon init_magicarpe()
-{
-    char nomfichier[256];
-
-    Pokemon Magicarpe =
-            {
-                    .tx = 80,
-                    .ty = 95,
-                    .posx = 0,
-                    .posy = 0,
-                    .depx = 0,
-                    .depy = 0,
-                    .frame_act = 0,
-                    .compteur = 0
-            };
-
-    for (int i = 0; i < NIMAGE; ++i) {
-        sprintf(nomfichier, "80x95-Magicarpe%d.bmp", i + 1);
-
-        Magicarpe.img[i] = load_bitmap(nomfichier, NULL);
-        if (!Magicarpe.img[i]) {
-            allegro_message("Fichier %s non existant", nomfichier);
-            exit(EXIT_FAILURE);
-
-        }
-    }
-    return Magicarpe;
-}*/
-
-/*Pokemon init_papillusion()
-{
-    Pokemon Papillusion =
-            {
-                    .im_1 = load_bitmap("80x95-Papillon.bmp",  NULL),
-                    .im_2 = load_bitmap("80x95-Papillon2.bmp",  NULL),
-                    .im_3 = load_bitmap("80x95-Papillon3.bmp", NULL),
-                    .im_4 = load_bitmap("80x95-Papillon4.bmp", NULL),
-                    .im_5 = load_bitmap("80x95-Papillon5.bmp", NULL),
-                    .tx = 0,
-                    .ty = 0,
-                    .posx = 0,
-                    .posy = 0,
-                    .depx = 0,
-                    .depy = 0
-            };
-    if(!Papillusion.im_1 || !Papillusion.im_2 || !Papillusion.im_3 || !Papillusion.im_4 || !Papillusion.im_5)
-    {
-        allegro_message("pb chargement image Papillusion");
-        allegro_exit();
-        exit(EXIT_FAILURE);
-    }
-    return Papillusion;
-}
-*/
-
-void init_allegro()
+void PI_init_allegro()
 {
     allegro_init();
     install_keyboard();
@@ -70,7 +15,7 @@ void init_allegro()
     }
 }
 
-Pokemon * init_pokemon(int tx, int ty, int xdx, int posx, int posy, int pok, int depx, int tmpimg)
+Pokemon * PI_init_pokemon(int tx, int ty, int xdx, int posx, int posy, int pok, int depx, int tmpimg)
 {
     Pokemon * random;
     char nomfichier[256];
@@ -165,43 +110,51 @@ Pokemon * init_pokemon(int tx, int ty, int xdx, int posx, int posy, int pok, int
     return random;
 }
 
-void remp_tab_pok(Pokemon * tab_rand[NPOK])
+void PI_remp_tab_pok(Pokemon * tab_rand[NPOK])
 {
-    tab_rand[0] = init_pokemon(80, 95, 1, 0,   0, 0, 1, 5);
-    tab_rand[1] = init_pokemon(80, 95, 1, 0, 100, 1, 1, 5);
-    tab_rand[2] = init_pokemon(90, 95, 1, 0, 200, 2, 1, 5);
-    tab_rand[3] = init_pokemon(80, 95, 1, 0, 300, 3, 1, 5);
-    tab_rand[4] = init_pokemon(80, 95, 1, 0, 400, 4, 1, 5);
+    tab_rand[0] = PI_init_pokemon(80, 95, 1, 0,   0, 0, 10, 5);
+    tab_rand[1] = PI_init_pokemon(80, 95, 1, 0, 0, 1, 10, 5);
+    tab_rand[2] = PI_init_pokemon(90, 95, 1, 0, 0, 2, 10, 5);
+    tab_rand[3] = PI_init_pokemon(80, 95, 1, 0, 0, 3, 10, 5);
+    tab_rand[4] = PI_init_pokemon(80, 95, 1, 0, 0, 4, 10, 5);
 }
 
-void Actu_Pok(Pokemon * random)
+void PI_anim_pok(Pokemon * tab_rand[NPOK], BITMAP * page)
 {
-    //Enchainement images
-    random->cptimg++;
-    if(random->cptimg >= random->tmpimg)
+    int pas  = 550;
+
+    //clear_bitmap(page);
+
+    for (int i = 0; i < NPOK; i++)
     {
-        random->cptimg = 0;
-        random->frame_act++;
-        if (random->frame_act >= NIMAGE) random->frame_act = 0;
+        draw_sprite(page, tab_rand[i]->img[tab_rand[i]->frame_act], tab_rand[i]->posx, pas);
+        tab_rand[i]->frame_act++;
+        if(tab_rand[i]->frame_act >= NIMAGE) tab_rand[i]->frame_act = 0;
+        pas = pas+40;
     }
 
-    //Calcul nouvelle position
-    random->compdepx++;
-    if(random->compdepx >= random->xdx)
-    {
-        random->compdepx = 0;
-        random->posx = random->posx + random->depx;
-    }
+    rest(100);
+    //blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+    pas = 0;
 }
 
-void Tab_Actu_Pok(Pokemon * tab_rand[NPOK])
+int PI_depla_pok(Pokemon * tab_rand[NPOK])
 {
+    int flag_PI  = 0;
+
     for (int i = 0; i < NPOK; ++i)
     {
-        Actu_Pok(tab_rand[i]);
-    }
-}
+        tab_rand[i]->posx = tab_rand[i]->posx + tab_rand[i]->depx;
 
-/*void chargerBITMAP(Sequence * anim)
-{
-*/
+        if(tab_rand[i]->posx%25 == 0)
+        {
+            tab_rand[i]->depx = rand()%10 + 3;
+        }
+
+        if (tab_rand[i]->posx >= 1024)
+        {
+            flag_PI = tab_rand[i]->pok + 1 ;
+        }
+    }
+    return flag_PI;
+}

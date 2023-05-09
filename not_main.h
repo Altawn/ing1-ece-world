@@ -2,6 +2,7 @@
 #define PARI_HIPPIQUE_V2_NOT_MAIN_H
 
 #include <stdio.h>
+#include <time.h>
 #include <allegro.h>
 #define NIMAGE 5
 #define NPOK 5
@@ -21,25 +22,17 @@ typedef struct
 }Pokemon;
 
 //Allouer + Initialisation d'acteurs
-Pokemon * init_pokemon(int tx, int ty, int xdx, int posx, int posxy, int pok, int depx, int tmpimg);
+Pokemon * PI_init_pokemon(int tx, int ty, int xdx, int posx, int posxy, int pok, int depx, int tmpimg);
 
 //Remplir un tab avec des acteurs
-void remp_tab_pok(Pokemon * tab_rand[NPOK]);
+void PI_remp_tab_pok(Pokemon * tab_rand[NPOK]);
 
-//Actualisation d'acteurs
-void Actu_Pok(Pokemon * random);
+//Initialisation Allegro
+void PI_init_allegro();
 
-//Actualisation de tous les acteurs
-void Tab_Actu_Pok(Pokemon * tab_rand[NPOK]);
+//Animation des pokemons
+void PI_anim_pok(Pokemon * tab_rand[NPOK], BITMAP * page);
 
-//Dessiner un pokemon sur une Bitmap
-void Dessin_Pok(BITMAP * quelconque, Pokemon * random);
-
-//Dessiner tous les pokemons
-void Tab_Dessin_Pok(BITMAP * quelconque, Pokemon * tab_rand[NPOK]);
-
-Pokemon init_magicarpe();
-Pokemon init_papillusion();
-void init_allegro();
+int PI_depla_pok(Pokemon * tab_rand[NPOK]);
 
 #endif //PARI_HIPPIQUE_V2_NOT_MAIN_H

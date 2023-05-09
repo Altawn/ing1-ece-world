@@ -1,9 +1,17 @@
 #include "not_main.h"
 
+/* Ce qu'il reste a faire
+ *      Demande aux joueurs le pokemon sur lequel ils parient
+ *          - Optionnel mais cool : affichage du sprite du pokemon pour qu'ils aient une idée
+ *      Retranscription numero pokemon en nom de pokemon
+ *      Retranscription numero gagnant a si un joueur a gagne ou non
+ *      Alternatice pour le textprint_ex a la fin -> photo avec tout noté déja dessus
+ */
+
 int main()
 {
     //Initialisation Allegro
-    init_allegro();
+    PI_init_allegro();
 
     //Supposant qu'on prend les deux variables pari gagnant du joueur
     int pari_gagnant_j1 = 0;
@@ -12,46 +20,44 @@ int main()
     //Autres variables + structures
     BITMAP * page = NULL;
     Pokemon * tab_pok[NPOK];
-    int pas = 0;
+    BITMAP * decor = NULL;
+    int arrivee = 0;
+    int * pokemon_gagnant = NULL;
+    char * test;
 
-    remp_tab_pok(tab_pok);
+    //init du tableau de pointeurs de structures de type pokemon nommé tab_pok
+    PI_remp_tab_pok(tab_pok);
+    test = malloc(sizeof(char*));
+    test = "wesh";
+    srand(time(NULL));
 
-    //Double buffer
-    page = create_bitmap(1024, 768);
-    clear_bitmap(page);
+    //Init double buffer + decor
+    page = create_bitmap(1024, 768); clear_bitmap(page);
     if(!page) allegro_message("Erreur creation page");
 
-    //Boucle d'evenements
-    while (!key[KEY_ESC])
-    {
-        clear_bitmap(page);
+    decor = load_bitmap("city street.bmp", NULL);
+    if(!decor) allegro_message("Pas de fond d'ecran");
 
-        for (int i = 0; i < NPOK; i++)
-        {
-            draw_sprite(page, tab_pok[i]->img[tab_pok[i]->frame_act], 0, pas);
-            tab_pok[i]->frame_act++;
-            if(tab_pok[i]->frame_act >= NIMAGE) tab_pok[i]->frame_act = 0;
-            pas = pas+100;
-        }
-        rest(100);
+    //Boucle d'evenements
+    while (!key[KEY_ESC] && arrivee == 0)
+    {
+        // Effacer buffer en appliquant decor
+        blit(decor,page,0,0,0,0,SCREEN_W,SCREEN_H);
+
+        //Animation des pokemons
+        PI_anim_pok(tab_pok, page);
+
+        //Affichage du buffer mis à jour
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
 
-        //blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-        //rest(100);
-        /*
-        tab_pok[0]->frame_act++;
-        tab_pok[1]->frame_act++;
-        tab_pok[2]->frame_act++;
-        tab_pok[3]->frame_act++;
-        tab_pok[4]->frame_act++;
-        if(tab_pok[0]->frame_act >= NIMAGE) tab_pok[0]->frame_act = 0;
-        if(tab_pok[1]->frame_act >= NIMAGE) tab_pok[1]->frame_act = 0;
-        if(tab_pok[2]->frame_act >= NIMAGE) tab_pok[2]->frame_act = 0;
-        if(tab_pok[3]->frame_act >= NIMAGE) tab_pok[3]->frame_act = 0;
-        if(tab_pok[4]->frame_act >= NIMAGE) tab_pok[4]->frame_act = 0;
-        */
-        pas = 0; 
+        //Deplacement des pokemons
+        arrivee = PI_depla_pok(tab_pok);
     }
+    //clear_to_color(screen,makecol(255, 255, 255));
+    clear(screen);
+    blit(decor,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+    allegro_message("Le gagnant est le pokemon numero %d", arrivee);
+
 
     for (int i = 0; i < NPOK; ++i)
     {
