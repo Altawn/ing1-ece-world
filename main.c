@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <allegro.h>
+#include <stdlib.h>
 
+#define NB_poke_guitare 3
 
 void initialisation_allegro() {
     allegro_init();
@@ -30,13 +32,74 @@ void initialisation_allegro() {
 
 
 
+void deplacement(int y_poke[NB_poke_guitare], int vitesse,int *perreur){
+    int i,j;
+    int nb_alea[NB_poke_guitare];
+    int verif;
+
+    for ( i = 0; i < NB_poke_guitare; ++i) {
+           verif=0;
+           nb_alea[i]=0;
+        if(y_poke[i]==-100){
+
+            nb_alea[i]=rand()%200;
+
+
+            for ( j = 0; j < NB_poke_guitare; ++j) {
+                if(y_poke[j]>20 || y_poke[j]==-100){
+                    verif+=1;
+                }
+
+            }
+            if(nb_alea[i]==5 && verif==NB_poke_guitare) {
+
+                y_poke[i]=-99;
+
+            }
+        }else if(y_poke[i]>-100){
+            y_poke[i]+=vitesse;}
+
+        if(y_poke[i]>450){
+            *perreur=1;
+        }
+
+    }
+}
+
+
+void verification_touche(int y_poke[NB_poke_guitare],int *perreur){
+   int i;
+   int  verification=0;
+
+    for ( i = 0; i < NB_poke_guitare; ++i) {
+        if (y_poke[i] > 290) {
+            y_poke[i] = -100;
+            verification=1;
+
+        }
+    }
+
+
+    if(verification==0 ){
+        *perreur=1;
+    }
+
+}
+
 
 int main() {
     initialisation_allegro();
 
+    int i;
+
     BITMAP* page=NULL;
     BITMAP* fond_ecran;
-    BITMAP* pikachu;
+    BITMAP* fond_ecran2;
+    BITMAP* pikachu[NB_poke_guitare];
+    BITMAP* carapuce[NB_poke_guitare];
+    BITMAP* dracaufeu[NB_poke_guitare];
+    BITMAP* evoli[NB_poke_guitare];
+    BITMAP* rondoudou[NB_poke_guitare];
 
     page=create_bitmap(SCREEN_W,SCREEN_H);
 
@@ -44,86 +107,100 @@ int main() {
         allegro_message("Erreur creation page");}
 
     clear_bitmap(screen);
-    fond_ecran=load_bitmap("../fond_ecran.bmp",NULL);
-    pikachu=load_bitmap("../tete_pikachu.bmp",NULL);
+    for ( i = 0; i < NB_poke_guitare; ++i) {
+
+        pikachu[i]=load_bitmap("../tete_pikachu.bmp",NULL);
+        carapuce[i]= load_bitmap("../tete_carapuce.bmp",NULL);
+        dracaufeu[i]= load_bitmap("../tete_dracaufeu.bmp",NULL);
+        evoli[i]= load_bitmap("../tete_evoli.bmp",NULL);
+        rondoudou[i]= load_bitmap("../tete_rondoudou.bmp",NULL);
+    }
+
+    fond_ecran=load_bitmap("../fond_ecran_guitare_heroo.bmp",NULL);
+    fond_ecran2=load_bitmap("../fond_ecran_guitare_heroo.bmp",NULL);
 
 
+    int y_pikachu[NB_poke_guitare];
+    int y_carapuce[NB_poke_guitare];
+    int y_dracaufeu[NB_poke_guitare];
+    int y_evoli[NB_poke_guitare];
+    int y_rondoudou[NB_poke_guitare];
 
-    draw_sprite(fond_ecran,pikachu,17,0);
-
-
-    /*
-    circlefill(fond_ecran,64,430,35,makeacol(0,0,0,0));
-    circlefill(fond_ecran,192,430,35,makeacol(0,0,0,0));
-    circlefill(fond_ecran,318,430,35,makeacol(0,0,0,0));
-    circlefill(fond_ecran,446,430,35,makeacol(0,0,0,0));
-    circlefill(fond_ecran,574,430,35,makeacol(0,0,0,0));
-    */
-
-
-    int y_pikachu=-100;
-    while(!key[KEY_ESC]){
+    int vitesse=1;
+    int temp=0;
+    int temp_touche=0;
+    int erreur=0;
 
 
+    for ( i = 0; i < NB_poke_guitare; ++i) {
+        y_pikachu[i]=-100;
+        y_carapuce[i]=-100;
+        y_dracaufeu[i]=-100;
+        y_evoli[i]=-100;
+        y_rondoudou[i]=-100;
+    }
 
-        fond_ecran=load_bitmap("../fond_ecran.bmp",NULL);
-        for (int i = 0; i < 5; ++i) {
-            circlefill(fond_ecran,64+i*128,430,40,makecol(0,0,0));
+    while(!key[KEY_ESC] && erreur==0 ){
+
+        blit(fond_ecran2,fond_ecran,0,0,0,0,SCREEN_W,SCREEN_H);
+
+
+        for ( i = 0; i < NB_poke_guitare; ++i) {
+            draw_sprite(fond_ecran,pikachu[i],17,y_pikachu[i]);
+            draw_sprite(fond_ecran,carapuce[i],145,y_carapuce[i]);
+            draw_sprite(fond_ecran,dracaufeu[i],273,y_dracaufeu[i]);
+            draw_sprite(fond_ecran,evoli[i],401,y_evoli[i]);
+            draw_sprite(fond_ecran,rondoudou[i],529,y_rondoudou[i]);
         }
-        draw_sprite(fond_ecran,pikachu,17,y_pikachu);
+
 
         blit(fond_ecran,page,0,0,0,0,SCREEN_W,SCREEN_H);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
 
 
-if(keypressed()) {
-
-
+if(keypressed() && temp-temp_touche>10 ) {
 
     if (key[KEY_Q]) {
 
-
-        if (y_pikachu > 290) {
-            y_pikachu = -100;
-
-
-        } else if (y_pikachu >= 0) {
-
-        }
-
-
+        verification_touche(y_pikachu,&erreur);
+            temp_touche=temp;
     } else if (key[KEY_W]) {
 
-        circlefill(fond_ecran, 192, 430, 50, makecol(0, 0, 0));
-
-
+         verification_touche(y_carapuce,&erreur);
+        temp_touche=temp;
     } else if (key[KEY_E]) {
 
-        circlefill(fond_ecran, 318, 430, 50, makecol(0, 0, 0));
-
-
+         verification_touche(y_dracaufeu,&erreur);
+        temp_touche=temp;
     } else if (key[KEY_R]) {
 
-        circlefill(fond_ecran, 446, 430, 50, makecol(0, 0, 0));
-
-
+         verification_touche(y_evoli,&erreur);
+        temp_touche=temp;
     } else if (key[KEY_T]) {
 
-        circlefill(fond_ecran, 574, 430, 50, makecol(0, 0, 0));
-
-
+         verification_touche(y_rondoudou,&erreur);
+        temp_touche=temp;
     }
 }
 
 
-        clear(fond_ecran);
-        y_pikachu+=2;
-        if(y_pikachu==480){
-            y_pikachu=-100;
+
+clear_bitmap(fond_ecran);
+
+deplacement(y_pikachu,vitesse,&erreur);
+deplacement(y_carapuce,vitesse,&erreur);
+deplacement(y_dracaufeu,vitesse,&erreur);
+deplacement(y_evoli,vitesse,&erreur);
+deplacement(y_rondoudou,vitesse,&erreur);
+
+        temp+=1;
+        if(temp % 1000 ==0){
+            vitesse+=1;
         }
+
 vsync();
+
     }
     return 0;
-
 
 }END_OF_MAIN()
