@@ -23,12 +23,15 @@ int main()
     BITMAP * decor = NULL;
     int arrivee = 0;
     int * pokemon_gagnant = NULL;
-    char * test;
+    char message[] = "Le pokemon gagnant est : ";
+    int text_width = text_length(font, message);
+    int rect_width = text_width + 20;
+    int rect_height =  30;
+    int rect_x = (SCREEN_W - rect_width) / 2;
+    int rect_y = (SCREEN_H - 25) / 2;
 
     //init du tableau de pointeurs de structures de type pokemon nommé tab_pok
     PI_remp_tab_pok(tab_pok);
-    test = malloc(sizeof(char*));
-    test = "wesh";
     srand(time(NULL));
 
     //Init double buffer + decor
@@ -55,8 +58,14 @@ int main()
     }
     //clear_to_color(screen,makecol(255, 255, 255));
     clear(screen);
-    blit(decor,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-    allegro_message("Le gagnant est le pokemon numero %d", arrivee);
+
+    while(!key[KEY_SPACE])
+    {
+        blit(decor,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        rectfill(decor, rect_x, rect_y, rect_x + rect_width + 5, rect_y + rect_height, makecol(255, 255, 255));
+        textout_centre_ex(decor, font, message, SCREEN_W / 2, SCREEN_H / 2, makecol(0, 0, 0), -1);
+        textprintf_ex(decor, font, SCREEN_W / 2 + text_width/2, SCREEN_H / 2, makecol(0,0,0), -1, "%d", arrivee);
+    }
 
 
     for (int i = 0; i < NPOK; ++i)
