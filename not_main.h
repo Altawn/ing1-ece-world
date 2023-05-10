@@ -38,5 +38,8 @@ int PI_depla_pok(Pokemon * tab_rand[NPOK]);
 
 void PI_pok_gagnant(char * winner, int pok_gagnant);
 
+void PI_affichage_liste(BITMAP * decor, char * liste[50] );
+
+void PI_entree_jeu(BITMAP * decor, BITMAP * page, BITMAP * dialogue);
 
 #endif //PARI_HIPPIQUE_V2_NOT_MAIN_H

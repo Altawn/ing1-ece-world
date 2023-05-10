@@ -178,3 +178,43 @@ void PI_pok_gagnant(char * winner, int pok_gagnant)
         strcpy(winner, "rondoudou");
 
 }
+
+void PI_affichage_liste(BITMAP * decor, char * liste[50] )
+{
+    int def = 0;
+
+    for (int k = 0; k < NPOK; ++k)
+    {
+        def = def + 25;
+        textprintf_ex
+                (
+                        decor,
+                        font,
+                        375 - strlen(liste[k]) / 2,
+                        550 + def,
+                        makecol(0, 0, 0),
+                        -1,
+                        "%s", liste[k]
+                );
+        blit(decor, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+    }
+}
+
+void PI_entree_jeu(BITMAP * decor, BITMAP * page, BITMAP * dialogue)
+{
+    while(!key[KEY_SPACE])
+    {
+        blit(decor, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        draw_sprite(decor, dialogue, 125 + 12, 500);
+        textprintf_ex
+                (
+                        decor,
+                        font,
+                        375 - strlen("Joueur 1 : Quel pokemon choisissez-vous ?") / 2,
+                        550,
+                        makecol(0, 0, 0),
+                        -1,
+                        "Joueur 1 : Quel pokemon choisissez-vous ?"
+                );
+    }
+}
