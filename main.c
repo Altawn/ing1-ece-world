@@ -3,9 +3,7 @@
 /* Ce qu'il reste a faire
  *      Demande aux joueurs le pokemon sur lequel ils parient
  *          - Optionnel mais cool : affichage du sprite du pokemon pour qu'ils aient une idée
- *      Retranscription numero pokemon en nom de pokemon
  *      Retranscription numero gagnant a si un joueur a gagne ou non
- *      Alternatice pour le textprint_ex a la fin -> photo avec tout noté déja dessus
  */
 
 int main()
@@ -21,14 +19,10 @@ int main()
     BITMAP * page = NULL;
     Pokemon * tab_pok[NPOK];
     BITMAP * decor = NULL;
+    BITMAP * dialogue = NULL;
     int arrivee = 0;
     int * pokemon_gagnant = NULL;
-    char message[] = "Le pokemon gagnant est : ";
-    int text_width = text_length(font, message);
-    int rect_width = text_width + 20;
-    int rect_height =  30;
-    int rect_x = (SCREEN_W - rect_width) / 2;
-    int rect_y = (SCREEN_H - 25) / 2;
+    char pok_gagnant[50];
 
     //init du tableau de pointeurs de structures de type pokemon nommé tab_pok
     PI_remp_tab_pok(tab_pok);
@@ -40,6 +34,9 @@ int main()
 
     decor = load_bitmap("city street.bmp", NULL);
     if(!decor) allegro_message("Pas de fond d'ecran");
+
+    dialogue = load_bitmap("Dialogue_Pokemon.bmp", NULL);
+    if(!page) allegro_message("Erreur creation page");
 
     //Boucle d'evenements
     while (!key[KEY_ESC] && arrivee == 0)
@@ -56,23 +53,34 @@ int main()
         //Deplacement des pokemons
         arrivee = PI_depla_pok(tab_pok);
     }
-    //clear_to_color(screen,makecol(255, 255, 255));
+
     clear(screen);
-
-    while(!key[KEY_SPACE])
+    PI_pok_gagnant(pok_gagnant, arrivee);
+    
+    while(!key[KEY_Q])
     {
-        blit(decor,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-        rectfill(decor, rect_x, rect_y, rect_x + rect_width + 5, rect_y + rect_height, makecol(255, 255, 255));
-        textout_centre_ex(decor, font, message, SCREEN_W / 2, SCREEN_H / 2, makecol(0, 0, 0), -1);
-        textprintf_ex(decor, font, SCREEN_W / 2 + text_width/2, SCREEN_H / 2, makecol(0,0,0), -1, "%d", arrivee);
+        blit(decor, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        draw_sprite(decor, dialogue, 125+12, 500);
+        //blit(dialogue, decor, 0, 0, 0, 0, 1000, 200);
+
+        textprintf_ex
+                (
+                decor,
+                font,
+                53 + 375 - strlen("la gagnant est Magic")/2,
+                623,
+                makecol(0, 0, 0),
+                -1,
+                " Le gagnant est %s", pok_gagnant
+                );
     }
-
-
+//SCREEN_W / 2 + text_width/2 - text_width2/2
+//SCREEN_H / 2
     for (int i = 0; i < NPOK; ++i)
     {
         free(tab_pok[i]);
     }
-
+    //free(pok_gagnant);
     allegro_exit();
     return 0;
 

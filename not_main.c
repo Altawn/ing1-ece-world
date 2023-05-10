@@ -148,7 +148,7 @@ int PI_depla_pok(Pokemon * tab_rand[NPOK])
 
         if(tab_rand[i]->posx%25 == 0)
         {
-            tab_rand[i]->depx = rand()%10 + 3;
+            tab_rand[i]->depx = rand()%50 + 3;
         }
 
         if (tab_rand[i]->posx >= 1024)
@@ -157,4 +157,24 @@ int PI_depla_pok(Pokemon * tab_rand[NPOK])
         }
     }
     return flag_PI;
+}
+
+void PI_pok_gagnant(char * winner, int pok_gagnant)
+{
+
+    if(pok_gagnant == 1)
+        strcpy(winner, "magicarpe");
+
+    else if(pok_gagnant == 2)
+        strcpy(winner, "papilusion");
+
+    else if(pok_gagnant == 3)
+        strcpy(winner, "tauros");
+
+    else if(pok_gagnant == 4)
+        strcpy(winner, "ponita");
+
+    else
+        strcpy(winner, "rondoudou");
+
 }

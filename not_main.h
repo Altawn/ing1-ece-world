@@ -6,6 +6,7 @@
 #include <allegro.h>
 #define NIMAGE 5
 #define NPOK 5
+#define TAILLEMAX 10
 
 typedef struct
 {
@@ -34,5 +35,8 @@ void PI_init_allegro();
 void PI_anim_pok(Pokemon * tab_rand[NPOK], BITMAP * page);
 
 int PI_depla_pok(Pokemon * tab_rand[NPOK]);
+
+void PI_pok_gagnant(char * winner, int pok_gagnant);
+
 
 #endif //PARI_HIPPIQUE_V2_NOT_MAIN_H
