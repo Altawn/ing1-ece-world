@@ -4,8 +4,8 @@
 
 
 int main() {
-
     t_player player1;
+    t_player player2;
     t_objet snake_game ={707,415,727,415,0,0};
     t_objet hero ={414,349,440,355,0,0};
     t_objet rectangle3 ={0,85,1024,85,0,0};
@@ -17,13 +17,16 @@ int main() {
     t_objet rectangle9 ={340,768,340,700,0,0};
     t_objet rectangle10 ={515,95,566,410,0,0};
     t_objet rectangle11 ={525,510,560,760,0,0};
-    t_objet rectangle12 ={69,192,250,192,0,0};
-    t_objet rectangle13 ={322,192,503,192,0,0};
+    t_objet rectangle12 ={69,188,250,188,0,0};
+    t_objet rectangle13 ={322,188,503,188,0,0};
     t_objet rectangle14 ={250,192,250,420,0,0};
     t_objet rectangle15 ={322,192,322,420,0,0};
-    t_objet rectangle16 ={350,272,508,360,0,0};
+    t_objet rectangle16 ={350,272,508,355,0,0};
     t_objet rectangle17 ={85,510,246,620,0,0};
     t_objet rectangle18 ={351,505,415,519,0,0};
+    t_objet rectangle19 ={458,100,482,115,0,0};
+    t_objet rectangle20 ={235,750,340,750,0,0};
+    t_objet rectangle21 ={854,405,880,410,0,0};
     t_objet gym ={575,290,970,415,0,0};
 
 
@@ -46,13 +49,15 @@ int main() {
     }
 
     BITMAP* fond;BITMAP* t0;BITMAP* t1;BITMAP* t2;BITMAP* tup0;BITMAP* tup1;BITMAP* tup2;BITMAP* ts0;BITMAP* ts1;BITMAP* ts2;BITMAP * page;
-
+    BITMAP* quoi;
+    BITMAP* cent;
     player1.x=270;
-    player1.y=720;
+    player1.y=700;
     player1.mouv=0;
 
     //////////////////BITMAP/////////////////
     page = create_bitmap(1024,768);
+    cent = load_bitmap("../poke_center.bmp",NULL);
     fond = load_bitmap("../fond_park.bmp",NULL);
     t0 = load_bitmap("../t1.bmp",NULL);
     t1 = load_bitmap("../t2.bmp",NULL);
@@ -63,14 +68,14 @@ int main() {
     tup0 = load_bitmap("../tu1.bmp",NULL);
     tup1 = load_bitmap("../tu2.bmp",NULL);
     tup2= load_bitmap("../tu3.bmp",NULL);
+    quoi = load_bitmap("../quoi.bmp",NULL);
 
     if(!fond){
         printf("erreur");
     }
-
-
     MIDI* midi = load_midi("../Pokemon_sound.mid");
     play_midi(midi, true);
+
     ecran();
     // print_chen(page)
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
@@ -94,7 +99,6 @@ int main() {
         colision(&player1,&rectangle16);
         colision(&player1,&rectangle17);
         colision(&player1,&rectangle18);
-
         colision(&player1,&gym);
         depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
 
@@ -129,6 +133,36 @@ int main() {
                 blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
             }
         }
+        if(colision(&player1,&rectangle19)){
+            clear(screen);
+            while(!key[KEY_ENTER])
+            {
+                draw_sprite(page,quoi,0,0);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            }
+
+            blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            draw_sprite(page,tup0,player1.x,player1.y);
+            blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        }
+        if(colision(&player1,&rectangle20)){
+            if(bulle(&player1)){
+                allegro_exit();
+                exit(EXIT_SUCCESS);
+            }
+            else{
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            }
+
+        }
+
+
+        if(colision(&player1,&rectangle21)){
+
+        }
+
 
 
         if (swap1 == true){
@@ -166,8 +200,6 @@ int main() {
             // jeux 4
             swap4 =false;
         }
-
-
     }
     return 0;
 }END_OF_MAIN()

@@ -202,62 +202,73 @@ void snake() {
     t_pomme * apple = malloc(sizeof(t_pomme*));
     int mouvement =2;
     int nb_part = 1;
+    int turn[2];
+    int t=0;
     bool end =true ;
-    t_liste* serpent = initialisation(base);
-    pomme_init(base,apple);
+    bool def_end = true;
 
-    add_part(serpent,base);add_part(serpent,base);
 
-    while(!key[KEY_SPACE] && end){
+    while(t!=2) {
+        t++;
+        t_liste* serpent = initialisation(base);
+        pomme_init(base,apple);
+        add_part(serpent,base);add_part(serpent,base);
 
-        textprintf_ex(screen,font,980,10,makecol(255,255,255),-1,"%d",nb_part-1);
-        if(key[KEY_LEFT]){
-            mouvement = 1;
-        }
-        if(key[KEY_RIGHT]){
-            mouvement = 2;
-        }
-        if(key[KEY_UP]){
-            mouvement = 3;
-        }
-        if(key[KEY_DOWN]){
-            mouvement = 4;
-        }
+        while (!key[KEY_SPACE] && end) {
 
-        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        move_snake(serpent,mouvement);
-        if(colision_snake(serpent,apple,base) == true){
-            nb_part++;
-            add_part(serpent,base);
-        }
-        if(key[KEY_E]){
-            nb_part++;
-            add_part(serpent,base);
-            rest(100);
-        }
-        if(serpent->head->x == SCREEN_W || serpent->head->x == -64 || serpent->head->y == SCREEN_H || serpent->head->y == -64){
-            end =false;
-        }
-
-        if (snake_defeat(nb_part,serpent)){
-            end =false;
-        }
-        if(key[KEY_P]){
-            while(!key[KEY_ENTER]){
-                rest(1);
+            textprintf_ex(screen, font, 980, 10, makecol(255, 255, 255), -1, "%d", nb_part - 1);
+            if (key[KEY_LEFT]) {
+                mouvement = 1;
             }
-        }
+            if (key[KEY_RIGHT]) {
+                mouvement = 2;
+            }
+            if (key[KEY_UP]) {
+                mouvement = 3;
+            }
+            if (key[KEY_DOWN]) {
+                mouvement = 4;
+            }
 
-        afficherListe(serpent,page,head1,head2,head3,head4,mouvement);
-        draw_sprite(page,apple->base,apple->x,apple->y);
-        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_W);
-    }
-    clear(screen);
-    stop_midi();
-    while(!key[KEY_ENTER]){
-        blit(over,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-        textprintf_ex(screen,font,512,600,makecol(255,255,255),-1,"%d",nb_part-1);
+            blit(fond, page, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+            move_snake(serpent, mouvement);
+            if (colision_snake(serpent, apple, base) == true) {
+                nb_part++;
+                add_part(serpent, base);
+            }
+            if (key[KEY_E]) {
+                nb_part++;
+                add_part(serpent, base);
+                rest(100);
+            }
+            if (serpent->head->x == SCREEN_W || serpent->head->x == -64 || serpent->head->y == SCREEN_H ||
+                serpent->head->y == -64) {
+                end = false;
+            }
+
+            if (snake_defeat(nb_part, serpent)) {
+                end = false;
+            }
+            if (key[KEY_P]) {
+                while (!key[KEY_ENTER]) {
+                    rest(1);
+                }
+            }
+
+            afficherListe(serpent, page, head1, head2, head3, head4, mouvement);
+            draw_sprite(page, apple->base, apple->x, apple->y);
+            blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_W);
+
+            
+        }
+        clear(screen);
+        draw_sprite(page, over, 0, 0);
+        while(!key[KEY_ENTER]){
+            textprintf_ex(page, font, 512, 700, makecol(255, 255, 255), -1, "%d", nb_part - 1);
+            blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_W);
+        }
+        turn[t] = nb_part-1;
+        end = true;
     }
 }
 

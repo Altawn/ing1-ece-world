@@ -125,10 +125,6 @@ int partie_guitar_hero(BITMAP* page){
     fond_ecran2=load_bitmap("../fond_ecran_guitarre_heroo_1024.bmp",NULL);
 
 
-
-
-
-
     for ( i = 0; i < NB_poke_guitare; ++i) {
         y_pikachu[i]=-100;
         y_carapuce[i]=-100;
@@ -184,9 +180,6 @@ int partie_guitar_hero(BITMAP* page){
 
 
         clear_bitmap(fond_ecran);
-
-
-
         deplacement(y_pikachu,vitesse,&erreur);
         deplacement(y_carapuce,vitesse,&erreur);
         deplacement(y_dracaufeu,vitesse,&erreur);

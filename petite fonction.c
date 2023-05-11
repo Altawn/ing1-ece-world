@@ -20,6 +20,7 @@ bool colision(t_player* player,t_objet* ob) {
         if(player->y < ob->y && swap == true){
             player->y =player->y-3;
             swap = false;
+            return true;
         }
         if(player->y> ob->y2 && swap == true){
             player->y= player->y+3;
@@ -84,5 +85,12 @@ void door_two(BITMAP* bit,t_player* player1){
         rectfill(screen,431-i,349,431+i,365,0);
         draw_sprite(screen,bit,player1->x,player1->y);
         rest(100);
+    }
+}
+
+void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BITMAP* t2,BITMAP* tup0,BITMAP* tup1,BITMAP* tup2,BITMAP* ts0,BITMAP* ts1,BITMAP* ts2){
+    while(!key[KEY_ENTER]){
+        depla(player,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
+
     }
 }

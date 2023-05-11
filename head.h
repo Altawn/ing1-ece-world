@@ -2,11 +2,6 @@
 #define PROJET_HEAD_H
 #define NB_poke_guitare 5
 
-
-
-#define TRAINER_W 44
-#define TRAINER_H 46
-
 #include <stdio.h>
 #include "allegro.h"
 #include "time.h"
@@ -14,10 +9,11 @@
 
 //////////BASE + INTRO/////////
 typedef struct player{
-        int x;
-        int y;
-        int mouv;
-        char name[50];
+    int x;
+    int y;
+    int mouv;
+    char name[50];
+    int ticket;
 }t_player;
 
 typedef struct objet{
@@ -51,7 +47,9 @@ typedef struct snake{
 typedef struct liste{
     t_snake* head;
 }t_liste;
+
 bool bulle(t_player* player);
+bool snake_defeat(int nbpart,t_liste* serpent);
 void door_one(BITMAP* bit,t_player* player1);
 void door_two(BITMAP* bit,t_player* player1);
 void snake();
@@ -62,8 +60,11 @@ t_liste *initialisation(BITMAP* base);
 void add_part(t_liste* liste,BITMAP* base);
 void move_snake(t_liste* serpent,int mouvement);
 
+
+
 ///////////jeux de matthias//////
 void deplacement(int y_poke[NB_poke_guitare], int vitesse,int *perreur);
 void verification_touche(int y_poke[NB_poke_guitare],int *perreur);
 void guitar_hero();
+int partie_guitar_hero(BITMAP* page);
 #endif //PROJET_HEAD_H
