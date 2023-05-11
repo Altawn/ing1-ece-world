@@ -1,5 +1,109 @@
 #include "not_main.h"
 
+void Pari_Hippique()
+{
+    //Supposant qu'on prend les deux variables pari gagnant du joueur
+    int pari_gagnant_j1 = 0;
+    int pari_gagnant_j2 = 0;
+
+    //Autres variables + structures
+    Pokemon * tab_pok[NPOK];
+
+    BITMAP * page = NULL;
+    BITMAP * decor = NULL;
+    BITMAP * dialogue = NULL;
+
+    int flag = 0;
+    int arrivee = 0;
+    int y_cir = 579;
+    int passe = 25;
+    int choix_j1;
+    int choix_j2;
+    int blanc = makecol(255, 255, 255);
+    int i;
+
+    char pok_gagnant[50];
+    char * debut[50] =
+            {
+                    "1. Magicarpe (poisson rouge)",
+                    "2. Papilusion (papillon geant)",
+                    "3. Tauros (taureau)",
+                    "4. Ponita (cheval en feu)",
+                    "5. Rondoudou (petite boule rose)"
+            };
+
+    srand(time(NULL));
+
+    //init du tableau de pointeurs de structures de type pokemon nommé tab_pok
+    PI_remp_tab_pok(tab_pok);
+
+    //Init double buffer + decor
+    page = create_bitmap(1024, 768); clear_bitmap(page);
+    if(!page) allegro_message("Erreur creation page");
+
+    decor = load_bitmap("city_street.bmp", NULL);
+    if(!decor) allegro_message("Pas de fond d'ecran");
+
+    dialogue = load_bitmap("Dialogue_Pokemon.bmp", NULL);
+    if(!page) allegro_message("Erreur creation dialogue");
+
+    //Dialogue d'entree
+    PI_entree_jeu(decor, page, dialogue);
+
+    //Cache la phrase de continuation avant le prochain sous-programme
+    rest(200);
+    rectfill(decor, 375 - strlen("Appuyer sur la barre espace pour continuer...") / 2, 690, 720, 700,makecol(255, 255, 255));
+    rest(200);
+
+    //Affichage de la liste des pokemons combattants
+    PI_affichage_liste(decor, debut, page);
+
+    //Transition entre les deux sous-programmes
+    circlefill(decor, 750, 579, 3, 0);
+    blit(decor, page, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+    blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+
+    //Recuperation des paris
+    choix_j1 = PI_navigation(decor, page, y_cir, passe, flag, blanc);
+    rest(200);
+    choix_j2 = PI_navigation(decor, page, y_cir, passe, flag, blanc);
+
+    //Suppression du dialogue et affichage de la course
+    clear(decor);
+    decor = load_bitmap("city_street.bmp", NULL);
+    blit(decor, page, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+    blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+
+    //Boucle d'evenements
+    while (!key[KEY_ESC] && arrivee == 0)
+    {
+        // Effacer buffer en appliquant decor
+        blit(decor,page,0,0,0,0,SCREEN_W,SCREEN_H);
+
+        //Animation des pokemons
+        PI_anim_pok(tab_pok, page); //-> draw_sprite(page, tab_rand[i]->img[tab_rand[i]->frame_act], tab_rand[i]->posx, pas);
+
+        //Affichage du buffer mis à jour
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
+        //Deplacement des pokemons
+        arrivee = PI_depla_pok(tab_pok);
+    }
+
+    clear(screen);
+
+    //Transformation du pokemon gagnant (int -> char)
+    PI_pok_gagnant(pok_gagnant, arrivee);
+
+    //Affichage du pokemon victorieux et du resultat du pari
+    PI_print_gagnant(decor, dialogue, pok_gagnant, choix_j1, arrivee, pari_gagnant_j1, pari_gagnant_j2, choix_j2);
+
+    //Libere la memoire
+    for (i = 0; i < NPOK; ++i)
+    {
+        free(tab_pok[i]);
+    }
+}
 void PI_init_allegro()
 {
     allegro_init();
@@ -14,7 +118,6 @@ void PI_init_allegro()
         exit(EXIT_FAILURE);
     }
 }
-
 Pokemon * PI_init_pokemon(int tx, int ty, int xdx, int posx, int posy, int pok, int depx, int tmpimg)
 {
     Pokemon * random;
@@ -109,7 +212,6 @@ Pokemon * PI_init_pokemon(int tx, int ty, int xdx, int posx, int posy, int pok, 
     }
     return random;
 }
-
 void PI_remp_tab_pok(Pokemon * tab_rand[NPOK])
 {
     tab_rand[0] = PI_init_pokemon(80, 95, 1, 0,   0, 0, 10, 5);
@@ -118,7 +220,6 @@ void PI_remp_tab_pok(Pokemon * tab_rand[NPOK])
     tab_rand[3] = PI_init_pokemon(80, 95, 1, 0, 0, 3, 10, 5);
     tab_rand[4] = PI_init_pokemon(80, 95, 1, 0, 0, 4, 10, 5);
 }
-
 void PI_anim_pok(Pokemon * tab_rand[NPOK], BITMAP * page)
 {
     int pas  = 550;
@@ -137,7 +238,6 @@ void PI_anim_pok(Pokemon * tab_rand[NPOK], BITMAP * page)
     //blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
     pas = 0;
 }
-
 int PI_depla_pok(Pokemon * tab_rand[NPOK])
 {
     int flag_PI  = 0;
@@ -148,7 +248,7 @@ int PI_depla_pok(Pokemon * tab_rand[NPOK])
 
         if(tab_rand[i]->posx%25 == 0)
         {
-            tab_rand[i]->depx = rand()%50 + 3;
+            tab_rand[i]->depx = rand()%10 + 5;
         }
 
         if (tab_rand[i]->posx >= 1024)
@@ -158,7 +258,6 @@ int PI_depla_pok(Pokemon * tab_rand[NPOK])
     }
     return flag_PI;
 }
-
 void PI_pok_gagnant(char * winner, int pok_gagnant)
 {
 
@@ -178,8 +277,7 @@ void PI_pok_gagnant(char * winner, int pok_gagnant)
         strcpy(winner, "rondoudou");
 
 }
-
-void PI_affichage_liste(BITMAP * decor, char * liste[50] )
+void PI_affichage_liste(BITMAP * decor, char * liste[50], BITMAP * page)
 {
     int def = 0;
 
@@ -196,25 +294,176 @@ void PI_affichage_liste(BITMAP * decor, char * liste[50] )
                         -1,
                         "%s", liste[k]
                 );
-        blit(decor, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        blit(decor, page, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+
     }
 }
-
 void PI_entree_jeu(BITMAP * decor, BITMAP * page, BITMAP * dialogue)
 {
     while(!key[KEY_SPACE])
     {
-        blit(decor, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        blit(decor, page, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         draw_sprite(decor, dialogue, 125 + 12, 500);
+        blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
         textprintf_ex
                 (
                         decor,
                         font,
-                        375 - strlen("Joueur 1 : Quel pokemon choisissez-vous ?") / 2,
+                        375 - strlen("Joueurs, quel pokemon choisissez-vous ?") / 2,
                         550,
                         makecol(0, 0, 0),
                         -1,
-                        "Joueur 1 : Quel pokemon choisissez-vous ?"
+                        "Joueurs, quel pokemon choisissez-vous ?"
+                );
+        textprintf_ex
+                (
+                        decor,
+                        font,
+                        375 - strlen("Appuyer sur la barre espace pour continuer...") / 2,
+                        690,
+                        makecol(0, 0, 0),
+                        -1,
+                        "Appuyer sur la barre espace pour continuer..."
                 );
     }
 }
+int PI_choix_pok(int y_cir)
+{
+    if(y_cir == 679) return 5;
+
+    else if(y_cir == 654) return 4;
+
+    else if(y_cir == 629) return 3;
+
+    else if(y_cir == 604) return 2;
+
+    else return 1;
+
+}
+int PI_navigation(BITMAP*decor, BITMAP*page, int y_cir, int passe, int flag, int blanc)
+{
+    int choix_j1;
+
+    while(!key[KEY_SPACE] && flag == 0)
+    {
+        flag = 0;
+        blit(decor, page, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+
+        if(key[KEY_UP] && y_cir > 579)
+        {
+            circlefill(decor, 750, y_cir, 3, blanc);
+            y_cir = y_cir - passe;
+            circlefill(decor, 750, y_cir, 3, 0);
+            readkey();
+        }
+        if(key[KEY_DOWN] && y_cir < 679)
+        {
+            circlefill(decor, 750, y_cir, 3, blanc);
+            y_cir = y_cir + passe;
+            circlefill(decor, 750, y_cir, 3, 0);
+            flag = 0;
+            rest(200);
+            readkey();
+        }
+
+        if(key[KEY_ENTER])
+        {
+            choix_j1 = PI_choix_pok(y_cir);
+            circlefill(decor, 750, y_cir, 3, blanc);
+            flag = 1;
+        }
+
+    }
+
+    return choix_j1;
+}
+void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix_j1, int arrivee, int pari_gagnant_j1, int pari_gagnant_j2, int choix_j2)
+                      {
+                          while(!key[KEY_ENTER])
+                          {
+                              blit(decor, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+                              draw_sprite(decor, dialogue, 125+12, 500);
+                              textprintf_ex
+                                      (
+                                              decor,
+                                              font,
+                                              53 + 375 - strlen("la gagnant est Magic")/2,
+                                              579,
+                                              makecol(0, 0, 0),
+                                              -1,
+                                              " Le gagnant est %s", pok_gagnant
+                                      );
+                              textprintf_ex
+                                      (
+                                              decor,
+                                              font,
+                                              375 - strlen("Appuyer sur la barre espace pour continuer...") / 2,
+                                              690,
+                                              makecol(0, 0, 0),
+                                              -1,
+                                              "Appuyer sur la barre entree pour quitter..."
+                                      );
+                              if(choix_j1 == arrivee)
+                              {
+                                  textprintf_ex
+                                          (
+                                                  decor,
+                                                  font,
+                                                  340 - strlen("Bravo au joueur 1 pour avoir parie sur le bon poulin" )/2,
+                                                  610,
+                                                  makecol(0, 0, 0),
+                                                  -1,
+                                                  "Bravo au joueur 1 pour avoir parie sur le bon poulin"
+                                          );
+                                  pari_gagnant_j1++;
+                                  readkey();
+                              }
+                              if(choix_j2 == arrivee)
+                              {
+                                  textprintf_ex
+                                          (
+                                                  decor,
+                                                  font,
+                                                  340 - strlen("Bravo au joueur 1 pour avoir parie sur le bon poulin" )/2,
+                                                  610,
+                                                  makecol(0, 0, 0),
+                                                  -1,
+                                                  "Bravo au joueur 2 pour avoir parie sur le bon poulin"
+                                          );
+                                  pari_gagnant_j2++;
+                                  readkey();
+                              }
+                              if(choix_j2 == arrivee && choix_j1 == arrivee)
+                              {
+                                  textprintf_ex
+                                          (
+                                                  decor,
+                                                  font,
+                                                  53 + 375 - strlen("Bravo a nos deux joueurs pour avoir parie sur le bon poulin" )/2,
+                                                  610,
+                                                  makecol(0, 0, 0),
+                                                  -1,
+                                                  "Bravo a nos deux joueurs pour avoir parie sur le bon poulin"
+                                          );
+                                  pari_gagnant_j1++;
+                                  pari_gagnant_j2++;
+                                  readkey();
+                              }
+                              if(choix_j2 != arrivee && choix_j1 != arrivee)
+                              {
+                                  textprintf_ex
+                                          (
+                                                  decor,
+                                                  font,
+                                                  20 + 375 - strlen("Vous ferez mieux une prochaine fois..." )/2,
+                                                  610,
+                                                  makecol(0, 0, 0),
+                                                  -1,
+                                                  "Vous ferez mieux une prochaine fois..."
+                                          );
+                                  readkey();
+                              }
+                          }
+                      }

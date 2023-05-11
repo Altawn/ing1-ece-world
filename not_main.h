@@ -38,8 +38,22 @@ int PI_depla_pok(Pokemon * tab_rand[NPOK]);
 
 void PI_pok_gagnant(char * winner, int pok_gagnant);
 
-void PI_affichage_liste(BITMAP * decor, char * liste[50] );
+void PI_affichage_liste(BITMAP * decor, char * liste[50], BITMAP * page);
 
 void PI_entree_jeu(BITMAP * decor, BITMAP * page, BITMAP * dialogue);
 
+int PI_choix_pok(int y_cir);
+
+int PI_navigation(BITMAP*decor, BITMAP*page, int y_cir, int passe, int flag, int blanc);
+
+void PI_print_gagnant(BITMAP*decor,
+                      BITMAP*dialogue,
+                      char*pok_gagnant,
+                      int choix_j1,
+                      int arrivee,
+                      int pari_gagnant_j1,
+                      int pari_gagnant_j2,
+                      int choix_j2);
+
+void Pari_Hippique();
 #endif //PARI_HIPPIQUE_V2_NOT_MAIN_H
