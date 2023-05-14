@@ -41,7 +41,7 @@ void Pari_Hippique()
     page = create_bitmap(1024, 768); clear_bitmap(page);
     if(!page) allegro_message("Erreur creation page");
 
-    decor = load_bitmap("city_street.bmp", NULL);
+    decor = load_bitmap("le_vrai.bmp", NULL);
     if(!decor) allegro_message("Pas de fond d'ecran");
 
     dialogue = load_bitmap("Dialogue_Pokemon.bmp", NULL);
@@ -70,7 +70,7 @@ void Pari_Hippique()
 
     //Suppression du dialogue et affichage de la course
     clear(decor);
-    decor = load_bitmap("city_street.bmp", NULL);
+    decor = load_bitmap("le_vrai.bmp", NULL);
     blit(decor, page, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 
@@ -167,7 +167,7 @@ Pokemon * PI_init_pokemon(int tx, int ty, int xdx, int posx, int posy, int pok, 
     {
         for (int i = 0; i < NIMAGE; ++i)
         {
-            sprintf(nomfichier, "Taureau/90x95-toreau%d.bmp", i + 1);
+            sprintf(nomfichier, "Taureau/80x95-toreau%d.bmp", i + 1);
             random->img[i] = load_bitmap(nomfichier, NULL);
             if (!random->img[i])
             {
@@ -222,7 +222,7 @@ void PI_remp_tab_pok(Pokemon * tab_rand[NPOK])
 }
 void PI_anim_pok(Pokemon * tab_rand[NPOK], BITMAP * page)
 {
-    int pas  = 550;
+    int pas  = 150;
 
     //clear_bitmap(page);
 
@@ -231,7 +231,15 @@ void PI_anim_pok(Pokemon * tab_rand[NPOK], BITMAP * page)
         draw_sprite(page, tab_rand[i]->img[tab_rand[i]->frame_act], tab_rand[i]->posx, pas);
         tab_rand[i]->frame_act++;
         if(tab_rand[i]->frame_act >= NIMAGE) tab_rand[i]->frame_act = 0;
-        pas = pas+40;
+
+        if(tab_rand[i]->pok == 0 || tab_rand[i]->pok == 1)
+        {
+            pas = pas+96;
+        }
+        if(tab_rand[i]->pok == 2 || tab_rand[i]->pok == 3)
+        {
+            pas = pas + 110;
+        }
     }
 
     rest(100);
