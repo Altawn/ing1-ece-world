@@ -61,14 +61,21 @@ int main() {
 
         //test attraper pokemon
         for (int i = 0; i < 7; ++i) {
-            if(((mouse_x <= pokemons[i]->posx + pokemons[i]->poke->w)
-            ||(mouse_x >= pokemons[i]->posx))
-            && mouse_b & 1)
+            flag = 0;
+
+            if(
+                       (mouse_x <= pokemons[i]->posx)
+                    && (mouse_x >= pokemons[i]->posx - pokemons[i]->poke->w)
+                    && (mouse_b & 1)
+                    && (flag == 0)
+                    && (mouse_y <= pokemons[i]->posy)
+                    && (mouse_y >= pokemons[i]->posy - pokemons[i]->poke->h))
             {
                 pokemons[i]->posx = -10;
                 pokemons[i]->posy = -10;
                 pokemons[i]->depx = 0;
                 pokemons[i]->depy = 0;
+                flag = 1;
 
             }
         }
@@ -84,9 +91,12 @@ int main() {
                 pokemons[i]->depx = rand()%50 - 25;
                 pokemons[i]->depy = rand()%50 - 25;
             }
-            if(compteur%60 == 0)
-                flag = 0;
+            //if(compteur%60 == 0)
+                //flag = 0;
         }
+
+        if(compteur%10==0)
+            flag = 0;
 
         rest(20);
         compteur++;

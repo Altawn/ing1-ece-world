@@ -106,12 +106,12 @@ ballons * TB_init_struct(int posx, int posy, int depx, int depy, int type)
 
 void TB_remp_tab_pok(ballons * taballons[7])
 {
-    taballons[0] = TB_init_struct(rand()%1024, rand()%768, rand()%7 + 1, rand()%7 + 1, 0);
-    taballons[1] = TB_init_struct(rand()%1024, rand()%768, rand()%6 + 1, rand()%6 + 1, 1);
-    taballons[2] = TB_init_struct(rand()%1024, rand()%768, rand()%7 + 1, rand()%7 + 1, 2);
+    taballons[0] = TB_init_struct(rand()%1024, rand()%768, rand()%7 + 1,  rand()%7 + 1,  0);
+    taballons[1] = TB_init_struct(rand()%1024, rand()%768, rand()%6 + 1,  rand()%6 + 1,  1);
+    taballons[2] = TB_init_struct(rand()%1024, rand()%768, rand()%7 + 1,  rand()%7 + 1,  2);
     taballons[3] = TB_init_struct(rand()%1024, rand()%768, rand()%10 + 1, rand()%10 + 1, 3);
     taballons[4] = TB_init_struct(rand()%1024, rand()%768, rand()%12 + 1, rand()%12 + 1, 4);
-    taballons[5] = TB_init_struct(rand()%1024, rand()%768, rand()%3 + 1, rand()%3 + 1, 5);
+    taballons[5] = TB_init_struct(rand()%1024, rand()%768, rand()%3 + 1,  rand()%3 + 1,  5);
     taballons[6] = TB_init_struct(rand()%1024, rand()%768, rand()%15 + 1, rand()%15 + 1, 6);
 }
 
