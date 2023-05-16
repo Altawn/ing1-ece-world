@@ -87,17 +87,16 @@ void door_two(BITMAP* bit,t_player* player1){
         rest(100);
     }
 }
- void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BITMAP* t2,BITMAP* tup0,BITMAP* tup1,BITMAP* tup2,BITMAP* ts0,BITMAP* ts1,BITMAP* ts2,bool* swap5){
-    t_objet sortie ={490,560,550,570,0,0};
+ void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BITMAP* t2,BITMAP* tup0,BITMAP* tup1,BITMAP* tup2,BITMAP* ts0,BITMAP* ts1,BITMAP* ts2){
+    t_objet sortie ={490,560,550,570};
     bool end =true;
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
     draw_sprite(page,tup0,player->x,player->y);
     blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-    while(!key[KEY_ENTER] && end){
+    while(end){
         depla(player,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
         if(colision(player,&sortie)){
             end = false;
         }
     }
-    swap5 =false;
 }

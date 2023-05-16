@@ -8,19 +8,27 @@
 #include <stdbool.h>
 
 //////////BASE + INTRO/////////
+
+typedef struct donne_score{
+    int temp;
+    int score;
+    char nom[20];
+}t_donne_score;
+
 typedef struct player{
     int x;
     int y;
     int mouv;
     char name[50];
+    t_donne_score* tab_score[4];
     int ticket;
 }t_player;
 
 typedef struct objet{
-    int x, y, x2, y2,w,h;
+    int x, y, x2, y2;
 }t_objet;
 
-void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BITMAP* t2,BITMAP* tup0,BITMAP* tup1,BITMAP* tup2,BITMAP* ts0,BITMAP* ts1,BITMAP* ts2,bool* swap5);
+void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BITMAP* t2,BITMAP* tup0,BITMAP* tup1,BITMAP* tup2,BITMAP* ts0,BITMAP* ts1,BITMAP* ts2);
 void calc(t_objet* ob);
 bool colision(t_player* player,t_objet* ob);
 void ecran();
@@ -52,7 +60,7 @@ bool bulle(t_player* player);
 bool snake_defeat(int nbpart,t_liste* serpent);
 void door_one(BITMAP* bit,t_player* player1);
 void door_two(BITMAP* bit,t_player* player1);
-void snake();
+void snake(t_player* player,t_player* player2);
 void afficherListe(t_liste *liste,BITMAP* page,BITMAP* head1,BITMAP* head2,BITMAP* head3,BITMAP* head4,int mouvement);
 void pomme_init(BITMAP* base2,t_pomme* apple);
 bool colision_snake(t_liste* liste,t_pomme* pomme,BITMAP* base);

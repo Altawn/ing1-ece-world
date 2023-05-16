@@ -184,7 +184,7 @@ bool snake_defeat(int nbpart, t_liste* serpent) {
 
 
 
-void snake() {
+void snake(t_player* player,t_player* player2) {
 
     MIDI* snake_music = load_midi("../snake_music.mid");
     play_midi(snake_music, true);
@@ -265,5 +265,12 @@ void snake() {
         turn[t] = nb_part-1;
         end = true;
     }
+    if(turn[0] > turn[1]){
+        player->ticket++;
+    } else
+        player2->ticket++;
+
+    player->tab_score[0]->score = turn[0];
+    player2->tab_score[0]->score = turn[1];
 }
 
