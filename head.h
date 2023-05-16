@@ -20,7 +20,7 @@ typedef struct objet{
     int x, y, x2, y2,w,h;
 }t_objet;
 
-
+void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BITMAP* t2,BITMAP* tup0,BITMAP* tup1,BITMAP* tup2,BITMAP* ts0,BITMAP* ts1,BITMAP* ts2,bool* swap5);
 void calc(t_objet* ob);
 bool colision(t_player* player,t_objet* ob);
 void ecran();

@@ -205,9 +205,6 @@ void snake() {
     int turn[2];
     int t=0;
     bool end =true ;
-    bool def_end = true;
-
-
     while(t!=2) {
         t++;
         t_liste* serpent = initialisation(base);
@@ -258,8 +255,6 @@ void snake() {
             afficherListe(serpent, page, head1, head2, head3, head4, mouvement);
             draw_sprite(page, apple->base, apple->x, apple->y);
             blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_W);
-
-            
         }
         clear(screen);
         draw_sprite(page, over, 0, 0);

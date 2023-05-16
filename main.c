@@ -5,7 +5,7 @@
 
 int main() {
     t_player player1;
-    t_player player2;
+    t_player player_temp;
     t_objet snake_game ={707,415,727,415,0,0};
     t_objet hero ={414,349,440,355,0,0};
     t_objet rectangle3 ={0,85,1024,85,0,0};
@@ -26,7 +26,7 @@ int main() {
     t_objet rectangle18 ={351,505,415,519,0,0};
     t_objet rectangle19 ={458,100,482,115,0,0};
     t_objet rectangle20 ={235,750,340,750,0,0};
-    t_objet rectangle21 ={854,405,880,410,0,0};
+    t_objet rectangle21 ={854,405,880,420,0,0};
     t_objet gym ={575,290,970,415,0,0};
 
 
@@ -34,6 +34,7 @@ int main() {
     bool swap2 = false;
     bool swap3 = false;
     bool swap4 = false;
+    bool swap5 = false;
 
     allegro_init();
     install_keyboard();
@@ -54,6 +55,10 @@ int main() {
     player1.x=270;
     player1.y=700;
     player1.mouv=0;
+    player_temp.x=501;
+    player_temp.y=489;
+    player_temp.mouv=0;
+
 
     //////////////////BITMAP/////////////////
     page = create_bitmap(1024,768);
@@ -75,7 +80,6 @@ int main() {
     }
     MIDI* midi = load_midi("../Pokemon_sound.mid");
     play_midi(midi, true);
-
     ecran();
     // print_chen(page)
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
@@ -160,10 +164,20 @@ int main() {
 
 
         if(colision(&player1,&rectangle21)){
-
+            if(bulle(&player1)){
+                swap5 = true;
+                }
+            else{
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            }
         }
 
-
+        if(swap5 == true){
+            clear(page);
+            poke_center(&player_temp,page,cent,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2,&swap5);
+        }
 
         if (swap1 == true){
             // jeux 1
