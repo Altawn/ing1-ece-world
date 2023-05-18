@@ -36,4 +36,6 @@ void TB_transition(BITMAP* background, BITMAP* buffer, int i);
 
 void TB_resultats(double tps_j1, double tps_j2, BITMAP* background, BITMAP* buffer, BITMAP* dialogue);
 
+void Tir_Ballons(double tps_j1, double tps_j2);
+
 #endif //TIR_AUX_BALLONS_NOT_MAIN_H
