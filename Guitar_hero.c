@@ -30,7 +30,7 @@ void initialisation_allegro() {
 
 
 
-void deplacement(int y_poke[NB_poke_guitare], int vitesse,int *perreur){
+void deplacement_guitare(int y_poke[NB_poke_guitare], int vitesse,int *perreur){
     int i,j;
     int nb_alea[NB_poke_guitare];
     int verif;
@@ -65,7 +65,7 @@ void deplacement(int y_poke[NB_poke_guitare], int vitesse,int *perreur){
 }
 
 
-void verification_touche(int y_poke[NB_poke_guitare],int *perreur){
+void verification_touche_guitare(int y_poke[NB_poke_guitare],int *perreur){
     int i;
     int  verification=0;
 
@@ -83,7 +83,7 @@ void verification_touche(int y_poke[NB_poke_guitare],int *perreur){
 
 }
 
-int partie_guitar_hero(BITMAP* page){
+double partie_guitar_hero(BITMAP* page){
     int y_pikachu[NB_poke_guitare];
     int y_carapuce[NB_poke_guitare];
     int y_dracaufeu[NB_poke_guitare];
@@ -134,10 +134,13 @@ int partie_guitar_hero(BITMAP* page){
     }
 
     srand(time(NULL));
+    double time_spent = 0.0;
+    clock_t begin = clock();
+
     while(!key[KEY_ESC] && erreur==0 ){
 
         blit(fond_ecran2,fond_ecran,0,0,0,0,SCREEN_W,SCREEN_H);
-        textprintf_ex(fond_ecran, font, 450, 180, makecol(0,0,0), -1, "SCORE : %d points", temp/10);
+      //  textprintf_ex(fond_ecran, font, 450, 180, makecol(0,0,0), -1, "SCORE : %d points", temp/10);
 
         for ( i = 0; i < NB_poke_guitare; ++i) {
             draw_sprite(fond_ecran,pikachu[i],52,y_pikachu[i]);
@@ -156,23 +159,23 @@ int partie_guitar_hero(BITMAP* page){
 
             if (key[KEY_Q]) {
 
-                verification_touche(y_pikachu,&erreur);
+                verification_touche_guitare(y_pikachu,&erreur);
                 temp_touche=temp;
             } else if (key[KEY_W]) {
 
-                verification_touche(y_carapuce,&erreur);
+                verification_touche_guitare(y_carapuce,&erreur);
                 temp_touche=temp;
             } else if (key[KEY_E]) {
 
-                verification_touche(y_dracaufeu,&erreur);
+                verification_touche_guitare(y_dracaufeu,&erreur);
                 temp_touche=temp;
             } else if (key[KEY_R]) {
 
-                verification_touche(y_evoli,&erreur);
+                verification_touche_guitare(y_evoli,&erreur);
                 temp_touche=temp;
             } else if (key[KEY_T]) {
 
-                verification_touche(y_rondoudou,&erreur);
+                verification_touche_guitare(y_rondoudou,&erreur);
                 temp_touche=temp;
             }
         }
@@ -180,11 +183,11 @@ int partie_guitar_hero(BITMAP* page){
 
 
         clear_bitmap(fond_ecran);
-        deplacement(y_pikachu,vitesse,&erreur);
-        deplacement(y_carapuce,vitesse,&erreur);
-        deplacement(y_dracaufeu,vitesse,&erreur);
-        deplacement(y_evoli,vitesse,&erreur);
-        deplacement(y_rondoudou,vitesse,&erreur);
+        deplacement_guitare(y_pikachu,vitesse,&erreur);
+        deplacement_guitare(y_carapuce,vitesse,&erreur);
+        deplacement_guitare(y_dracaufeu,vitesse,&erreur);
+        deplacement_guitare(y_evoli,vitesse,&erreur);
+        deplacement_guitare(y_rondoudou,vitesse,&erreur);
 
         temp+=1;
 
@@ -195,7 +198,10 @@ int partie_guitar_hero(BITMAP* page){
         vsync();
 
     }
-    return temp;
+    clock_t end = clock();
+    time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
+
+    return time_spent;
 }
 
 void guitar_hero(t_player* player,t_player* player2) {
@@ -208,7 +214,7 @@ void guitar_hero(t_player* player,t_player* player2) {
     game_over2=load_bitmap("../game_over_V2.bmp",NULL);
     page=create_bitmap(SCREEN_W,SCREEN_H);
 
-    int temp[2];
+    double temp[2];
     int i;
 
     for ( i = 0; i < 2; ++i) {
@@ -220,7 +226,7 @@ void guitar_hero(t_player* player,t_player* player2) {
 
             blit(game_over,page,0,0,0,0,SCREEN_W,SCREEN_H);
             blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-            textprintf_ex(game_over, font, 140, 80, makecol(0,0,0), -1, "SCORE : %d points", temp[i]/10);
+            textprintf_ex(game_over, font, 140, 80, makecol(0,0,0), -1, "SCORE : %.2f secondes", temp[i]);
             textprintf_ex(game_over, font, 390, 450, makecol(255,0,0), -1, "CLIQUEZ SUR ENTREE POUR CONTINUER");
         }
     }
