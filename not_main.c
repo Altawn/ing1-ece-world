@@ -132,7 +132,42 @@ void TB_anim_pok(ballons * pokemons[7], BITMAP*buffer)
     }
 }
 
-void TB_click_souris()
+void TB_click_souris(ballons * pokemons[7], int available_poke)
+{
+    for (int i = 0; i < 7; ++i) {
+        if(
+                (mouse_x < pokemons[i]->posx + pokemons[i]->poke->w)
+                && (mouse_x > pokemons[i]->posx)
+                && (mouse_b & 1)
+                && (available_poke == 1)
+                && (mouse_y < pokemons[i]->posy + pokemons[i]->poke->h)
+                && (mouse_y > pokemons[i]->posy))
+        {
+            pokemons[i]->posx = -10;
+            pokemons[i]->posy = -10;
+            pokemons[i]->depx = 0;
+            pokemons[i]->depy = 0;
+        }
+    }
+}
+
+int TB_condition_attrap(BITMAP* pokeball[2], BITMAP*buffer)
 {
 
+    int available_poke = 0;
+    //Animation pokeball ferme + mise a zero de la variable available_poke
+    if(mouse_b & 1)
+    {
+        draw_sprite(buffer, pokeball[1], mouse_x - pokeball[1]->w/2, mouse_y- pokeball[1]->h/2);
+        available_poke = 0; //Du temps que la pokeball est ferme, nous en pouvons plus attraper de pokemons  -->  il faut dont relacher le click gauche pour essayer d' en attraper de nouveau
+    }
+
+
+    //condition pour que la variable available_poke = 1
+    if(!(mouse_b & 1))
+    {
+        available_poke = 1;
+    }
+
+    return available_poke;
 }
