@@ -27,7 +27,7 @@ ballons * TB_init_struct(int posx, int posy, int depx, int depy, int type, int a
 
     if(random->type == 0)
     {
-        sprintf(nomFichier, "articuno.bmp");
+        sprintf(nomFichier, "Tir_Ballons/Pokemons/articuno.bmp");
         random->poke = load_bitmap(nomFichier, NULL);
         if (!random->poke)
         {
@@ -38,7 +38,7 @@ ballons * TB_init_struct(int posx, int posy, int depx, int depy, int type, int a
 
     else if(random->type == 1)
     {
-        sprintf(nomFichier, "butterfree.bmp");
+        sprintf(nomFichier, "Tir_Ballons/Pokemons/butterfree.bmp");
         random->poke = load_bitmap(nomFichier, NULL);
         if (!random->poke)
         {
@@ -49,7 +49,7 @@ ballons * TB_init_struct(int posx, int posy, int depx, int depy, int type, int a
 
     else if(random->type == 2)
     {
-        sprintf(nomFichier, "golbat.bmp");
+        sprintf(nomFichier, "Tir_Ballons/Pokemons/golbat.bmp");
         random->poke = load_bitmap(nomFichier, NULL);
         if (!random->poke)
         {
@@ -60,7 +60,7 @@ ballons * TB_init_struct(int posx, int posy, int depx, int depy, int type, int a
 
     else if(random->type == 3)
     {
-        sprintf(nomFichier, "magnemite.bmp");
+        sprintf(nomFichier, "Tir_Ballons/Pokemons/magnemite.bmp");
         random->poke = load_bitmap(nomFichier, NULL);
         if (!random->poke)
         {
@@ -71,7 +71,7 @@ ballons * TB_init_struct(int posx, int posy, int depx, int depy, int type, int a
 
     else if(random->type == 4)
     {
-        sprintf(nomFichier, "mew.bmp");
+        sprintf(nomFichier, "Tir_Ballons/Pokemons/mew.bmp");
         random->poke = load_bitmap(nomFichier, NULL);
         if (!random->poke)
         {
@@ -82,7 +82,7 @@ ballons * TB_init_struct(int posx, int posy, int depx, int depy, int type, int a
 
     else if(random->type == 5)
     {
-        sprintf(nomFichier, "weezing.bmp");
+        sprintf(nomFichier, "Tir_Ballons/Pokemons/weezing.bmp");
         random->poke = load_bitmap(nomFichier, NULL);
         if (!random->poke)
         {
@@ -93,7 +93,7 @@ ballons * TB_init_struct(int posx, int posy, int depx, int depy, int type, int a
 
     else
     {
-        sprintf(nomFichier, "zubat.bmp");
+        sprintf(nomFichier, "Tir_Ballons/Pokemons/zubat.bmp");
         random->poke = load_bitmap(nomFichier, NULL);
         if (!random->poke)
         {
@@ -178,7 +178,7 @@ void TB_entree_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, int i)
     while(!key[KEY_SPACE])
     {
         blit(background, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-        background = load_bitmap("fond_ballons.bmp", NULL);
+        background = load_bitmap("Tir_Ballons/fond_ballons.bmp", NULL);
         draw_sprite(background, dialogue, 125 + 12, 500);
 
         textprintf_ex
@@ -237,7 +237,7 @@ double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pok
 
 //debut du jeu
     clear(background);
-    background = load_bitmap("fond_ballons.bmp", NULL);
+    background = load_bitmap("Tir_Ballons/fond_ballons.bmp", NULL);
     blit(background, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 
@@ -327,7 +327,7 @@ void TB_resultats(double tps_j1, double tps_j2, BITMAP* background, BITMAP* buff
     while(!key[KEY_ENTER])
     {
         blit(background, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
-        background = load_bitmap("fond_ballons.bmp", NULL);
+        background = load_bitmap("Tir_Ballons/fond_ballons.bmp", NULL);
         draw_sprite(background, dialogue, 137, 500);
 
         if(tps_j1 < tps_j2)
@@ -375,16 +375,16 @@ void Tir_Ballons(double tps_j1, double tps_j2)
     buffer = create_bitmap(1024, 768); clear_bitmap(buffer);
     if(!buffer) allegro_message("Erreur creation page");
 
-    background = load_bitmap("fond_ballons.bmp", NULL);
+    background = load_bitmap("Tir_Ballons/fond_ballons.bmp", NULL);
     if(!background) allegro_message("Pas de fond d'ecran");
 
-    pokeball[0] = load_bitmap("open_pokeball1.bmp", NULL);
+    pokeball[0] = load_bitmap("Tir_Ballons/open_pokeball1.bmp", NULL);
     if(!pokeball[0]) allegro_message("Pas de pokeball 1");
 
-    pokeball[1] = load_bitmap("closed_pokeball1.bmp", NULL);
+    pokeball[1] = load_bitmap("Tir_Ballons/closed_pokeball1.bmp", NULL);
     if(!pokeball[1]) allegro_message("Pas de pokeball 2");
 
-    dialogue = load_bitmap("dialogue_pokemon.bmp", NULL);
+    dialogue = load_bitmap("Tir_Ballons/dialogue_pokemon.bmp", NULL);
     if(!dialogue) allegro_message("Pas de dialogue");
 
     //Definition des regles du jeu pour j1
