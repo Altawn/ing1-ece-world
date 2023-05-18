@@ -131,3 +131,8 @@ void TB_anim_pok(ballons * pokemons[7], BITMAP*buffer)
         pokemons[i]->posy = pokemons[i]->posy + pokemons[i]->depy;
     }
 }
+
+void TB_click_souris()
+{
+
+}

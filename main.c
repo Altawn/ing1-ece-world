@@ -17,6 +17,7 @@ int main() {
     BITMAP * close_poke = NULL;
     BITMAP * pokeball[2] = {0, 0};
     int flag = 0;
+    int available_poke = 1;
     int compteur = 0;
 
     srand(time(NULL));
@@ -40,6 +41,7 @@ int main() {
 
     while(!key[KEY_ESC])
     {
+        show_mouse(buffer);
         mouse_y = mouse_y;
         mouse_x = mouse_x;
 
@@ -48,43 +50,46 @@ int main() {
         //apparition des pokemons
         TB_anim_pok(pokemons, buffer);
 
-        //animation pokeball
-        draw_sprite(buffer, pokeball[0], mouse_x, mouse_y);
-        while(mouse_b & 1 && flag == 0)
-        {
-            clear(buffer);
-            blit(background, buffer,0,0,0,0,SCREEN_W,SCREEN_H);
-            TB_anim_pok(pokemons, buffer);
-            draw_sprite(buffer, pokeball[1], mouse_x, mouse_y);
-            flag = 1;
-        }
+    //affichage pokeball ouverte
+        draw_sprite(buffer, pokeball[0], mouse_x - pokeball[0]->w/2, mouse_y- pokeball[0]->h/2);
 
         //test attraper pokemon
         for (int i = 0; i < 7; ++i) {
-            flag = 0;
-
             if(
-                       (mouse_x <= pokemons[i]->posx)
-                    && (mouse_x >= pokemons[i]->posx - pokemons[i]->poke->w)
+                       (mouse_x <= pokemons[i]->posx + pokemons[i]->depx)
+                    && (mouse_x >= pokemons[i]->posx - pokemons[i]->poke->w + pokemons[i]->depx)
                     && (mouse_b & 1)
-                    && (flag == 0)
-                    && (mouse_y <= pokemons[i]->posy)
-                    && (mouse_y >= pokemons[i]->posy - pokemons[i]->poke->h))
+                    && (available_poke == 1)
+                    && (mouse_y <= pokemons[i]->posy + pokemons[i]->depy)
+                    && (mouse_y >= pokemons[i]->posy - pokemons[i]->poke->h + pokemons[i]->depy))
             {
                 pokemons[i]->posx = -10;
                 pokemons[i]->posy = -10;
                 pokemons[i]->depx = 0;
                 pokemons[i]->depy = 0;
-                flag = 1;
-
             }
         }
 
+    //Animation pokeball ferme + mise a zero de la variable available_poke
+        if(mouse_b & 1)
+        {
+            draw_sprite(buffer, pokeball[1], mouse_x - pokeball[1]->w/2, mouse_y- pokeball[1]->h/2);
+            available_poke = 0; //Du temps que la pokeball est ferme, nous en pouvons plus attraper de pokemons  -->  il faut dont relacher le click gauche pour essayer d' en attraper de nouveau
+        }
 
+
+    //condition pour que la variable available_poke = 1
+        if(!(mouse_b & 1))
+        {
+            available_poke = 1;
+        }
+
+
+    //fin de la boucle
         blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
 
         //conditions de jeu
-        if(compteur%30 == 0)
+      /*  if(compteur%30 == 0)
         {
             for (int i = 0; i < 7; ++i)
             {
@@ -97,7 +102,7 @@ int main() {
 
         if(compteur%10==0)
             flag = 0;
-
+*/
         rest(20);
         compteur++;
     }

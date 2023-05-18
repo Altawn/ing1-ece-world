@@ -22,5 +22,6 @@ void TB_remp_tab_pok(ballons * taballons[7]);
 
 void TB_anim_pok(ballons * pokemons[7], BITMAP*buffer);
 
+void TB_click_souris();
 
 #endif //TIR_AUX_BALLONS_NOT_MAIN_H
