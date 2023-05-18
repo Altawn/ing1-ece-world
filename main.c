@@ -5,6 +5,12 @@
 int main() {
     t_player player1;
     t_player player2;
+
+    char defaut[] = "alex";
+    char default2[] = "zebi";
+    strcpy(player1.name,defaut);
+    strcpy(player2.name,default2);
+
     t_player player_temp;
     t_objet snake_game ={707,415,727,415};
     t_objet hero ={414,349,440,355};
@@ -82,7 +88,7 @@ int main() {
     MIDI* midi = load_midi("../Pokemon_sound.mid");
     play_midi(midi, true);
     ecran();
-    // print_chen(page)
+    //print_chen(page,&player1,&player2);
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
     draw_sprite(page,ts0,player1.x,player1.y);
     blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);

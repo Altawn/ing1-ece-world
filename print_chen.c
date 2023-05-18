@@ -12,7 +12,7 @@ void ecran(){
     }
 }
 
-void print_chen(BITMAP *page) {
+void print_chen(BITMAP *page,t_player *player1,t_player *player2) {
 
     char nom_perso1[256] = "";
     char stock_nom1[256];
@@ -38,7 +38,7 @@ void print_chen(BITMAP *page) {
     BITMAP *chen;
     chen = load_bitmap("../pr_chen1.bmp", NULL);
     int current_phrase = 0;
-    char display[256]; // Chaîne de caractères à afficher
+    char display[256];
     memset(display, 0, sizeof(display)); // Initialisation de la chaîne de caractères à afficher
 
 
@@ -119,7 +119,7 @@ void print_chen(BITMAP *page) {
                             }
                         }
                     }
-                    textout_ex(screen, font, nom_perso2, 652, 244, makecol(0, 0, 0), -1);
+                    textout_ex(screen, font, nom_perso1, 652, 244, makecol(0, 0, 0), -1);
                 }
             }
 
@@ -210,6 +210,8 @@ void print_chen(BITMAP *page) {
         }
 
     }
-    strcpy(nom_perso1,stock_nom1);
-    strcpy(nom_perso2,stock_nom2);
+
+
+    strcpy(player1->name,nom_perso1);
+    strcpy(player2->name,nom_perso2);
 }

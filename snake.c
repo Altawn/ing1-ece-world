@@ -265,6 +265,12 @@ void snake(t_player* player,t_player* player2) {
             blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_W);
         }
         turn[t] = nb_part-1;
+        if(t == 1){
+            score_modif(turn[t],1,player->name);
+        } else
+            score_modif(turn[t],1,player2->name);
+
+        printf("%d\n",turn[t]);
         end = true;
     }
     if(turn[0] > turn[1]){
@@ -272,7 +278,10 @@ void snake(t_player* player,t_player* player2) {
     } else
         player2->ticket++;
 
-    score_modif(turn[0],1,player->name);
-    score_modif(turn[1],1,player2->name);
+
+    printf("%s\n",player->name);
+    printf("%s\n",player2->name);
+
+
 }
 
