@@ -178,8 +178,9 @@ void TB_entree_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, int i)
     while(!key[KEY_SPACE])
     {
         blit(background, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        background = load_bitmap("fond_ballons.bmp", NULL);
         draw_sprite(background, dialogue, 125 + 12, 500);
-        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+
         textprintf_ex
                 (
                         background,
@@ -188,7 +189,7 @@ void TB_entree_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, int i)
                         550,
                         makecol(0, 0, 0),
                         -1,
-                        "Joueur %d, tu commences :", i
+                        "Joueur %d, c'est a toi :", i
                 );
         textprintf_ex
                 (
@@ -220,6 +221,7 @@ void TB_entree_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, int i)
                         -1,
                         "Appuyer sur la barre espace pour continuer..."
                 );
+        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
 }
 
@@ -229,6 +231,9 @@ double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pok
     int available_poke = 0;
     int i = 0;
     int flag = 0;
+
+    //initiation des pokemons
+    TB_remp_tab_pok(pokemons);
 
 //debut du jeu
     clear(background);
@@ -258,7 +263,7 @@ double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pok
         //envoie des infos à l'écran
         blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
 
-        //conditions de jeu (ballons changent de trajectoire a tt moment)
+        //conditions de jeu (ballons changent de trajectoire a tt moment)²
         for (i = 0; i < 7; ++i)
         {
             if(pokemons[i]->attrape == 0 && compteur%30 == 0)
@@ -266,7 +271,7 @@ double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pok
                 do
                 {
                     pokemons[i]->depx = rand()%35 - 17;
-                    pokemons[i]->depy = rand()%35 - 17;
+                    pokemons[i]->depy = rand()%35 - 17; //35 - 17
                 }while(pokemons[i]->depx == 0 && pokemons[i]->depy == 0);
             }
         }
@@ -315,4 +320,43 @@ double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pok
     }
 
     return time_spent;
+}
+
+void TB_resultats(double tps_j1, double tps_j2, BITMAP* background, BITMAP* buffer, BITMAP* dialogue)
+{
+    while(!key[KEY_ENTER])
+    {
+        blit(background, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+        background = load_bitmap("fond_ballons.bmp", NULL);
+        draw_sprite(background, dialogue, 137, 500);
+
+        if(tps_j1 < tps_j2)
+        {
+            textprintf_ex
+                    (
+                            background,
+                            font,
+                            410 - strlen("Bravo au joueur 1 ! Tu as gagne") / 2,
+                            625,
+                            makecol(0, 0, 0),
+                            -1,
+                            "Bravo au joueur 1 ! Tu as gagne"
+                    );
+        }
+
+        else if(tps_j2 < tps_j1)
+        {
+            textprintf_ex
+                    (
+                            background,
+                            font,
+                            410 - strlen("Bravo au joueur 2 ! Tu as gagne") / 2,
+                            625,
+                            makecol(0, 0, 0),
+                            -1,
+                            "Bravo au joueur 2 ! Tu as gagne"
+                    );
+        }
+        blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+    }
 }

@@ -32,4 +32,8 @@ void TB_entree_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, int i);
 
 double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pokemons[7], BITMAP* pokeball[2]);
 
+void TB_transition(BITMAP* background, BITMAP* buffer, int i);
+
+void TB_resultats(double tps_j1, double tps_j2, BITMAP* background, BITMAP* buffer, BITMAP* dialogue);
+
 #endif //TIR_AUX_BALLONS_NOT_MAIN_H

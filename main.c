@@ -3,8 +3,8 @@
 int main()
 {
     //Temps des joueurs respectifs
-    double tps_j1 = 0.0;
-    double tps_j2 = 0.0;
+    double tps_j1;
+    double tps_j2;
 
     //init allegro
     TB_init_allegro();
@@ -13,21 +13,10 @@ int main()
     ballons * pokemons[7];
     BITMAP * background = NULL;
     BITMAP * buffer = NULL;
-    BITMAP * open_poke = NULL;
-    BITMAP * close_poke = NULL;
     BITMAP * pokeball[2] = {0, 0};
     BITMAP * dialogue = NULL;
-    int flag = 0;
-    int available_poke = 1;
-    int compteur = 0;
-    int detection_y = 0;
-    int detection_x = 0;
-    int i = 1;
 
     srand(time(NULL));
-
-//init structures
-    TB_remp_tab_pok(pokemons);
 
 //init bitmaps
     buffer = create_bitmap(1024, 768); clear_bitmap(buffer);
@@ -46,14 +35,28 @@ int main()
     if(!dialogue) allegro_message("Pas de dialogue");
 
     //Definition des regles du jeu pour j1
-    TB_entree_jeu(buffer, background, dialogue, i);
+    TB_entree_jeu(buffer, background, dialogue, 1);
 
     //joueur 1
     tps_j1 = TB_jeu(buffer,background,dialogue,pokemons,pokeball);
 
-    //Definition des regles du jeu pour j2
-    TB_entree_jeu(buffer, background, dialogue, i);
+    //transition
+    rest(20);
+    rectfill(background,410,600,450,620,makecol(255,255,255));
 
-    return 0;
+    //transition entre les deux joueurs
+    TB_entree_jeu(buffer,background,dialogue,2);
+
+    //Definition des regles du jeu pour j2
+    tps_j2 = TB_jeu(buffer,background,dialogue,pokemons,pokeball);
+
+    //transition
+    rest(20);
+
+    //affichage des resultats
+    TB_resultats(tps_j1, tps_j2, background, buffer, dialogue);
+
+
     allegro_exit();
+    return 0;
 }END_OF_MAIN()
