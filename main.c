@@ -2,10 +2,9 @@
 
 int main()
 {
-
     //Temps des joueurs respectifs
-    int tps_j1 = 0;
-    int tps_j2 = 0;
+    double tps_j1 = 0.0;
+    double tps_j2 = 0.0;
 
     //init allegro
     TB_init_allegro();
@@ -17,11 +16,13 @@ int main()
     BITMAP * open_poke = NULL;
     BITMAP * close_poke = NULL;
     BITMAP * pokeball[2] = {0, 0};
+    BITMAP * dialogue = NULL;
     int flag = 0;
     int available_poke = 1;
     int compteur = 0;
     int detection_y = 0;
     int detection_x = 0;
+    int i = 1;
 
     srand(time(NULL));
 
@@ -36,48 +37,22 @@ int main()
     if(!background) allegro_message("Pas de fond d'ecran");
 
     pokeball[0] = load_bitmap("open_pokeball1.bmp", NULL);
-    if(!background) allegro_message("Pas de pokeball 1");
+    if(!pokeball[0]) allegro_message("Pas de pokeball 1");
 
     pokeball[1] = load_bitmap("closed_pokeball1.bmp", NULL);
-    if(!background) allegro_message("Pas de pokeball 2");
+    if(!pokeball[1]) allegro_message("Pas de pokeball 2");
 
-    while(!key[KEY_ESC])
-    {
-        show_mouse(buffer);
-        mouse_y = mouse_y;
-        mouse_x = mouse_x;
+    dialogue = load_bitmap("dialogue_pokemon.bmp", NULL);
+    if(!dialogue) allegro_message("Pas de dialogue");
 
-        blit(background, buffer,0,0,0,0,SCREEN_W,SCREEN_H);
+    //Definition des regles du jeu pour j1
+    TB_entree_jeu(buffer, background, dialogue, i);
 
-    //apparition des pokemons
-        TB_anim_pok(pokemons, buffer);
+    //joueur 1
+    tps_j1 = TB_jeu(buffer,background,dialogue,pokemons,pokeball);
 
-    //affichage pokeball ouverte
-        draw_sprite(buffer, pokeball[0], mouse_x - pokeball[0]->w/2, mouse_y- pokeball[0]->h/2);
-
-    //test attraper pokemon
-        TB_click_souris(pokemons, available_poke);
-
-    //Si la pokeball reste appuyé, nous ne pouvons plus attraper de pokemons
-        available_poke = TB_condition_attrap(pokeball, buffer);
-
-    //fin de la boucle
-        blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-
-    //conditions de jeu
-        if(compteur%30 == 0)
-        {
-            for (int i = 0; i < 7; ++i)
-            {
-                pokemons[i]->depx = rand()%50 - 25;
-                pokemons[i]->depy = rand()%50 - 25;
-            }
-        }
-
-
-        rest(20);
-        compteur++;
-    }
+    //Definition des regles du jeu pour j2
+    TB_entree_jeu(buffer, background, dialogue, i);
 
     return 0;
     allegro_exit();
