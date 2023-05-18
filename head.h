@@ -73,6 +73,6 @@ void move_snake(t_liste* serpent,int mouvement);
 ///////////jeux de matthias//////
 void deplacement(int y_poke[NB_poke_guitare], int vitesse,int *perreur);
 void verification_touche(int y_poke[NB_poke_guitare],int *perreur);
-void guitar_hero();
+void guitar_hero(t_player* player,t_player* player2);
 int partie_guitar_hero(BITMAP* page);
 #endif //PROJET_HEAD_H

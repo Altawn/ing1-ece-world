@@ -198,7 +198,7 @@ int partie_guitar_hero(BITMAP* page){
     return temp;
 }
 
-void guitar_hero() {
+void guitar_hero(t_player* player,t_player* player2) {
 
     BITMAP* game_over;
     BITMAP* game_over2;
@@ -227,9 +227,11 @@ void guitar_hero() {
 
 
     if(temp[0]>temp[1]){
-        printf("le premier a gagne");
+     //   printf("le premier a gagne");
+        player2->ticket--;
     }else{
-        printf("le deuxieme a gagne");
+    //    printf("le deuxieme a gagne");
+        player->ticket--;
     }
 
 

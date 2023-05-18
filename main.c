@@ -189,7 +189,7 @@ int main() {
 
         if (swap2 == true){
             clear(page);
-            guitar_hero();
+            guitar_hero( &player1,&player2);
             blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
             draw_sprite(page,tup0,player1.x,player1.y);
             blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
