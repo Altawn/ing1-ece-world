@@ -60,8 +60,8 @@ int main() {
     player_temp.y=489;
     player_temp.mouv=0;
 
-player1.ticket=5;
-player2.ticket=5;
+    player1.ticket=5;
+    player2.ticket=5;
     //////////////////BITMAP/////////////////
     page = create_bitmap(1024,768);
     page2 = create_bitmap(1024,768);
@@ -85,13 +85,12 @@ player2.ticket=5;
     MIDI* midi = load_midi("../Pokemon_sound.mid");
     play_midi(midi, true);
     ecran();
-     print_chen(page,&player1,&player2);
+    //print_chen(page,&player1,&player2);
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
     draw_sprite(page,ts0,player1.x,player1.y);
     blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
     while (!key[KEY_A])
     {
-        blit(fond2,fond,0,0,0,0,SCREEN_W,SCREEN_H);
         textprintf_ex(fond,font,920,30,makecol(255,0,0),-1,"%s : %d",player1.name,player1.ticket);
         textprintf_ex(fond,font,920,40,makecol(255,0,0),-1,"%s : %d",player2.name,player2.ticket);
         colision(&player1,&rectangle3);

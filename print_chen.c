@@ -119,7 +119,7 @@ void print_chen(BITMAP *page,t_player* player,t_player* player2) {
                             }
                         }
                     }
-                    textout_ex(screen, font, nom_perso2, 652, 244, makecol(0, 0, 0), -1);
+                    textout_ex(screen, font, nom_perso1, 652, 244, makecol(0, 0, 0), -1);
                 }
             }
 
@@ -196,8 +196,6 @@ void print_chen(BITMAP *page,t_player* player,t_player* player2) {
                 }
                 allegro_exit();
             }
-
-
 
             clear_to_color(page, makecol(82,107,231));
             blit(chen, page, 0, 0, 192, 144, SCREEN_W, SCREEN_H);
