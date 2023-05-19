@@ -2,7 +2,7 @@
 
 void ecran(){
     BITMAP* page;
-    page = load_bitmap("../pokepark.bmp",NULL);
+    page = load_bitmap("../présentation+fond/pokepark.bmp",NULL);
     while(!key[KEY_ENTER]){
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
 
@@ -36,7 +36,7 @@ void print_chen(BITMAP *page,t_player* player,t_player* player2) {
     bool text = true;
     bool flag = false;
     BITMAP *chen;
-    chen = load_bitmap("../pr_chen1.bmp", NULL);
+    chen = load_bitmap("../présentation+fond/pr_chen1.bmp", NULL);
     int current_phrase = 0;
     char display[256]; // Chaîne de caractères à afficher
     memset(display, 0, sizeof(display)); // Initialisation de la chaîne de caractères à afficher

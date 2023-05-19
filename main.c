@@ -64,25 +64,23 @@ int main() {
     player2.ticket=5;
     //////////////////BITMAP/////////////////
     page = create_bitmap(1024,768);
-    page2 = create_bitmap(1024,768);
-    cent = load_bitmap("../poke_center.bmp",NULL);
-    fond = load_bitmap("../fond_park.bmp",NULL);
-    fond2 = load_bitmap("../fond_park.bmp",NULL);
-    t0 = load_bitmap("../t1.bmp",NULL);
-    t1 = load_bitmap("../t2.bmp",NULL);
-    t2 = load_bitmap("../t3.bmp",NULL);
-    ts0 = load_bitmap("../ts1.bmp",NULL);
-    ts1 = load_bitmap("../ts2.bmp",NULL);
-    ts2= load_bitmap("../ts3.bmp",NULL);
-    tup0 = load_bitmap("../tu1.bmp",NULL);
-    tup1 = load_bitmap("../tu2.bmp",NULL);
-    tup2= load_bitmap("../tu3.bmp",NULL);
-    quoi = load_bitmap("../quoi.bmp",NULL);
+    cent = load_bitmap("../présentation+fond/poke_center.bmp",NULL);
+    fond = load_bitmap("../présentation+fond/fond_park.bmp",NULL);
+    t0 = load_bitmap("../image_deplacement/t1.bmp",NULL);
+    t1 = load_bitmap("../image_deplacement/t2.bmp",NULL);
+    t2 = load_bitmap("../image_deplacement/t3.bmp",NULL);
+    ts0 = load_bitmap("../image_deplacement/ts1.bmp",NULL);
+    ts1 = load_bitmap("../image_deplacement/ts2.bmp",NULL);
+    ts2= load_bitmap("../image_deplacement/ts3.bmp",NULL);
+    tup0 = load_bitmap("../image_deplacement/tu1.bmp",NULL);
+    tup1 = load_bitmap("../image_deplacement/tu2.bmp",NULL);
+    tup2= load_bitmap("../image_deplacement/tu3.bmp",NULL);
+    quoi = load_bitmap("../présentation+fond/quoi.bmp",NULL);
 
     if(!fond){
         printf("erreur");
     }
-    MIDI* midi = load_midi("../Pokemon_sound.mid");
+    MIDI* midi = load_midi("../music/Pokemon_sound.mid");
     play_midi(midi, true);
     ecran();
     //print_chen(page,&player1,&player2);

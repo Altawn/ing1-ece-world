@@ -186,7 +186,7 @@ bool snake_defeat(int nbpart, t_liste* serpent) {
 
 void snake(t_player* player,t_player* player2) {
 
-    MIDI* snake_music = load_midi("../snake_image/snake_music.mid");
+    MIDI* snake_music = load_midi("../music/snake_music.mid");
     play_midi(snake_music, true);
     BITMAP* over = load_bitmap("../snake_image/game-over1.bmp",NULL);
    BITMAP* fond = load_bitmap("../snake_image/cave_background.bmp",NULL);
