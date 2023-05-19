@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #define NIMAGE 5
 #define NPOK 5
+#define TEMPSTETE 1000
 
 //////////BASE + INTRO/////////
 
