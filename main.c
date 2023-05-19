@@ -9,6 +9,8 @@ int main() {
     t_player player_temp;
     t_objet snake_game ={707,415,727,415};
     t_objet hero ={414,349,440,355};
+    t_objet ballon ={140,610,160,630};
+    t_objet pari = {862,624,890,632};
     t_objet rectangle3 ={0,85,1024,85};
     t_objet rectangle4 ={55,0,55,768};
     t_objet rectangle5 ={965,0,965,768};
@@ -28,6 +30,7 @@ int main() {
     t_objet rectangle19 ={458,100,482,115};
     t_objet rectangle20 ={235,750,340,750};
     t_objet rectangle21 ={845,405,875,420};
+    t_objet rectangle22 ={809,526,947,630};
     t_objet gym ={575,290,970,415};
 
 
@@ -107,6 +110,7 @@ int main() {
         colision(&player1,&rectangle16);
         colision(&player1,&rectangle17);
         colision(&player1,&rectangle18);
+        colision(&player1,&rectangle22);
         colision(&player1,&gym);
         depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
 
@@ -165,10 +169,38 @@ int main() {
             }
 
         }
+        if(colision(&player1,&ballon)){
+            if(bulle(&player1)){
+                stop_midi();
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+                swap4= true;
+            }
+            else{
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            }
+        }
+        if(colision(&player1,&pari)){
+            if(bulle(&player1)){
+                stop_midi();
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+                swap3= true;
+            }
+            else{
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            }
+        }
 
 
         if(colision(&player1,&rectangle21)){
-                swap5 = true;
+            swap5 = true;
         }
 
         if(swap5 == true){
