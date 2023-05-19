@@ -50,7 +50,7 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    BITMAP* fond;BITMAP* t0;BITMAP* t1;BITMAP* t2;BITMAP* tup0;BITMAP* tup1;BITMAP* tup2;BITMAP* ts0;BITMAP* ts1;BITMAP* ts2;BITMAP * page;BITMAP* page2;
+    BITMAP* fond;BITMAP* fond2;BITMAP* t0;BITMAP* t1;BITMAP* t2;BITMAP* tup0;BITMAP* tup1;BITMAP* tup2;BITMAP* ts0;BITMAP* ts1;BITMAP* ts2;BITMAP * page;BITMAP* page2;
     BITMAP* quoi;
     BITMAP* cent;
     player1.x=270;
@@ -61,11 +61,17 @@ int main() {
     player_temp.mouv=0;
 
 
+    player1.ticket=5;
+    player2.ticket=5;
+
+
+
     //////////////////BITMAP/////////////////
     page = create_bitmap(1024,768);
     page2 = create_bitmap(1024,768);
     cent = load_bitmap("../poke_center.bmp",NULL);
     fond = load_bitmap("../fond_park.bmp",NULL);
+    fond2 = load_bitmap("../fond_park.bmp",NULL);
     t0 = load_bitmap("../t1.bmp",NULL);
     t1 = load_bitmap("../t2.bmp",NULL);
     t2 = load_bitmap("../t3.bmp",NULL);
@@ -83,12 +89,19 @@ int main() {
     MIDI* midi = load_midi("../Pokemon_sound.mid");
     play_midi(midi, true);
     ecran();
-    // print_chen(page)
+     print_chen(page,&player1,&player2);
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
     draw_sprite(page,ts0,player1.x,player1.y);
     blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
     while (!key[KEY_A])
     {
+
+        blit(fond2,fond,0,0,0,0,SCREEN_W,SCREEN_H);
+        textprintf_ex(fond, font, 920, 30, makecol(255,0,0), -1, "%s : %d",player1.name,player1.ticket);
+        textprintf_ex(fond, font, 920, 40, makecol(255,0,0), -1, "%s : %d",player2.name,player2.ticket);
+
+
+
         colision(&player1,&rectangle3);
         colision(&player1,&rectangle4);
         colision(&player1,&rectangle5);
@@ -106,7 +119,14 @@ int main() {
         colision(&player1,&rectangle17);
         colision(&player1,&rectangle18);
         colision(&player1,&gym);
+
+
+
+
+
         depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
+
+
 
         if(colision(&player1,&snake_game)){
             if(bulle(&player1)){
@@ -175,6 +195,21 @@ int main() {
             swap5 = false;
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         if (swap1 == true){
             // jeux 1
             clear(page);
@@ -210,6 +245,9 @@ int main() {
             // jeux 4
             swap4 =false;
         }
+
+
+
     }
     return 0;
 }END_OF_MAIN()

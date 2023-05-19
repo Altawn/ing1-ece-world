@@ -12,7 +12,7 @@ void ecran(){
     }
 }
 
-void print_chen(BITMAP *page) {
+void print_chen(BITMAP *page,t_player* player,t_player* player2) {
 
     char nom_perso1[256] = "";
     char stock_nom1[256];
@@ -210,6 +210,7 @@ void print_chen(BITMAP *page) {
         }
 
     }
-    strcpy(nom_perso1,stock_nom1);
-    strcpy(nom_perso2,stock_nom2);
+    strcpy(player->name,nom_perso1);
+    strcpy(player2->name,nom_perso2);
+
 }
