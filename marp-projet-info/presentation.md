@@ -26,19 +26,18 @@ _footer: Algorithmique Avancée et Bibliothèque Graphique - 2022-2023
 
 # ECE World
 
-Equipe X
+Equipe 57 - TD 1
 
 ---
 
-# Equipe X
+# Equipe 57
 
 ![bg right:50%](./images/equipe.avif)
 
-- Tata Jaja
-- Toto Jojo
-- Tyty Jyjy
-- Tutu Juju
-- Titi Jiji
+- Alexandre Charvet
+- Matthias Aubert
+- Maximiliano Berté
+- Ronan Meyer-Roussilhon
 
 ---
 
@@ -54,7 +53,7 @@ Lorem ipsum dolor sit amet, **consectetur** adipiscing elit, sed do eiusmod temp
 
 # Carte `1/2`
 
-*Réalisée par : **Toto**, **Tata**.*
+*Réalisée par : **Alexandre**, **Ronan**, **Matthias**, **Maximiliano**.*
 
 Décrire ici les fonctionnalités implémentées : choix joueurs, saisie des noms, affichage des scores/classement... Comment avez-vous fait ? Quels étaient les problèmes rencontrés.
 
@@ -77,14 +76,11 @@ Quels paramètres prennent les jeux ?  La file d'événement par exemple ? Ou es
 Comment on lance un jeu et comment on revient à la carte à la fin de la partie ?
 Comment le classement est-il mis à jour ?
 
-
 ---
 
-![bg right:40%](images/peche_canards.jpg)
+# Template jeu - a enlever dans presentation finale
 
-# Pêche aux canards
-
-*Réalisé par : **Toto** (40%), **Tata** (60%).*
+*Réalisé par : **votre nom**.*
 
 Décrire le fonctionnement du jeu dans les grandes lignes. Comment vous l'avez conçu.
 - Les canards vont de la droite à la gauche.
@@ -92,28 +88,91 @@ Décrire le fonctionnement du jeu dans les grandes lignes. Comment vous l'avez c
 - Les canards vont à une vitesse différente (tirée aléatoirement).
 - La collision des canards est détectée.
 - etc.
-
+Pour chaque jeu (bien détailler au moins un jeu par personne), précisez les structures de données (structures importantes, tableaux importants, listes chainées...) et les fonctions importantes (avec leur prototype).
+- Ajoutez structures + graphe d'appel (logigramme optionnel)
 <sup>:bulb: Remplacez les images par des captures d'écran de votre jeu.</sup>
+---
+
+![bg right:40%](images/peche_canards.jpg)
+
+# Snake
+
+*Réalisé par : **Alexandre**.*
+
+Voir template jeu
+
+---
+![bg right:40%](images/peche_canards.jpg)
+
+# Guitar Hero
+
+*Réalisé par : **Matthias**.*
+
+Voir template jeu
 
 ---
 
 ![bg right:40%](images/peche_canards.jpg)
 
-# Pêche aux canards
+# Pari Hippique
 
-Pour chaque jeu (bien détailler au moins un jeu par personne), précisez les structures de données (structures importantes, tableaux importants, listes chainées...) et les fonctions importantes (avec leur prototype).
+*Réalisé par : **Ronan**.*
 
-### Structures
+Voir template jeu
 
-<div class="mermaid">
+---
+![bg right:40%](images/peche_canards.jpg)
+
+# Taupe-la
+
+*Réalisé par : **Maximiliano**.*
+
+Voir template jeu
+
+---
+
+![bg right:40%](images/peche_canards.jpg)
+
+# Pierre - Feuille - Cisaux (style pokémon)
+
+*Réalisé par : **Alexandre**.*
+
+Voir template jeu
+
+---
+
+![bg right:40%](images/peche_canards.jpg)
+
+# Jackpot
+
+*Réalisé par : **Matthias**.*
+
+Voir template jeu
+
+---
+
+![bg right:40%](screenshot-tir_aux_ballons.png)
+
+# Tir aux Ballons
+
+*Réalisé par : **Ronan**.*
+
+- 7 pokémons avec une vitesse aléatoire se déplacent sur l'écran en rebondissant sur les bords
+- Lorsqu'on clique dessus, ils disparaissent de l'écran
+- La souris est matérialiser par une pokéball qui s'ouvre et qui se ferme
+- Le gagnant est celui qui attrape tous les pokémons en un temps inférieur
+
+### Structure
+[comment]: <> "Presentation de ma structure"
+<div class="mermaid"> 
 %%{init: {'theme':'neutral'}}%%
 classDiagram
-    class Canard
-    Canard : int x, y
-    Canard : int vitesse
-    class Canne
-    Canne : int x, y
-    Canne : Canard* canard
+    class Ballons
+    Ballons : int posx, posy
+    Ballons : int depx, depy
+    Ballons : int type
+    Ballons : int attrape
+    Ballons : BITMAP * poke
 </div>
 
 ### Tableaux
@@ -121,10 +180,6 @@ classDiagram
 - `Canard canards[20]`
 
 ---
-
-![bg right:40%](images/peche_canards.jpg)
-
-# Pêche aux canards
 
 ### Graphe d'appel
 
@@ -248,8 +303,3 @@ https://gist.github.com/rxaviers/7360908
 Vous pouvez personnaliser l'affichage de votre présentation avec le langage CSS en modifiant le fichier `theme.css`.
 
 ---
-
-# Export PDF
-
-Depuis récemment, l'export (**`Export Slide Deck...`**) en PDF oublie parfois des éléments. 
-Si c'est le cas, nous vous conseillons d'exporter en fichier PowerPoint (pptx), puis de l'exporter en PDF depuis PowerPoint.
