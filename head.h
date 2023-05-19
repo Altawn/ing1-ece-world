@@ -6,6 +6,8 @@
 #include "allegro.h"
 #include "time.h"
 #include <stdbool.h>
+#define NIMAGE 5
+#define NPOK 5
 
 //////////BASE + INTRO/////////
 
@@ -75,4 +77,97 @@ void deplacement_guitare(int y_poke[NB_poke_guitare], int vitesse,int *perreur);
 void verification_touche_guitare(int y_poke[NB_poke_guitare],int *perreur);
 void guitar_hero(t_player* player,t_player* player2);
 double partie_guitar_hero(BITMAP* page);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////JEUX DU RORO//////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ *
+ *
+ * Pari Hippique
+ *
+ *
+ */
+typedef struct
+{
+    int posx, posy; //posit. coin sup. gauche
+    int tx, ty; //largeur / hauteur
+    int depx; //deplacement en x
+    int frame_act; //frame actuelle du pokemon
+    int compdepx; //compteur pour ralentir deplacement (Randomiser la vitesse du pokemon)
+    int xdx; //ralentir dep en x
+    int pok; //quel pokemon ?
+    int tmpimg; //?
+    int cptimg; //?
+    BITMAP *img[NIMAGE-1];
+}Pokemon;
+
+//Allouer + Initialisation d'acteurs
+Pokemon * PI_init_pokemon(int tx, int ty, int xdx, int posx, int posxy, int pok, int depx, int tmpimg);
+
+//Remplir un tab avec des acteurs
+void PI_remp_tab_pok(Pokemon * tab_rand[NPOK]);
+
+//Animation des pokemons
+void PI_anim_pok(Pokemon * tab_rand[NPOK], BITMAP * page);
+
+//deplacement des pokemons
+int PI_depla_pok(Pokemon * tab_rand[NPOK]);
+
+//transcription nombres -> chaine de caracteres
+void PI_pok_gagnant(char * winner, int pok_gagnant);
+
+//Affichage de la liste des pokemons dans le texte
+void PI_affichage_liste(BITMAP * decor, char * liste[50], BITMAP * page);
+
+//Texte d'entree du jeu
+void PI_entree_jeu(BITMAP * decor, BITMAP * page, BITMAP * dialogue);
+
+//sauvegarde des resultats des deux joueurs
+int PI_choix_pok(int y_cir);
+
+//navigtion pour le choix des pokemons dans PI_choix_pok
+int PI_navigation(BITMAP*decor, BITMAP*page, int y_cir, int passe, int flag, int blanc);
+
+//Affichage du pokemon gagnant
+void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix_j1, int arrivee, int choix_j2, int tickets_j1, int tickets_j2);
+
+//Jeu principal
+void Pari_Hippique(t_player* player,t_player* player2);
+
+/*
+ *
+ *
+ * Tir aux ballons
+ *
+ *
+ */
+typedef struct
+{
+    int posx;
+    int posy;
+    int depx;
+    int depy;
+    int type;
+    int attrape;
+    BITMAP*poke;
+}ballons;
+
+ballons * TB_init_struct(int posx, int posy, int depx, int depy, int type, int attrape);
+
+void TB_remp_tab_pok(ballons * taballons[7]);
+
+void TB_anim_pok(ballons * pokemons[7], BITMAP*buffer);
+
+void TB_click_souris(ballons * pokemons[7], int available_poke);
+
+int TB_condition_attrap(BITMAP* pokeball[2], BITMAP*buffer);
+
+void TB_entree_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, int i);
+
+double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pokemons[7], BITMAP* pokeball[2]);
+
+void TB_transition(BITMAP* background, BITMAP* buffer, int i);
+
+void TB_resultats(double tps_j1, double tps_j2, BITMAP* background, BITMAP* buffer, BITMAP* dialogue,t_player* player,t_player* player2);
+
+void Tir_Ballons(t_player* player,t_player* player2);
 #endif //PROJET_HEAD_H

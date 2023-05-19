@@ -204,16 +204,28 @@ player2.ticket=5;
             swap2 = false;
         }
 
-        if (swap3 == true){
-
-            // jeux 3
+        if (swap3 == true)
+        {
+            clear(page);
+            Pari_Hippique(&player1,&player2);
+            blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            draw_sprite(page,tup0,player1.x,player1.y);
+            blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            play_midi(midi, true);
+            depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
             swap3 = false;
         }
 
-        if (swap4 == true){
-
-            // jeux 4
-            swap4 =false;
+        if (swap4 == true)
+        {
+            clear(page);
+            Tir_Ballons(&player1,&player2);
+            blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            draw_sprite(page,tup0,player1.x,player1.y);
+            blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            play_midi(midi, true);
+            depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
+            swap4 = false;
         }
     }
     return 0;

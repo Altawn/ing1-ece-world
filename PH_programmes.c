@@ -1,6 +1,6 @@
-#include "PH_programmes.h"
+#include "head.h"
 
-void Pari_Hippique(int p_gagnant_j1, int p_gagnant_j2, int tickets_j1, int tickets_j2)
+void Pari_Hippique(t_player* player,t_player* player2)
 {
 
     //Autres variables + structures
@@ -103,27 +103,12 @@ void Pari_Hippique(int p_gagnant_j1, int p_gagnant_j2, int tickets_j1, int ticke
     PI_pok_gagnant(pok_gagnant, arrivee);
 
     //Affichage du pokemon victorieux et du resultat du pari
-    PI_print_gagnant(decor, dialogue, pok_gagnant, choix_j1, arrivee, p_gagnant_j1, p_gagnant_j2, choix_j2, tickets_j1, tickets_j2);
+    PI_print_gagnant(decor, dialogue, pok_gagnant, choix_j1, arrivee, choix_j2, player->ticket, player2->ticket);
 
     //Libere la memoire
     for (i = 0; i < NPOK; ++i)
     {
         free(tab_pok[i]);
-    }
-}
-
-void PI_init_allegro()
-{
-    allegro_init();
-    install_keyboard();
-    install_mouse();
-
-    set_color_depth(desktop_color_depth());
-    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,1024,768,0,0)!=0)
-    {
-        allegro_message("probleme mode graphique");
-        allegro_exit();
-        exit(EXIT_FAILURE);
     }
 }
 
@@ -411,7 +396,7 @@ int PI_navigation(BITMAP*decor, BITMAP*page, int y_cir, int passe, int flag, int
     return choix_j;
 }
 
-void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix_j1, int arrivee, int p_gagnant_j1, int p_gagnant_j2, int choix_j2, int tickets_j1, int tickets_j2)
+void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix_j1, int arrivee, int choix_j2, int tickets_j1, int tickets_j2)
                       {
                           while(!key[KEY_ENTER])
                           {
@@ -449,7 +434,6 @@ void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix
                                                   -1,
                                                   "Bravo au joueur 1 pour avoir parie sur le bon poulin"
                                           );
-                                  p_gagnant_j1++;
                                   tickets_j2--;
 
                                   readkey();
@@ -466,7 +450,6 @@ void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix
                                                   -1,
                                                   "Bravo au joueur 2 pour avoir parie sur le bon poulin"
                                           );
-                                  p_gagnant_j2++;
                                   tickets_j1--;
                                   readkey();
                               }
@@ -482,8 +465,6 @@ void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix
                                                   -1,
                                                   "Bravo a nos deux joueurs pour avoir parie sur le bon poulin"
                                           );
-                                  p_gagnant_j1++;
-                                  p_gagnant_j2++;
                                   readkey();
                               }
                               if(choix_j2 != arrivee && choix_j1 != arrivee)

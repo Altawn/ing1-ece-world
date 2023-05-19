@@ -1,19 +1,4 @@
-#include "TB_programmes.h"
-
-void TB_init_allegro()
-{
-    allegro_init();
-    install_keyboard();
-    install_mouse();
-
-    set_color_depth(desktop_color_depth());
-    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,1024,768,0,0)!=0)
-    {
-        allegro_message("probleme mode graphique");
-        allegro_exit();
-        exit(EXIT_FAILURE);
-    }
-}
+#include "head.h"
 
 ballons * TB_init_struct(int posx, int posy, int depx, int depy, int type, int attrape)
 {
@@ -229,7 +214,7 @@ double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pok
 {
     int compteur = 0;
     int available_poke = 0;
-    int i = 0;
+    int i;
     int flag = 0;
 
     //initiation des pokemons
@@ -322,7 +307,7 @@ double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pok
     return time_spent;
 }
 
-void TB_resultats(double tps_j1, double tps_j2, BITMAP* background, BITMAP* buffer, BITMAP* dialogue)
+void TB_resultats(double tps_j1, double tps_j2, BITMAP* background, BITMAP* buffer, BITMAP* dialogue, t_player* player,t_player* player2)
 {
     while(!key[KEY_ENTER])
     {
@@ -342,6 +327,7 @@ void TB_resultats(double tps_j1, double tps_j2, BITMAP* background, BITMAP* buff
                             -1,
                             "Bravo au joueur 1 ! Tu as gagne"
                     );
+            player2->ticket--;
         }
 
         else if(tps_j2 < tps_j1)
@@ -356,13 +342,17 @@ void TB_resultats(double tps_j1, double tps_j2, BITMAP* background, BITMAP* buff
                             -1,
                             "Bravo au joueur 2 ! Tu as gagne"
                     );
+            player->ticket--;
         }
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
 }
 
-void Tir_Ballons(double tps_j1, double tps_j2)
+void Tir_Ballons(t_player* player,t_player* player2)
 {
+    double tps_j1 = 0;
+    double tps_j2 = 0;
+
     ballons * pokemons[7];
     BITMAP * background = NULL;
     BITMAP * buffer = NULL;
@@ -407,5 +397,5 @@ void Tir_Ballons(double tps_j1, double tps_j2)
     rest(20);
 
     //affichage des resultats
-    TB_resultats(tps_j1, tps_j2, background, buffer, dialogue);
+    TB_resultats(tps_j1, tps_j2, background, buffer, dialogue, player, player2);
 }
