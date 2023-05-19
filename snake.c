@@ -200,18 +200,20 @@ void snake(t_player* player,t_player* player2) {
     BITMAP* page = create_bitmap(1024,768);
     clear_to_color(base2, makecol(255,0,0));
     t_pomme * apple = malloc(sizeof(t_pomme*));
-    int mouvement =2;
-    int nb_part = 1;
+
     int turn[2];
     int t=0;
     bool end =true ;
+
     while(t!=2) {
+        int mouvement =2;
+        int nb_part = 1;
         t++;
         t_liste* serpent = initialisation(base);
         pomme_init(base,apple);
         add_part(serpent,base);add_part(serpent,base);
 
-        while (!key[KEY_SPACE] && end) {
+        while (end) {
 
             textprintf_ex(screen, font, 980, 10, makecol(255, 255, 255), -1, "%d", nb_part - 1);
             if (key[KEY_LEFT]) {
@@ -263,6 +265,12 @@ void snake(t_player* player,t_player* player2) {
             blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_W);
         }
         turn[t] = nb_part-1;
+        if(t == 1){
+            score_modif(turn[t],1,player->name);
+        } else
+            score_modif(turn[t],1,player2->name);
+
+        printf("%d\n",turn[t]);
         end = true;
     }
     if(turn[0] > turn[1]){
@@ -270,7 +278,10 @@ void snake(t_player* player,t_player* player2) {
     } else
         player2->ticket++;
 
-    player->tab_score[0]->score = turn[0];
-    player2->tab_score[0]->score = turn[1];
+
+    printf("%s\n",player->name);
+    printf("%s\n",player2->name);
+
+
 }
 

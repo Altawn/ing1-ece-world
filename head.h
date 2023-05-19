@@ -32,7 +32,7 @@ void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* 
 void calc(t_objet* ob);
 bool colision(t_player* player,t_objet* ob);
 void ecran();
-void print_chen(BITMAP *page,t_player* player,t_player* player2);
+void print_chen(BITMAP*page);
 void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BITMAP* t2,BITMAP* tup0,BITMAP* tup1,BITMAP* tup2,BITMAP* ts0,BITMAP* ts1,BITMAP* ts2);
 
 

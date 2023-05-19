@@ -100,3 +100,105 @@ void door_two(BITMAP* bit,t_player* player1){
         }
     }
 }
+
+void score_modif(int t, int type_jeux, const char* nom) {
+    char fichier_jeux[20];
+    sprintf(fichier_jeux, "../score%d.txt", type_jeux);
+
+    FILE *pf = fopen(fichier_jeux, "r");
+    if (pf == NULL) {
+        pf = fopen(fichier_jeux, "w+");
+    } else {
+        pf = fopen(fichier_jeux, "a+");
+    }
+
+    int nombre_ligne = 0;
+    int *tab_tri;
+
+    int temp;
+    char caractere;
+    fprintf(pf, "%d %s\n", t, nom);
+    rewind(pf);
+    while ((caractere = fgetc(pf)) != EOF) {
+        if (caractere == '\n') {
+            nombre_ligne++;
+        }
+    }
+
+    printf("%d\n", nombre_ligne);
+    tab_tri = malloc(nombre_ligne * sizeof(int));
+    char temp_tri[nombre_ligne][4];
+
+    rewind(pf);
+
+    for (int i = 0; i < nombre_ligne; ++i) {
+        fgets(temp_tri[i], 20, pf);
+        tab_tri[i] = atoi(temp_tri[i]);
+    }
+
+    for (int i = 0; i < nombre_ligne - 1; ++i) {
+        for (int j = 0; j < nombre_ligne - 1 - i; ++j) {
+            if (tab_tri[j] < tab_tri[j + 1]) {
+                temp = tab_tri[j];
+                tab_tri[j] = tab_tri[j + 1];
+                tab_tri[j + 1] = temp;
+            }
+        }
+    }
+
+    rewind(pf);
+    pf = fopen(fichier_jeux, "w");
+
+    for (int i = 0; i < nombre_ligne; ++i) {
+        fprintf(pf, "%d %s\n", tab_tri[i], nom);
+    }
+
+    fclose(pf);
+    free(tab_tri);
+}
+
+void afficher_score(BITMAP* page){
+    int number = 1;
+    char fichier_jeux[20];
+    sprintf(fichier_jeux, "../score%d.txt",number);
+    FILE *pf = fopen(fichier_jeux, "r");
+    for (int i = 1; i < 8; ++i) {
+        sprintf(fichier_jeux, "../score%d.txt",i);
+        pf = fopen(fichier_jeux, "r");
+        if (pf == NULL) {
+            pf = fopen(fichier_jeux, "w+");
+        }
+    }
+
+
+    while(!key[KEY_ENTER]){
+        int y = 10;
+        if (key[KEY_RIGHT]){
+            clear_to_color(page, makecol(255,255,255));
+            if(number<4){number++;}
+            sprintf(fichier_jeux, "../score%d.txt", number);
+            pf = fopen(fichier_jeux, "r");
+            rest(500);
+        }
+        if (key[KEY_LEFT]){
+            clear_to_color(page, makecol(255,255,255));
+            if(number>1){number--;}
+            sprintf(fichier_jeux, "../score%d.txt", number);
+            pf = fopen(fichier_jeux, "r");
+            rest(500);
+        }
+        while (!feof(pf)) {
+            char line[256];
+            if (fgets(line, sizeof(line), pf) != NULL) {
+                textout_ex(page, font, line, 10, y, makecol(0, 0, 0), -1);
+                y += 20;
+            }
+        }
+        blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
+    }
+
+
+    destroy_bitmap(page);
+    allegro_exit();
+    fclose(pf);
+}
