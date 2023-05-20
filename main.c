@@ -64,7 +64,7 @@ int main() {
     player1.type =1;
     player2.type =2;
     player2.x=270;
-    player2.y=740;
+    player2.y=670;
     player2.mouv=0;
     player_temp.x=501;
     player_temp.y=489;
@@ -106,7 +106,9 @@ int main() {
     }
     MIDI* midi = load_midi("../music/Pokemon_sound.mid");
     play_midi(midi, true);
-    //decran();
+    clear_to_color(page, makecol(255,255,255));
+    //afficher_score(page);
+    //ecran();
     //print_chen(page,&player1,&player2);
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
     if(player1.type == 2){

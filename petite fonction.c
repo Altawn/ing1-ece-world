@@ -89,12 +89,19 @@ void door_two(BITMAP* bit,t_player* player1){
 }
  void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
     t_objet sortie ={490,560,550,570};
+    t_objet pc = {660,160,690,220};
+    bool swap = false;
     bool end =true;
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
     draw_sprite(page,tab[6],player->x,player->y);
     blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
     while(end){
         depla(player,page,fond,tab);
+        if (colision(player,&pc)){
+            if(bulle(player)){
+                afficher_score(page);
+            }
+        }
         if(colision(player,&sortie)){
             end = false;
         }
@@ -117,6 +124,8 @@ void score_modif(int t, int type_jeux, const char* nom) {
 
     int temp;
     char caractere;
+
+    srand(time(NULL));
     fprintf(pf, "%d %s\n", t, nom);
     rewind(pf);
     while ((caractere = fgetc(pf)) != EOF) {
@@ -160,18 +169,11 @@ void score_modif(int t, int type_jeux, const char* nom) {
 void afficher_score(BITMAP* page){
     int number = 1;
     char fichier_jeux[20];
-    sprintf(fichier_jeux, "../score%d.txt",number);
+    bool end = true;
+    clear_to_color(page, makecol(255,255,255));
+    sprintf(fichier_jeux, "../score%d.txt", number);
     FILE *pf = fopen(fichier_jeux, "r");
-    for (int i = 1; i < 8; ++i) {
-        sprintf(fichier_jeux, "../score%d.txt",i);
-        pf = fopen(fichier_jeux, "r");
-        if (pf == NULL) {
-            pf = fopen(fichier_jeux, "w+");
-        }
-    }
-
-
-    while(!key[KEY_ENTER]){
+    while(end){
         int y = 10;
         if (key[KEY_RIGHT]){
             clear_to_color(page, makecol(255,255,255));
@@ -194,11 +196,10 @@ void afficher_score(BITMAP* page){
                 y += 20;
             }
         }
+        if(key[KEY_ENTER]){
+            end =false ;
+        }
         blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
-
-
-    destroy_bitmap(page);
-    allegro_exit();
     fclose(pf);
 }
