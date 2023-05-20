@@ -26,26 +26,30 @@ void print_chen(BITMAP *page,t_player* player,t_player* player2) {
     bool swap2 = false;
     bool swap3 = false;
     bool swap4 = false;
+    bool swap5 = false;
+    bool swap6 = false;
 
     bool circle = false;
     int pos = 257;
     int i = 0;
     int yrec =0;
     int xrec=0;
-    char* texte[] = {"Bonjour je suis le professeur chen ","Tu vas bien?","comment t'appelles tu?","et le joueur 2","tu t'apprète a rentrer dans le parc d'atraction pokemon de l'ece", "est-tu prêts ?","c'est bien dommage","d"};
+    char* texte[] = {"Bonjour je suis le professeur chen ","Tu vas bien?","comment t'appelles tu?","et le joueur 2","A quoi est ce que tu ressembles?","et le joueur 2","tu t'apprète a rentrer dans le parc d'atraction pokemon de l'ece", "est-tu prêts ?","c'est bien dommage","d"};
     bool text = true;
     bool flag = false;
-    BITMAP *chen;
+    BITMAP *chen;BITMAP* lucas;BITMAP* ethan;
+    ethan = load_bitmap("../présentation+fond/ethan.bmp",NULL);
+    lucas = load_bitmap("../présentation+fond/lucas.bmp",NULL);
     chen = load_bitmap("../présentation+fond/pr_chen1.bmp", NULL);
     int current_phrase = 0;
-    char display[256]; // Chaîne de caractères à afficher
+    char display[256];
     memset(display, 0, sizeof(display)); // Initialisation de la chaîne de caractères à afficher
 
 
     while (!flag) {
 
         if (text) {
-            if (i < strlen(texte[current_phrase]) && current_phrase <=6) {
+            if (i < strlen(texte[current_phrase]) && current_phrase <=8) {
                 display[i] = texte[current_phrase][i];
                 i++;
             }
@@ -54,7 +58,7 @@ void print_chen(BITMAP *page,t_player* player,t_player* player2) {
                 rest(500);
                 memset(display, 0, sizeof(display));
                 i = 0;
-                if(current_phrase <= 6){
+                if(current_phrase <= 8){
                     current_phrase = current_phrase + 1;
                 }
             }
@@ -152,9 +156,69 @@ void print_chen(BITMAP *page,t_player* player,t_player* player2) {
                     textout_ex(screen, font, nom_perso2, 652, 244, makecol(0, 0, 0), -1);
                 }
             }
+            if(current_phrase == 5 && !swap5 ){
+                swap5 = true;
+                int pos_selecx = 635;
+                while (!key[KEY_ENTER]){
+                    clear_to_color(page, makecol(82,107,231));
+                    blit(chen, page, 0, 0, 192, 144, SCREEN_W, SCREEN_H);
+                    if(key[KEY_RIGHT]){
+                        pos_selecx = 635;
+                    }
+                    if(key[KEY_LEFT]){
+                        pos_selecx = 285;
+                    }
+
+                    rectfill(page,625,275,735,435,0);
+                    rectfill(page,275,275,385,435,0);
+                    rectfill(page,630,280,730,430, makecol(255,255,255));
+                    rectfill(page,280,280,380,430, makecol(255,255,255));
+                    rect(page,pos_selecx,285,pos_selecx+90,425, makecol(255,0,0));
+                    draw_sprite(page,lucas,650,300);
+                    draw_sprite(page,ethan,300,300);
+                    blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+                    if(key[KEY_ENTER] && pos_selecx == 285){
+                        player->type = 1;
+                    }
+                    if(key[KEY_ENTER] && pos_selecx == 635){
+                        player->type = 2;
+                    }
+
+                }
+            }
+            if(current_phrase == 6 && !swap6 ){
+                swap6 = true;
+                int pos_selecx = 635;
+                while (!key[KEY_ENTER]){
+                    clear_to_color(page, makecol(82,107,231));
+                    blit(chen, page, 0, 0, 192, 144, SCREEN_W, SCREEN_H);
+                    if(key[KEY_RIGHT]){
+                        pos_selecx = 635;
+                    }
+                    if(key[KEY_LEFT]){
+                        pos_selecx = 285;
+                    }
+
+                    rectfill(page,625,275,735,435,0);
+                    rectfill(page,275,275,385,435,0);
+                    rectfill(page,630,280,730,430, makecol(255,255,255));
+                    rectfill(page,280,280,380,430, makecol(255,255,255));
+                    rect(page,pos_selecx,285,pos_selecx+90,425, makecol(255,0,0));
+                    draw_sprite(page,lucas,650,300);
+                    draw_sprite(page,ethan,300,300);
+                    blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+                    if(key[KEY_ENTER] && pos_selecx == 285){
+                        player2->type = 1;
+                    }
+                    if(key[KEY_ENTER] && pos_selecx == 635){
+                        player2->type = 2;
+                    }
+
+                }
+            }
 
             ////BULLE 3/////
-            if(current_phrase == 6 && swap4 == false ){
+            if(current_phrase == 8 && swap4 == false ){
                 swap4 = true;
                 xrec = 0;
                 yrec =0;
@@ -190,7 +254,7 @@ void print_chen(BITMAP *page,t_player* player,t_player* player2) {
                 }
 
             }
-            if(current_phrase == 7){
+            if(current_phrase == 9){
                 while(key[KEY_ENTER]){
                     rest(1);
                 }

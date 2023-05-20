@@ -1,12 +1,14 @@
 #include "head.h"
 
-void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BITMAP* t2,BITMAP* tup0,BITMAP* tup1,BITMAP* tup2,BITMAP* ts0,BITMAP* ts1,BITMAP* ts2){
+void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
     int lastmove;
+    ////////PLAYER1////////////////////////
     if(player->mouv <= 5 && key[KEY_RIGHT] ){
         clear(page);
         blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        draw_sprite(page,ts0,player->x,player->y);
+        draw_sprite(page,tab[6],player->x,player->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
         player->x= player->x+2;
         player->mouv++;
         lastmove =1;
@@ -15,27 +17,29 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BIT
     if(player->mouv > 5 && player->mouv <=10 && key[KEY_RIGHT]){
         clear(page);
         blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        draw_sprite(page,ts1,player->x,player->y);
+        draw_sprite(page,tab[7],player->x,player->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
         player->x= player->x+2;
         lastmove =1;
         player->mouv++;
         rest(10);
     }
-    if(player->mouv > 10 && player->mouv <= 20  && key[KEY_RIGHT]){
+    if(player->mouv > 10 && player->mouv <= 15  && key[KEY_RIGHT]){
         clear(page);
         blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        draw_sprite(page,ts2,player->x,player->y);
+        draw_sprite(page,tab[8],player->x,player->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
         player->x= player->x+2;
         lastmove =1;
-        player->mouv = 0;
+        player->mouv++;
+        if(player->mouv == 15){player->mouv = 0;}
         rest(10);
     }
     if(player->mouv <= 5 && key[KEY_LEFT]){
         clear(page);
         blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        draw_sprite_h_flip(page,ts0,player->x,player->y);
+        draw_sprite_h_flip(page,tab[6],player->x,player->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
         player->x= player->x-2;
         lastmove =2;
@@ -45,28 +49,32 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BIT
     if(player->mouv > 5 && player->mouv <=10 && key[KEY_LEFT]){
         clear(page);
         blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        draw_sprite_h_flip(page,ts1,player->x,player->y);
+        draw_sprite_h_flip(page,tab[7],player->x,player->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
         player->x= player->x-2;
         lastmove =2;
         player->mouv++;
         rest(10);
     }
-    if(player->mouv > 10 && player->mouv <= 20  && key[KEY_LEFT]){
+    if(player->mouv > 10 && player->mouv <= 15 && key[KEY_LEFT]){
         clear(page);
         blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        draw_sprite_h_flip(page,ts2,player->x,player->y);
+        draw_sprite_h_flip(page,tab[8],player->x,player->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
         player->x= player->x-2;
         lastmove =2;
-        player->mouv=0;
+        player->mouv++;
+        if(player->mouv == 15){player->mouv = 0;}
         rest(10);
     }
     if(player->mouv <= 5 && key[KEY_UP] ){
         clear(page);
         blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        draw_sprite(page,tup0,player->x,player->y);
+        draw_sprite(page,tab[3],player->x,player->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
         player->y= player->y-2;
         player->mouv++;
         lastmove =3;
@@ -75,50 +83,56 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BIT
     if(player->mouv > 5 && player->mouv <=10 && key[KEY_UP]){
         clear(page);
         blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        draw_sprite(page,tup1,player->x,player->y);
+        draw_sprite(page,tab[4],player->x,player->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
         player->y= player->y-2;
         player->mouv++;
         lastmove =3;
         rest(10);
     }
-    if(player->mouv > 10 && player->mouv <= 20  && key[KEY_UP]){
+    if(player->mouv > 10 && player->mouv <= 15  && key[KEY_UP]){
         clear(page);
         blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        draw_sprite(page,tup2,player->x,player->y);
+        draw_sprite(page,tab[5],player->x,player->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
         player->y= player->y-2;
         lastmove =3;
-        player->mouv = 0;
+        player->mouv++;
+        if(player->mouv == 15){player->mouv = 0;}
         rest(10);
     }
     if(player->mouv <= 5 && key[KEY_DOWN] ){
         clear(page);
         blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        draw_sprite(page,t0,player->x,player->y);
+        draw_sprite(page,tab[0],player->x,player->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
         player->y= player->y+2;
         player->mouv++;
         lastmove =4;
         rest(10);
     }
-    if(player->mouv > 5 && player->mouv <=10 && key[KEY_DOWN] ){
+    if(player->mouv > 5 && player->mouv <=10&& key[KEY_DOWN] ){
         clear(page);
         blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        draw_sprite(page,t1,player->x,player->y);
+        draw_sprite(page,tab[1],player->x,player->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+
         player->y= player->y+2;
         player->mouv++;
         lastmove =4;
         rest(10);
     }
-    if(player->mouv > 10 && player->mouv <= 20  && key[KEY_DOWN]){
+    if(player->mouv > 10 && player->mouv <= 15 && key[KEY_DOWN]){
         clear(page);
         blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-        draw_sprite(page,t2,player->x,player->y);
+        draw_sprite(page,tab[2],player->x,player->y);
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
         player->y= player->y+2;
-        player->mouv = 0;
+        player->mouv++;
+        if(player->mouv == 15){player->mouv = 0;}
         lastmove =4;
         rest(10);
     }
@@ -126,24 +140,179 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BIT
         if(lastmove == 1){
             clear(page);
             blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-            draw_sprite(page,ts0,player->x,player->y);
+            draw_sprite(page,tab[6],player->x,player->y);
             blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
         }
         if(lastmove == 2){
             clear(page);
             blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-            draw_sprite_h_flip(page,ts0,player->x,player->y);
+            draw_sprite_h_flip(page,tab[6],player->x,player->y);
             blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
         }
         if(lastmove == 3){
+            clear(page);
             blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-            draw_sprite(page,tup0,player->x,player->y);
+            draw_sprite(page,tab[3],player->x,player->y);
             blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
         }
         if(lastmove == 4){
+            clear(page);
             blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-            draw_sprite(page,t0,player->x,player->y);
+            draw_sprite(page,tab[0],player->x,player->y);
             blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
         }
     }
+    blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+}
+
+void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
+    int lastmove;
+    ////////PLAYER1/////////////////////////
+    if(player->mouv <= 5 && key[KEY_D] ){
+        clear(page);
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        draw_sprite(page,tab[6],player->x,player->y);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        player->x= player->x+2;
+        player->mouv++;
+        lastmove =1;
+        rest(10);
+    }
+    if(player->mouv > 5 && player->mouv <=10 && key[KEY_D]){
+        clear(page);
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        draw_sprite(page,tab[7],player->x,player->y);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        player->x= player->x+2;
+        lastmove =1;
+        player->mouv++;
+        rest(10);
+    }
+    if(player->mouv > 10 && player->mouv <= 15  && key[KEY_D]){
+        clear(page);
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        draw_sprite(page,tab[8],player->x,player->y);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        player->x= player->x+2;
+        lastmove =1;
+        player->mouv++;
+        if(player->mouv == 15){player->mouv = 0;}
+        rest(10);
+    }
+    if(player->mouv <= 5 && key[KEY_A]){
+        clear(page);
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        draw_sprite_h_flip(page,tab[6],player->x,player->y);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        player->x= player->x-2;
+        lastmove =2;
+        player->mouv++;
+        rest(10);
+    }
+    if(player->mouv > 5 && player->mouv <=10 && key[KEY_A]){
+        clear(page);
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        draw_sprite_h_flip(page,tab[7],player->x,player->y);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        player->x= player->x-2;
+        lastmove =2;
+        player->mouv++;
+        rest(10);
+    }
+    if(player->mouv > 10 && player->mouv <= 15 && key[KEY_A]){
+        clear(page);
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        draw_sprite_h_flip(page,tab[8],player->x,player->y);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        player->x= player->x-2;
+        lastmove =2;
+        player->mouv++;
+        if(player->mouv == 15){player->mouv = 0;}
+        rest(10);
+    }
+    if(player->mouv <= 5 && key[KEY_W] ){
+        clear(page);
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        draw_sprite(page,tab[3],player->x,player->y);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        player->y= player->y-2;
+        player->mouv++;
+        lastmove =3;
+        rest(10);
+    }
+    if(player->mouv > 5 && player->mouv <=10 && key[KEY_W]){
+        clear(page);
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        draw_sprite(page,tab[4],player->x,player->y);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        player->y= player->y-2;
+        player->mouv++;
+        lastmove =3;
+        rest(10);
+    }
+    if(player->mouv > 10 && player->mouv <= 15  && key[KEY_W]){
+        clear(page);
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        draw_sprite(page,tab[5],player->x,player->y);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        player->y= player->y-2;
+        lastmove =3;
+        player->mouv++;
+        if(player->mouv == 15){player->mouv = 0;}
+        rest(10);
+    }
+    if(player->mouv <= 5 && key[KEY_S] ){
+        clear(page);
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        draw_sprite(page,tab[0],player->x,player->y);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        player->y= player->y+2;
+        player->mouv++;
+        lastmove =4;
+        rest(10);
+    }
+    if(player->mouv > 5 && player->mouv <=10&& key[KEY_S] ){
+        clear(page);
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        draw_sprite(page,tab[1],player->x,player->y);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        player->y= player->y+2;
+        player->mouv++;
+        lastmove =4;
+        rest(10);
+    }
+    if(player->mouv > 10 && player->mouv <= 15 && key[KEY_S]){
+        clear(page);
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        draw_sprite(page,tab[2],player->x,player->y);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        player->y= player->y+2;
+        player->mouv++;
+        if(player->mouv == 15){player->mouv = 0;}
+        lastmove =4;
+        rest(10);
+    }
+    else if (keypressed()!= 1){
+        if(lastmove == 1){
+            clear(page);
+            blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            draw_sprite(page,tab[6],player->x,player->y);
+        }
+        if(lastmove == 2){
+            clear(page);
+            blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            draw_sprite_h_flip(page,tab[6],player->x,player->y);
+        }
+        if(lastmove == 3){
+            clear(page);
+            blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            draw_sprite(page,tab[3],player->x,player->y);
+        }
+        if(lastmove == 4){
+            clear(page);
+            blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            draw_sprite(page,tab[0],player->x,player->y);
+        }
+    }
+    blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
 }

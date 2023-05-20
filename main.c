@@ -39,6 +39,7 @@ int main() {
     bool swap3 = false;
     bool swap4 = false;
     bool swap5 = false;
+    bool end = true;
 
     allegro_init();
     install_keyboard();
@@ -54,11 +55,17 @@ int main() {
     }
 
     BITMAP* fond;BITMAP* fond2;BITMAP* t0;BITMAP* t1;BITMAP* t2;BITMAP* tup0;BITMAP* tup1;BITMAP* tup2;BITMAP* ts0;BITMAP* ts1;BITMAP* ts2;BITMAP * page;BITMAP* page2;
+    BITMAP* e1;BITMAP* e2;BITMAP* e3;BITMAP* e_s1;BITMAP* e_s2;BITMAP* e_s3;BITMAP* e_u1;BITMAP* e_u2;BITMAP* e_u3;
     BITMAP* quoi;
     BITMAP* cent;
     player1.x=270;
     player1.y=700;
     player1.mouv=0;
+    player1.type =1;
+    player2.type =2;
+    player2.x=270;
+    player2.y=740;
+    player2.mouv=0;
     player_temp.x=501;
     player_temp.y=489;
     player_temp.mouv=0;
@@ -66,9 +73,11 @@ int main() {
     player1.ticket=5;
     player2.ticket=5;
     //////////////////BITMAP/////////////////
+    page2 = create_bitmap(1024,768);
     page = create_bitmap(1024,768);
     cent = load_bitmap("../présentation+fond/poke_center.bmp",NULL);
     fond = load_bitmap("../présentation+fond/fond_park.bmp",NULL);
+
     t0 = load_bitmap("../image_deplacement/t1.bmp",NULL);
     t1 = load_bitmap("../image_deplacement/t2.bmp",NULL);
     t2 = load_bitmap("../image_deplacement/t3.bmp",NULL);
@@ -78,20 +87,39 @@ int main() {
     tup0 = load_bitmap("../image_deplacement/tu1.bmp",NULL);
     tup1 = load_bitmap("../image_deplacement/tu2.bmp",NULL);
     tup2= load_bitmap("../image_deplacement/tu3.bmp",NULL);
-    quoi = load_bitmap("../présentation+fond/quoi.bmp",NULL);
+    BITMAP* tab_depla1[] ={t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2,};
 
+    e1 = load_bitmap("../image_deplacement/img8.bmp",NULL);
+    e2 = load_bitmap("../image_deplacement/img7.bmp",NULL);
+    e3 = load_bitmap("../image_deplacement/img9.bmp",NULL);
+    e_s1 = load_bitmap("../image_deplacement/img5.bmp",NULL);
+    e_s2= load_bitmap("../image_deplacement/img6.bmp",NULL);
+    e_s3 = load_bitmap("../image_deplacement/img4.bmp",NULL);
+    e_u1 = load_bitmap("../image_deplacement/img2.bmp",NULL);
+    e_u2 = load_bitmap("../image_deplacement/img1.bmp",NULL);
+    e_u3 = load_bitmap("../image_deplacement/img3.bmp",NULL);
+    BITMAP* tab_depla2[] ={e1,e2,e3,e_u1,e_u2,e_u3,e_s1,e_s2,e_s3};
+
+    quoi = load_bitmap("../présentation+fond/quoi.bmp",NULL);
     if(!fond){
         printf("erreur");
     }
     MIDI* midi = load_midi("../music/Pokemon_sound.mid");
     play_midi(midi, true);
-    ecran();
+    //decran();
     //print_chen(page,&player1,&player2);
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
-    draw_sprite(page,ts0,player1.x,player1.y);
+    if(player1.type == 2){
+        draw_sprite(page,ts0,player1.x,player1.y);
+    }
+    if (player1.type ==1){
+        draw_sprite(page,e_u1,player1.x,player1.y);
+    }
+
     blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-    while (!key[KEY_A])
+    while (end)
     {
+        //////colision///////
         textprintf_ex(fond,font,920,30,makecol(255,0,0),-1,"%s : %d",player1.name,player1.ticket);
         textprintf_ex(fond,font,920,40,makecol(255,0,0),-1,"%s : %d",player2.name,player2.ticket);
         colision(&player1,&rectangle3);
@@ -112,9 +140,39 @@ int main() {
         colision(&player1,&rectangle18);
         colision(&player1,&rectangle22);
         colision(&player1,&gym);
-        depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
+        colision(&player2,&rectangle3);
+        colision(&player2,&rectangle4);
+        colision(&player2,&rectangle5);
+        colision(&player2,&rectangle6);
+        colision(&player2,&rectangle7);
+        colision(&player2,&rectangle8);
+        colision(&player2,&rectangle9);
+        colision(&player2,&rectangle10);
+        colision(&player2,&rectangle11);
+        colision(&player2,&rectangle12);
+        colision(&player2,&rectangle13);
+        colision(&player2,&rectangle14);
+        colision(&player2,&rectangle15);
+        colision(&player2,&rectangle16);
+        colision(&player2,&rectangle17);
+        colision(&player2,&rectangle18);
+        colision(&player2,&rectangle22);
+        colision(&player2,&gym);
 
-        if(colision(&player1,&snake_game)){
+        /////deplacement/////
+
+        if(player1.type == 2 && player2.type == 1){
+            depla(&player1,page,fond,tab_depla1);
+            depla2(&player2,page,fond,tab_depla2);
+        }
+        if(player1.type == 1 && player2.type == 2){
+            depla(&player1,page,fond,tab_depla2);
+            blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            depla2(&player2,page,fond,tab_depla1);
+        }
+
+        //////condition jeux/////////
+        if(colision(&player1,&snake_game) || colision(&player2,&snake_game)){
             if(bulle(&player1)){
                 stop_midi();
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
@@ -130,7 +188,7 @@ int main() {
             }
         }
 
-        if(colision(&player1,&hero)){
+        if(colision(&player1,&hero) || colision(&player2,&hero)){
             if(bulle(&player1)){
                 stop_midi();
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
@@ -145,7 +203,7 @@ int main() {
                 blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
             }
         }
-        if(colision(&player1,&rectangle19)){
+        if(colision(&player1,&rectangle19) || colision(&player2,&rectangle19)){
             clear(screen);
             while(!key[KEY_ENTER])
             {
@@ -157,10 +215,9 @@ int main() {
             draw_sprite(page,tup0,player1.x,player1.y);
             blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
         }
-        if(colision(&player1,&rectangle20)){
+        if(colision(&player1,&rectangle20) || colision(&player2,&rectangle20)){
             if(bulle(&player1)){
-                allegro_exit();
-                exit(EXIT_SUCCESS);
+                end = false;
             }
             else{
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
@@ -169,7 +226,7 @@ int main() {
             }
 
         }
-        if(colision(&player1,&ballon)){
+        if(colision(&player1,&ballon)|| colision(&player2,&ballon)){
             if(bulle(&player1)){
                 stop_midi();
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
@@ -183,7 +240,7 @@ int main() {
                 blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
             }
         }
-        if(colision(&player1,&pari)){
+        if(colision(&player1,&pari)|| colision(&player2,&pari)){
             if(bulle(&player1)){
                 stop_midi();
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
@@ -198,14 +255,15 @@ int main() {
             }
         }
 
+        ///////declanchement jeux///////
 
-        if(colision(&player1,&rectangle21)){
+        if(colision(&player1,&rectangle21)|| colision(&player2,&rectangle21)){
             swap5 = true;
         }
 
         if(swap5 == true){
             clear(page);
-            poke_center(&player_temp,page,cent,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
+            poke_center(&player_temp,page,cent,tab_depla1);
             swap5 = false;
         }
 
@@ -217,7 +275,6 @@ int main() {
             draw_sprite(page,tup0,player1.x,player1.y);
             blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
             play_midi(midi, true);
-            depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
             swap1 = false;
         }
 
@@ -228,7 +285,6 @@ int main() {
             draw_sprite(page,tup0,player1.x,player1.y);
             blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
             play_midi(midi, true);
-            depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
             // jeux 2
             swap2 = false;
         }
@@ -241,7 +297,6 @@ int main() {
             draw_sprite(page,tup0,player1.x,player1.y);
             blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
             play_midi(midi, true);
-            depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
             swap3 = false;
         }
 
@@ -253,7 +308,6 @@ int main() {
             draw_sprite(page,tup0,player1.x,player1.y);
             blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
             play_midi(midi, true);
-            depla(&player1,page,fond,t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2);
             swap4 = false;
         }
     }

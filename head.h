@@ -12,19 +12,14 @@
 
 //////////BASE + INTRO/////////
 
-typedef struct donne_score{
-    int temp;
-    int score;
-    char nom[20];
-}t_donne_score;
 
 typedef struct player{
     int x;
     int y;
     int mouv;
     char name[50];
-    t_donne_score* tab_score[4];
     int ticket;
+    int type;
 }t_player;
 
 typedef struct objet{
@@ -32,12 +27,13 @@ typedef struct objet{
 }t_objet;
 void score_modif(int t, int type_jeux, const char* nom);
 void afficher_score(BITMAP* page);
-void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BITMAP* t2,BITMAP* tup0,BITMAP* tup1,BITMAP* tup2,BITMAP* ts0,BITMAP* ts1,BITMAP* ts2);
+void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]);
 void calc(t_objet* ob);
 bool colision(t_player* player,t_objet* ob);
 void ecran();
 void print_chen(BITMAP *page,t_player* player,t_player* player2);
-void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* t0,BITMAP* t1,BITMAP* t2,BITMAP* tup0,BITMAP* tup1,BITMAP* tup2,BITMAP* ts0,BITMAP* ts1,BITMAP* ts2);
+void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]);
+void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]);
 
 
 /////////JEUX DE ALEXANDRE///////////
