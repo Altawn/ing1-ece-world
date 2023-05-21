@@ -277,6 +277,13 @@ partie_guitare_hero-->deplacement
 </div>
 
 ---
+![bg right:50%](images/paris_hypique_histogramme.jpg)
+
+# Pari Hippique :horse_racing:
+
+## organigramme
+
+---
 
 ![bg left:35%](images/le_vrai.bmp)
 
@@ -302,13 +309,7 @@ Pari_Hippique --> PI_print_gagnant
 
 ---
 
-![bg right:50%](images/paris_hypique_histogramme.jpg)
 
-# Pari Hippique :horse_racing:
-
-## organigramme
-
----
 ![bg right:40%](images/maptaupela.jpeg)
 
 # Taupe-la :hammer:
@@ -503,6 +504,14 @@ flowchart LR
 | BITMAP* poke | 
 
 </div>
+
+---
+
+![bg right:50%](images/tir_au_ballon_histogramme.jpg)
+
+# Tir aux Ballons :balloon:
+
+## organigramme
 
 ---
 
