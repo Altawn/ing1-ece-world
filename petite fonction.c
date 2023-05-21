@@ -89,13 +89,24 @@ void door_two(BITMAP* bit,t_player* player1){
 }
  void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
     t_objet sortie ={490,560,550,570};
-    t_objet pc = {660,160,690,220};
+    t_objet pc = {660,160,690,226};
+    t_objet mur1 ={0,225,1024,225};
+    t_objet mur2 ={305,0,305,768};
+    t_objet mur3 ={0,515,470,515};
+    t_objet mur4 ={555,515,1024,515};
+    t_objet desk ={405,230,615,325};
+
     bool swap = false;
     bool end =true;
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
     draw_sprite(page,tab[6],player->x,player->y);
     blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
     while(end){
+        colision(player,&mur1);
+        colision(player,&mur2);
+        colision(player,&mur3);
+        colision(player,&mur4);
+        colision(player,&desk);
         depla(player,page,fond,tab);
         if (colision(player,&pc)){
             if(bulle(&pc)){
@@ -167,19 +178,37 @@ void score_modif(int t, int type_jeux, const char* nom) {
 }
 
 void afficher_score(){
+    rest(100);
     BITMAP* page = create_bitmap(SCREEN_W,SCREEN_H);
     int number = 1;
     char fichier_jeux[20];
     bool end = true;
-    printf("mes couilles");
     clear_to_color(page, makecol(255,255,255));
     sprintf(fichier_jeux, "../score%d.txt", number);
     FILE *pf = fopen(fichier_jeux, "r");
     while(end){
-        int y = 10;
+        if(number == 1){
+            textout_ex(page, font, "snake:", 10, 10, 0, -1);
+        }
+        if(number == 2){
+            textout_ex(page, font, "Guitard hero:", 10, 10, 0, -1);
+        }
+        if(number == 3){
+            textout_ex(page, font, "Pari pokemon:", 10, 10, 0, -1);
+        }
+        if(number == 4){
+            textout_ex(page, font, "taupe la:", 10, 10, 0, -1);
+        }
+        if(number == 5){
+            textout_ex(page, font, "Jackpot:", 10, 10, 0, -1);
+        }
+        if(number == 6){
+            textout_ex(page, font, "Tir au ballon:", 10, 10, 0, -1);
+        }
+        int y = 30;
         if (key[KEY_RIGHT]){
             clear_to_color(page, makecol(255,255,255));
-            if(number<4){number++;}
+            if(number<6){number++;}
             sprintf(fichier_jeux, "../score%d.txt", number);
             pf = fopen(fichier_jeux, "r");
             rest(500);
@@ -198,7 +227,7 @@ void afficher_score(){
                 y += 20;
             }
         }
-        if(key[KEY_ENTER]){
+        if(key[KEY_ESC]){
             end =false ;
         }
         blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);

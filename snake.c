@@ -273,9 +273,13 @@ void snake(t_player* player,t_player* player2) {
         end = true;
     }
     if(turn[0] > turn[1]){
-        player->ticket++;
-    } else
-        player2->ticket++;
+        player2->ticket--;
+    }
+    if (turn[0]< turn[1]){
+        player->ticket--;
+    }
+
+
 
 
     printf("%s\n",player->name);
