@@ -177,6 +177,6 @@ void Tir_Ballons(t_player* player,t_player* player2);
 #endif //PROJET_HEAD_H
 
 ///////////////////////////MAXIMILIANO////////////////////
-int finalTP(t_player *player, t_player *player2);
+void  finalTP(t_player *player, t_player *player2);
 void ecran_d_accueil();
 int jeu_maximiliano();

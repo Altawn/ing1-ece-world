@@ -157,7 +157,7 @@ void ecran_d_accueil(){
     }
 }
 
-int  finalTP(t_player *player, t_player *player2){
+void  finalTP(t_player *player, t_player *player2){
     int point_joueur1TP;
     int point_joueur2TP;
     ecran_d_accueil();
@@ -169,12 +169,17 @@ int  finalTP(t_player *player, t_player *player2){
 
         if (point_joueur1TP < point_joueur2TP) {
             textprintf_ex(screen, font, 10, 10, makecol(255, 100, 100), -1, " %s vous avez gagné !",player2->name);
-            player->ticket--;
+
         } else {
             textprintf_ex(screen, font, 10, 10, makecol(255, 100, 100), -1, "%s vous avez gagné !", player->name);
-            player2->ticket--;
+
         }
     }
+    if (point_joueur1TP < point_joueur2TP) {
+        player->ticket--;
+    }else if (point_joueur1TP > point_joueur2TP){
+        player2->ticket--;
+    }
 
-    return 0;
+
 }
