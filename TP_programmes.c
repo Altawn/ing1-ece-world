@@ -177,5 +177,8 @@ void  finalTP(t_player *player, t_player *player2){
         player2->ticket--;
     }
 
+    score_modif(point_joueur1TP,4,player->name);
+    score_modif(point_joueur2TP,4,player2->name);
+
 
 }
