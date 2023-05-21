@@ -443,7 +443,6 @@ flowchart LR
 
 </div>
 
-
 ---
 
 ![bg left:35%](images/screenshot-tir_aux_ballons.png)
@@ -469,26 +468,14 @@ flowchart LR
     TB_remp_tab_pok --> TB_init_struct 
 </div>
 
-
----
-
-![bg right:40%](images/peche_canards.jpg)
-
-# Pêche aux canards
-
-### Logigramme
-
-Que vous jugez pertinent (image ou Mermaid.js)
-
-
-
 ---
 
 # Bilan collectif
 
 - Bonne organisation de groupe et cohésion
 - Beaucoup d'amusement avec ce projet -> meilleur travail
-- Découverte de nouveaux outils ( Git, Github et Marp )
+- Découverte de nouveaux outils ( Git, Github, Marp et Paint )
+- Projet concret (notre premier jeu vidéo)
 
 ---
 
@@ -502,26 +489,21 @@ _class: lead
 
 # Tâches réalisées (pour chaque membre) `1/2`
 
-- `✅ 100%` Exemple
-- `✅ 90%`  Exemple
-    - *Développer ici pourquoi cette tâche n'a pas été terminée.*
-
-- `❌ 20%` Exemple
-    - *Développer ici pourquoi cette tâche n'a pas été terminée.*
-- `❌ 20%` Exemple
-    - *Développer ici pourquoi cette tâche n'a pas été terminée.*
+- `✅ 100%` Sprites / Bitmaps / Gestion avec Paint
+- `✅ 90%`  Système de collision
+    - Certaines collisions sont un peu mauvaises ou ne sont pas encore faites
+- `✅ 75%`  Deplacement du joueur sur la map
+    - Il se déplace bien, il y a en effet deux joueurs mais le mouvement en diagonal fait bugger les sprites
 
 ---
 
 # Tâches réalisées (pour chaque membre) `1/2`
 
-- `✅ 100%` Exemple
-    - *Développer ici pourquoi cette tâche n'a pas été terminée.*
-- `✅ 90%`  Exemple
-    - *Développer ici pourquoi cette tâche n'a pas été terminée.*
-
-- `❌ 20%` Exemple
-    - *Développer ici pourquoi cette tâche n'a pas été terminée.*
+- `✅ 100%`  Lancement des mini-jeux
+- `✅ 100%`  Sauvegarde du nombre de tickets
+- `✅ 70%`  Records sur certains jeux
+    - Les records de certains jeux ne sont pas parlants (1 ou 0 pour Pari hippique)
+ - `✅ 100%`  Transition map et jeux et inversement  
 
 ---
 
@@ -551,47 +533,3 @@ pie title Organisation de l'équipe
 | Jackpot | 100% | - |
 
 ---
-
-<!--
-_class: lead
--->
-# Quelques éléments que vous pouvez utiliser à votre guise dans votre présentation
-
----
-
-# Schémas et Graphes
-
-Vous pouvez utiliser [Mermaid.js](https://mermaid.js.org/) pour générer des schémas. Regardez la documentation.
-
----
-
-# Slide avec du code
-
-
-```C
-for(int i = 0; i < 5; i++) {
-    printf("%d ", i);
-}
-```
-
-> 0 1 2 3 4 
-
-
----
-
-# Emojis
-
-https://gist.github.com/rxaviers/7360908
-
----
-
-# Thème 
-
-Vous pouvez personnaliser l'affichage de votre présentation avec le langage CSS en modifiant le fichier `theme.css`.
-
----
-
-# Export PDF
-
-Depuis récemment, l'export (**`Export Slide Deck...`**) en PDF oublie parfois des éléments. 
-Si c'est le cas, nous vous conseillons d'exporter en fichier PowerPoint (pptx), puis de l'exporter en PDF depuis PowerPoint.
