@@ -103,9 +103,15 @@ Précisez comment les jeux sont organisés ? Sont-ils dans des fichiers séparé
 Quels paramètres prennent les jeux ?  La file d'événement par exemple ? Ou est-ce que chaque jeu crée sa propre file ?
 
  - Notre jeu est organisé autour d'une structure principale :
- - structure
- - structure
- - structure
+typedef struct player{
+    int x;
+    int y;
+    int mouv;
+    char name[50];
+    pokemon* pokemon1;
+    int ticket;
+    int type;
+}t_player;
 
  - On envoie à chaque jeu deux pointeurs de stuctures pour joueur 1 et joueur 2 :
 
