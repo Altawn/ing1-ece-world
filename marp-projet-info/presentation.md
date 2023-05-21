@@ -35,7 +35,7 @@ Equipe 57 - TD 1
 
 # Equipe 57  :bangbang:
 
-![bg right:50%](./images/equipe.avif)
+![bg left:50%](./images/equipe.avif)
   
 - Alexandre Charvet
 - Matthias Aubert
@@ -84,6 +84,8 @@ Equipe 57 - TD 1
 
 ---
 
+![bg blur](images/organisation.jpg)
+<!--_color: red-->
 # Organisation des jeux :moneybag: `1/3`
 
 Précisez comment les jeux sont organisés ? Sont-ils dans des fichiers séparés ? Dans des dossiers ? Sont-ils éparpillés dans plusieurs fichiers ?
@@ -95,6 +97,7 @@ Précisez comment les jeux sont organisés ? Sont-ils dans des fichiers séparé
 
 ---
 
+![bg blur:25px](images/organisation2.jpg)
 # Organisation des jeux :moneybag: `2/3`
 
 Quels paramètres prennent les jeux ?  La file d'événement par exemple ? Ou est-ce que chaque jeu crée sa propre file ?
@@ -105,11 +108,15 @@ Quels paramètres prennent les jeux ?  La file d'événement par exemple ? Ou es
  - structure
 
  - On envoie à chaque jeu deux pointeurs de stuctures pour joueur 1 et joueur 2 :
+
+ <!--_color: green-->
  ```C
 void jeu_random(t_player * player, t_player * player2);
  ```
 ---
 
+![bg blur:25px](images/organisation3.jpg)
+<!--_color: white-->
 # Organisation des jeux :moneybag: `3/3`
 
 Comment on lance un jeu et comment on revient à la carte à la fin de la partie ?
