@@ -177,7 +177,7 @@ move_snake --> end_snake --> end_
 
 ---
 
-![bg right:35%](images/hero_de_la_guitare.webp)
+![bg right:35%](images/hero_de_la_guitare.png)
 
 # Guitar Hero :guitar:
 
@@ -192,7 +192,7 @@ move_snake --> end_snake --> end_
 
 ---
 
-![bg right:35%](images/hero_de_la_guitare.webp)
+![bg right:35%](images/hero_de_la_guitare.png)
 
 # Guitar Hero :guitar:
 
@@ -215,7 +215,7 @@ move_snake --> end_snake --> end_
 
 
 ---
-![bg right:35%](images/hero_de_la_guitare.webp)
+![bg right:35%](images/hero_de_la_guitare.png)
 # Guitar Hero :guitar:
 
 ## Graphe d'appel :
@@ -345,7 +345,7 @@ Voir template jeu
 
 ---
 
-![bg right:35%](images/jackpot.png)
+![bg right:35%](images/jackpot2.png)
 
 # Jackpot :slot_machine:
 
@@ -360,7 +360,7 @@ Voir template jeu
 
 ---
 
-![bg right:35%](images/jackpot.png)
+![bg right:35%](images/jackpot2.png)
 # Jackpot :slot_machine:
 
 
@@ -379,7 +379,7 @@ Voir template jeu
 </div>
 
 ---
-![bg right:35%](images/jackpot.png)
+![bg right:35%](images/jackpot2.png)
 # Jackpot :slot_machine:
 
 ## Graphe d'appel :
