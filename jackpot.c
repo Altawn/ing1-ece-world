@@ -5,7 +5,6 @@ void tournee_debut_jackpot(int vitesse,int y[3]){
     for (int i = 0; i < 3; ++i) {
         y[i] += vitesse;
 
-
         if (y[i] > 500) {
             y[i] = 95;
         }
