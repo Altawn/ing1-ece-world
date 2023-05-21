@@ -80,6 +80,7 @@ void door_one(BITMAP* bit,t_player* player1){
         rest(100);
     }
 }
+
 void door_two(BITMAP* bit,t_player* player1){
     for (int i = 0; i < 13; ++i) {
         rectfill(screen,431-i,349,431+i,365,0);
@@ -87,7 +88,8 @@ void door_two(BITMAP* bit,t_player* player1){
         rest(100);
     }
 }
- void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
+
+void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
     t_objet sortie ={490,560,550,570};
     t_objet pc = {660,160,690,226};
     t_objet mur1 ={0,225,1024,225};
@@ -239,4 +241,19 @@ void afficher_score(){
         blit(page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
     fclose(pf);
+}
+
+void MAIN_initialisation_allegro()
+{
+    allegro_init();
+    install_keyboard();
+    install_mouse();
+    install_sound(DIGI_AUTODETECT, MIDI_AUTODETECT, NULL);
+    set_color_depth(desktop_color_depth());
+    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,1024,768,0,0)!=0)
+    {
+        allegro_message("prb gfx mode");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
 }
