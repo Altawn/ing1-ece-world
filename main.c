@@ -1,9 +1,7 @@
 #include "head.h"
 
-
-
-int main() {
-
+int main()
+{
     //initialisation des structures joueurs
     t_player player1, player2, player_temp;
 
