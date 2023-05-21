@@ -108,16 +108,9 @@ int main()
 
     //partie musique :
     MIDI* midi           = load_midi("../music/Pokemon_sound.mid"); play_midi(midi, true);
-
-    //appel sous-programme temporaire
-    //poke_center(&player_temp,page,cent,tab_depla1);
-
-    //afficher_score(page);
-    //ecran();
-
+    ecran();
     //affichage de Chen qui demande nom + skin
-    //print_chen(page,&player1,&player2);
-    //pfc(&player1,&player2);
+    print_chen(page,&player1,&player2);
 
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
 

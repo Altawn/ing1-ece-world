@@ -158,12 +158,12 @@ void fight(pokemon* s,pokemon* c,BITMAP* page,t_player* player1,t_player* player
             frame = 0;
         }
 
-        if(pv1 >= -160){
-            player1->ticket--;
-        }
-        if(pv2 >= -210){
-            player2->ticket--;
-        }
+    }
+    if(pv1 >= -160){
+        player1->ticket--;
+    }
+    if(pv2 >= -210){
+        player2->ticket--;
     }
 }
 
@@ -171,6 +171,7 @@ void pfc(t_player* player1,t_player* player2)  {
 
     bool end = true;
     bool exit = true;
+    bool battle = true;
     t_objet bord1 = {347,137,347,589};
     t_objet bord2 = {347,126,700,210};
     t_objet bord3 = {700,237,700,589};
@@ -361,10 +362,15 @@ void pfc(t_player* player1,t_player* player2)  {
         if(colision(player1,&sortie)){
             exit = false;
         }
-        if( player1->pokemon1 != NULL && player2->pokemon1 != NULL){
+        if( player1->pokemon1 != NULL && player2->pokemon1 != NULL && battle){
             rest(1000);
             play_midi(snake_music, true);
             fight(player1->pokemon1,player2->pokemon1,page,player1,player2);
+            battle=false;
         }
+        blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        draw_sprite(page,tup0,player1->x,player1->y);
+        draw_sprite(page,tup0,player2->x,player2->y);
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
     }
 }
