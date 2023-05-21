@@ -191,4 +191,7 @@ void jackpot(t_player* player,t_player* player2){
         printf("%d\n",ticket[i]);
     }
 
+    player->ticket+=ticket[0];
+    player2->ticket+=ticket[1];
+
 }
