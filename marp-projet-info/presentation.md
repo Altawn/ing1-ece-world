@@ -140,13 +140,48 @@ Pour chaque jeu (bien détailler au moins un jeu par personne), précisez les st
 
 ---
 
-![bg left:35%](images/peche_canards.jpg)
+![bg left:35%](images/snake.png)
 
 # Snake :snake:
 
 *Réalisé par : **Alexandre**.*
 
-Voir template jeu
+## Résumé :
+- Un serpent avance selon les touche préssées
+- l'objectif est d'atteindre les rochers pour allonger le serpent
+- un nouveau rocher est géneré aléatoirement a chaque fois que le précédent est attenit
+- les joueurs doivent obtenir le plus de rocher possible sans rentrer dans les bords ni les dans sa queue
+
+---
+![bg right:35%](images/snake.png)
+
+## Listes chainées principales :
+
+typedef struct snake {
+-       int x;
+        int y;
+        BITMAP* base;
+        struct snake* next;
+}t_snake;
+
+typedef struct liste{
+-       t_snake* head;
+}t_liste;
+
+---
+![bg left:35%](images/snake.png)
+
+# Snake :snake:
+<br>
+
+<div class="mermaid">
+%%{init: {'theme':'dark'}}%%
+flowchart LR
+initialisation --> pomme_init --> move_snake-->collision_snake 
+collision_snake --> addpart --> pomme_init
+move_snake --> end_snake --> end_
+ 
+</div>
 
 ---
 ![bg right:35%](images/peche_canards.jpg)
