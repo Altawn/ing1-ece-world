@@ -139,10 +139,10 @@ Comment le classement est-il mis à jour ?
 *Réalisé par : **Alexandre**.*
 
 ## Résumé :
-- Un serpent avance selon les touche préssées
+- Un serpent avance selon les touche pressées
 - l'objectif est d'atteindre les rochers pour allonger le serpent
-- un nouveau rocher est géneré aléatoirement a chaque fois que le précédent est attenit
-- les joueurs doivent obtenir le plus de rocher possible sans rentrer dans les bords ni les dans sa queue
+- un nouveau rocher est géneré aléatoirement a chaque fois que le précédent est atteint
+- les joueurs doivent obtenir le plus de rochers possible sans rentrer dans les bords ni en se mordant la queue
 
 ---
 ![bg right:35%](images/snake.png)
@@ -253,9 +253,9 @@ Pari_Hippique --> PI_print_gagnant
 ## Resumé :
 
 * Un pokémon apparaît a une position aléatoire sur la map
-* le pokemon change de position toute les quelques secondes.
+* le pokemon change de position toutes les quelques secondes.
 * le joueur doit utiliser sa souris et son clic gauche pour cliquer sur le pokemon lorsqu'il apparaît
-* les joueurs jouent chacun leurs tour 
+* les joueurs jouent chacun leur tours 
 
 ---
 ![bg right:40%](images/maptaupela.jpeg)
