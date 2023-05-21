@@ -25,6 +25,8 @@ typedef struct player{
 typedef struct objet{
     int x, y, x2, y2;
 }t_objet;
+
+void MAIN_initialisation_allegro();
 void score_modif(int t, int type_jeux, const char* nom);
 void afficher_score();
 void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]);
