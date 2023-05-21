@@ -69,7 +69,7 @@ Equipe 57 - TD 1
 <p style="text-align: center;"> * Le personnage est animé sur la carte</p>
 <p style="text-align: center;"> * Saisie des noms par clavier avec readkey()</p>
 <p style="text-align: center;"> * le score et le classement sont affichés ...</p>
-<p style="text-align: center;"> * Problemes rencontres ...</p>
+<p style="text-align: center;"> * probleme avec un ordinateur pas assez puissant</p>
 
 ---
 
