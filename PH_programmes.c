@@ -103,7 +103,17 @@ void Pari_Hippique(t_player* player,t_player* player2)
     PI_pok_gagnant(pok_gagnant, arrivee);
 
     //Affichage du pokemon victorieux et du resultat du pari
-    PI_print_gagnant(decor, dialogue, pok_gagnant, choix_j1, arrivee, choix_j2, player->ticket, player2->ticket);
+    PI_print_gagnant(decor, dialogue, pok_gagnant, choix_j1, arrivee, choix_j2);
+
+
+    if(choix_j2 != arrivee && choix_j1 != arrivee){
+        player->ticket--;
+        player2->ticket--;
+    }else if(choix_j1 == arrivee){
+        player2->ticket--;
+    }else if(choix_j2 == arrivee){
+        player->ticket--;
+    }
 
     //Libere la memoire
     for (i = 0; i < NPOK; ++i)
@@ -396,7 +406,7 @@ int PI_navigation(BITMAP*decor, BITMAP*page, int y_cir, int passe, int flag, int
     return choix_j;
 }
 
-void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix_j1, int arrivee, int choix_j2, int tickets_j1, int tickets_j2)
+void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix_j1, int arrivee, int choix_j2)
                       {
                           while(!key[KEY_ENTER])
                           {
@@ -434,7 +444,6 @@ void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix
                                                   -1,
                                                   "Bravo au joueur 1 pour avoir parie sur le bon poulin"
                                           );
-                                  tickets_j2--;
 
                                   readkey();
                               }
@@ -450,7 +459,7 @@ void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix
                                                   -1,
                                                   "Bravo au joueur 2 pour avoir parie sur le bon poulin"
                                           );
-                                  tickets_j1--;
+
                                   readkey();
                               }
                               if(choix_j2 == arrivee && choix_j1 == arrivee)
@@ -479,8 +488,7 @@ void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix
                                                   -1,
                                                   "Vous ferez mieux une prochaine fois..."
                                           );
-                                  tickets_j1--;
-                                  tickets_j2--;
+
                                   readkey();
                               }
                           }
