@@ -219,13 +219,45 @@ Pari_Hippique --> PI_print_gagnant
 </div>
 
 ---
-![bg right:35%](images/peche_canards.jpg)
+![bg right:40%](images/maptaupela.jpeg)
+
+# Taupe-la :hammer:
+* Réalisé par : **Maximiliano**.
+## Resumé :
+
+* Un pokémon apparaît a une position aléatoire sur la map
+* le pokemon change de position toute les quelques secondes.
+* le joueur doit utiliser sa souris et son clic gauche pour cliquer sur le pokemon lorsqu'il apparaît
+* les joueurs jouent chacun leurs tour 
+
+---
+![bg right:40%](images/maptaupela.jpeg)
 
 # Taupe-la :hammer:
 
-*Réalisé par : **Maximiliano**.*
+## fonctionnement génerale
+### boucle while :
+* variable aléatoire qui définit la position du sprite et l'affiche sur la page
+* affichage d'une page blanche pour recouvrir l'ancien sprite 
+* lorsque le sprite est cliqué le joueur gagne 1 point 
 
-Voir template jeu
+
+---
+
+![bg right:40%](images/maptaupela.jpeg)
+
+# Taupe-la :hammer:
+
+<br>
+
+<div class="mermaid">
+%%{init: {'theme':'dark'}}%%
+flowchart LR
+Finale_TP --> fond_ecran 
+
+jeu_maximiliano-->fond_ecran-->jeu_maximiliano
+ 
+</div> 
 
 ---
 
