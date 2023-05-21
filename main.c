@@ -10,6 +10,8 @@ int main() {
     t_objet hero ={414,349,440,355};
     t_objet ballon ={140,610,160,630};
     t_objet pari = {862,624,890,632};
+    t_objet taupe = {640,620,670,638};
+    t_objet jackpot_o = {110,340,140,360};
     t_objet rectangle3 ={0,85,1024,85};
     t_objet rectangle4 ={55,0,55,768};
     t_objet rectangle5 ={965,0,965,768};
@@ -30,6 +32,7 @@ int main() {
     t_objet rectangle20 ={235,750,340,750};
     t_objet rectangle21 ={845,405,875,420};
     t_objet rectangle22 ={809,526,947,630};
+    t_objet rectangle23 ={580,530,735,635};
     t_objet gym ={575,290,970,415};
 
 
@@ -38,6 +41,8 @@ int main() {
     bool swap3 = false;
     bool swap4 = false;
     bool swap5 = false;
+    bool swap6 = false;
+    bool swap7 = false;
     bool end = true;
 
     allegro_init();
@@ -144,6 +149,7 @@ int main() {
         colision(&player1,&rectangle17);
         colision(&player1,&rectangle18);
         colision(&player1,&rectangle22);
+        colision(&player1,&rectangle23);
         colision(&player1,&gym);
         colision(&player2,&rectangle3);
         colision(&player2,&rectangle4);
@@ -162,6 +168,7 @@ int main() {
         colision(&player2,&rectangle17);
         colision(&player2,&rectangle18);
         colision(&player2,&rectangle22);
+        colision(&player2,&rectangle23);
         colision(&player2,&gym);
 
         /////deplacement/////
@@ -261,6 +268,36 @@ int main() {
             }
         }
 
+        if(colision(&player1,&taupe)|| colision(&player2,&taupe)){
+            if(bulle(&player1)){
+                stop_midi();
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+                swap6= true;
+            }
+            else{
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            }
+        }
+        if(colision(&player1,&jackpot_o) || colision(&player2,&jackpot_o)){
+            if(bulle(&player1)){
+                stop_midi();
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+                door_one(tup0,&player1);
+                swap7= true;
+            }
+            else{
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            }
+        }
+
         ///////declanchement jeux///////
 
         if(colision(&player1,&rectangle21)|| colision(&player2,&rectangle21)){
@@ -316,6 +353,31 @@ int main() {
             play_midi(midi, true);
             swap4 = false;
         }
+        if (swap6 == true)
+        {
+            clear(page);
+            finalTP(&player1,&player2);
+            blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            draw_sprite(page,tup0,player1.x,player1.y);
+            blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            play_midi(midi, true);
+            swap6 = false;
+        }
+        if (swap7 == true)
+        {
+            clear(page);
+            jackpot(&player1,&player2);
+            blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            draw_sprite(page,tup0,player1.x,player1.y);
+            blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            play_midi(midi, true);
+            swap7 = false;
+        }
+
+        if(player1.ticket == 0 || player2.ticket == 0){
+            end = false;
+        }
     }
+    allegro_exit();
     return 0;
 }END_OF_MAIN()

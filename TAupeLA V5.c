@@ -4,8 +4,6 @@
 int jeu_maximiliano()
 {
 
-
-
     srand(time(NULL));
     int compteur_points_joueur=0;
     int temps_tete = 0;
@@ -159,28 +157,24 @@ void ecran_d_accueil(){
     }
 }
 
-int finalTP(t_player *player, t_player *player2){
+int  finalTP(t_player *player, t_player *player2){
     int point_joueur1TP;
     int point_joueur2TP;
     ecran_d_accueil();
     point_joueur1TP = jeu_maximiliano();
     ecran_d_accueil();
     point_joueur2TP = jeu_maximiliano();
-
-
-
-
-
     clear(screen);
-
     while(!key[KEY_ESC]) {
 
         if (point_joueur1TP < point_joueur2TP) {
-            textprintf_ex(screen, font, 10, 10, makecol(255, 100, 100), -1, "%d vous avez gagné !", point_joueur2TP);
+            textprintf_ex(screen, font, 10, 10, makecol(255, 100, 100), -1, " %s vous avez gagné !",player2->name);
             player->ticket--;
         } else {
-            textprintf_ex(screen, font, 10, 10, makecol(255, 100, 100), -1, "%d vous avez gagné !", point_joueur1TP);
+            textprintf_ex(screen, font, 10, 10, makecol(255, 100, 100), -1, "%s vous avez gagné !", player->name);
             player2->ticket--;
         }
     }
+
+    return 0;
 }
