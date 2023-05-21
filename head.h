@@ -126,7 +126,7 @@ int PI_choix_pok(int y_cir);
 int PI_navigation(BITMAP*decor, BITMAP*page, int y_cir, int passe, int flag, int blanc);
 
 //Affichage du pokemon gagnant
-void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix_j1, int arrivee, int choix_j2, int tickets_j1, int tickets_j2);
+void PI_print_gagnant(BITMAP*decor, BITMAP*dialogue, char*pok_gagnant, int choix_j1, int arrivee, int choix_j2);
 
 //Jeu principal
 void Pari_Hippique(t_player* player,t_player* player2);

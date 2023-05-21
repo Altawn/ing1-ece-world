@@ -141,3 +141,46 @@ int jeu_maximiliano()
     }
     return compteur_points_joueur;
 }
+void ecran_d_accueil(){
+    BITMAP *ecran_accueil;
+    BITMAP *page = create_bitmap(1024, 768);
+    clear_bitmap(page);
+    ecran_accueil = load_bitmap("../ecranaccueil.bmp", NULL);
+    if (!ecran_accueil)
+    {
+        allegro_message("erreur de chargement");
+        exit(1);
+    }
+
+    while (!key[KEY_ENTER])
+    {
+        blit(page,screen,0,0,0,0, SCREEN_W, SCREEN_H);
+        blit(ecran_accueil,page,0,0,0,0, SCREEN_W, SCREEN_H);
+    }
+}
+
+int finalTP(t_player *player, t_player *player2){
+    int point_joueur1TP;
+    int point_joueur2TP;
+    ecran_d_accueil();
+    point_joueur1TP = jeu_maximiliano();
+    ecran_d_accueil();
+    point_joueur2TP = jeu_maximiliano();
+
+
+
+
+
+    clear(screen);
+
+    while(!key[KEY_ESC]) {
+
+        if (point_joueur1TP < point_joueur2TP) {
+            textprintf_ex(screen, font, 10, 10, makecol(255, 100, 100), -1, "%d vous avez gagné !", point_joueur2TP);
+            player->ticket--;
+        } else {
+            textprintf_ex(screen, font, 10, 10, makecol(255, 100, 100), -1, "%d vous avez gagné !", point_joueur1TP);
+            player2->ticket--;
+        }
+    }
+}
