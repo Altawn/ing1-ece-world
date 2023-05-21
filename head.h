@@ -26,7 +26,7 @@ typedef struct objet{
     int x, y, x2, y2;
 }t_objet;
 void score_modif(int t, int type_jeux, const char* nom);
-void afficher_score(BITMAP* page);
+void afficher_score();
 void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]);
 void calc(t_objet* ob);
 bool colision(t_player* player,t_objet* ob);

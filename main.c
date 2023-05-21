@@ -109,7 +109,7 @@ int main() {
     clear_to_color(page, makecol(255,255,255));
     //afficher_score(page);
     //ecran();
-    //print_chen(page,&player1,&player2);
+    print_chen(page,&player1,&player2);
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
     if(player1.type == 2){
         draw_sprite(page,ts0,player1.x,player1.y);
@@ -168,6 +168,7 @@ int main() {
 
         if(player1.type == 2 && player2.type == 1){
             depla(&player1,page,fond,tab_depla1);
+            blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
             depla2(&player2,page,fond,tab_depla2);
         }
         if(player1.type == 1 && player2.type == 2){

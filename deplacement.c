@@ -12,7 +12,7 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->x= player->x+2;
         player->mouv++;
         lastmove =1;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 5 && player->mouv <=10 && key[KEY_RIGHT]){
         clear(page);
@@ -23,7 +23,7 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->x= player->x+2;
         lastmove =1;
         player->mouv++;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 10 && player->mouv <= 15  && key[KEY_RIGHT]){
         clear(page);
@@ -34,7 +34,7 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         lastmove =1;
         player->mouv++;
         if(player->mouv == 15){player->mouv = 0;}
-        rest(10);
+        rest(1);
     }
     if(player->mouv <= 5 && key[KEY_LEFT]){
         clear(page);
@@ -44,7 +44,7 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->x= player->x-2;
         lastmove =2;
         player->mouv++;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 5 && player->mouv <=10 && key[KEY_LEFT]){
         clear(page);
@@ -55,7 +55,7 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->x= player->x-2;
         lastmove =2;
         player->mouv++;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 10 && player->mouv <= 15 && key[KEY_LEFT]){
         clear(page);
@@ -67,7 +67,7 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         lastmove =2;
         player->mouv++;
         if(player->mouv == 15){player->mouv = 0;}
-        rest(10);
+        rest(1);
     }
     if(player->mouv <= 5 && key[KEY_UP] ){
         clear(page);
@@ -78,7 +78,7 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->y= player->y-2;
         player->mouv++;
         lastmove =3;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 5 && player->mouv <=10 && key[KEY_UP]){
         clear(page);
@@ -89,7 +89,7 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->y= player->y-2;
         player->mouv++;
         lastmove =3;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 10 && player->mouv <= 15  && key[KEY_UP]){
         clear(page);
@@ -101,7 +101,7 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         lastmove =3;
         player->mouv++;
         if(player->mouv == 15){player->mouv = 0;}
-        rest(10);
+        rest(1);
     }
     if(player->mouv <= 5 && key[KEY_DOWN] ){
         clear(page);
@@ -112,7 +112,7 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->y= player->y+2;
         player->mouv++;
         lastmove =4;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 5 && player->mouv <=10&& key[KEY_DOWN] ){
         clear(page);
@@ -123,7 +123,7 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->y= player->y+2;
         player->mouv++;
         lastmove =4;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 10 && player->mouv <= 15 && key[KEY_DOWN]){
         clear(page);
@@ -134,7 +134,7 @@ void depla(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->mouv++;
         if(player->mouv == 15){player->mouv = 0;}
         lastmove =4;
-        rest(10);
+        rest(1);
     }
     else if (keypressed()!= 1){
         if(lastmove == 1){
@@ -176,7 +176,7 @@ void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->x= player->x+2;
         player->mouv++;
         lastmove =1;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 5 && player->mouv <=10 && key[KEY_D]){
         clear(page);
@@ -186,7 +186,7 @@ void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->x= player->x+2;
         lastmove =1;
         player->mouv++;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 10 && player->mouv <= 15  && key[KEY_D]){
         clear(page);
@@ -197,7 +197,7 @@ void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         lastmove =1;
         player->mouv++;
         if(player->mouv == 15){player->mouv = 0;}
-        rest(10);
+        rest(1);
     }
     if(player->mouv <= 5 && key[KEY_A]){
         clear(page);
@@ -207,7 +207,7 @@ void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->x= player->x-2;
         lastmove =2;
         player->mouv++;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 5 && player->mouv <=10 && key[KEY_A]){
         clear(page);
@@ -217,7 +217,7 @@ void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->x= player->x-2;
         lastmove =2;
         player->mouv++;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 10 && player->mouv <= 15 && key[KEY_A]){
         clear(page);
@@ -228,7 +228,7 @@ void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         lastmove =2;
         player->mouv++;
         if(player->mouv == 15){player->mouv = 0;}
-        rest(10);
+        rest(1);
     }
     if(player->mouv <= 5 && key[KEY_W] ){
         clear(page);
@@ -238,7 +238,7 @@ void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->y= player->y-2;
         player->mouv++;
         lastmove =3;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 5 && player->mouv <=10 && key[KEY_W]){
         clear(page);
@@ -248,7 +248,7 @@ void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->y= player->y-2;
         player->mouv++;
         lastmove =3;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 10 && player->mouv <= 15  && key[KEY_W]){
         clear(page);
@@ -259,7 +259,7 @@ void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         lastmove =3;
         player->mouv++;
         if(player->mouv == 15){player->mouv = 0;}
-        rest(10);
+        rest(1);
     }
     if(player->mouv <= 5 && key[KEY_S] ){
         clear(page);
@@ -269,7 +269,7 @@ void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->y= player->y+2;
         player->mouv++;
         lastmove =4;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 5 && player->mouv <=10&& key[KEY_S] ){
         clear(page);
@@ -279,7 +279,7 @@ void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->y= player->y+2;
         player->mouv++;
         lastmove =4;
-        rest(10);
+        rest(1);
     }
     if(player->mouv > 10 && player->mouv <= 15 && key[KEY_S]){
         clear(page);
@@ -290,7 +290,7 @@ void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
         player->mouv++;
         if(player->mouv == 15){player->mouv = 0;}
         lastmove =4;
-        rest(10);
+        rest(1);
     }
     else if (keypressed()!= 1){
         if(lastmove == 1){

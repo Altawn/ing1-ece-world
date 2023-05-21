@@ -99,7 +99,7 @@ void door_two(BITMAP* bit,t_player* player1){
         depla(player,page,fond,tab);
         if (colision(player,&pc)){
             if(bulle(player)){
-                afficher_score(page);
+                afficher_score();
             }
         }
         if(colision(player,&sortie)){
@@ -166,10 +166,12 @@ void score_modif(int t, int type_jeux, const char* nom) {
     free(tab_tri);
 }
 
-void afficher_score(BITMAP* page){
+void afficher_score(){
+    BITMAP* page = create_bitmap(SCREEN_W,SCREEN_H);
     int number = 1;
     char fichier_jeux[20];
     bool end = true;
+    printf("mes couilles");
     clear_to_color(page, makecol(255,255,255));
     sprintf(fichier_jeux, "../score%d.txt", number);
     FILE *pf = fopen(fichier_jeux, "r");
