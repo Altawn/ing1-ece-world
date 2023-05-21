@@ -5,21 +5,16 @@ int jeu_maximiliano()
 {
 
     srand(time(NULL));
-    int compteur_points_joueur=0;
-    int temps_tete = 0;
-    int randomposition=rand()%13; ;
-    int randompositions[12];
-    int nombre_pokemon=0;
+    int compteur_points_joueur = 0;
+    int randomposition         = rand()%13;
     int x=0;
     int y=0;
     int temp=0;
     int compt=0;
-    int defaite = 0;
-    int resultat_taupe_la[2];
+    int defaite;
     BITMAP *sprite_tiplouf_tete;
     BITMAP *fond_d_ecran;
     BITMAP* page=NULL;
-    //  BITMAP* fond_d_ecran2;
     show_mouse(screen);
 
 
@@ -139,6 +134,7 @@ int jeu_maximiliano()
     }
     return compteur_points_joueur;
 }
+
 void ecran_d_accueil(){
     BITMAP *ecran_accueil;
     BITMAP *page = create_bitmap(1024, 768);

@@ -45,15 +45,7 @@ void Pari_Hippique(t_player* player,t_player* player2)
     if(!page) allegro_message("Erreur creation dialogue");
 
     //Dialogue d'entree
-    PI_entree_jeu(decor, page, dialogue);
-
-    //Cache la phrase de continuation avant le prochain sous-programme
-    rest(200);
-    rectfill(decor, 375 - strlen("Appuyer sur la barre espace pour continuer...") / 2, 690, 720, 700,makecol(255, 255, 255));
-    rest(200);
-
-    //Affichage de la liste des pokemons combattants
-    PI_affichage_liste(decor, debut, page);
+    PI_entree_jeu(decor, page, dialogue, debut);
 
     //Transition entre les deux sous-programmes
     circlefill(decor, 750, 579, 3, 0);
@@ -87,14 +79,11 @@ void Pari_Hippique(t_player* player,t_player* player2)
         // Effacer buffer en appliquant decor
         blit(decor,page,0,0,0,0,SCREEN_W,SCREEN_H);
 
-        //Animation des pokemons
-        PI_anim_pok(tab_pok, page); //-> draw_sprite(page, tab_rand[i]->img[tab_rand[i]->frame_act], tab_rand[i]->posx, pas);
+        //Deplacement des pokemons
+        arrivee = PI_depla_pok(tab_pok, page);
 
         //Affichage du buffer mis à jour
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-
-        //Deplacement des pokemons
-        arrivee = PI_depla_pok(tab_pok);
     }
 
     clear(screen);
@@ -122,18 +111,15 @@ void Pari_Hippique(t_player* player,t_player* player2)
     }
 }
 
-Pokemon * PI_init_pokemon(int tx, int ty, int xdx, int posx, int posy, int pok, int depx, int tmpimg)
+Pokemon * PI_init_pokemon(int posx, int posy, int pok, int depx)
 {
     Pokemon * random;
     char nomfichier[256];
     random = (Pokemon *) malloc(sizeof(Pokemon));
 
     random->posx = posx;  random->posy = posy;
-    random->xdx = xdx;    random->depx = depx;
-    random->compdepx = 0; random->tmpimg = tmpimg;
-    random->tx = tx;      random->ty = ty;
-    random->pok = pok;    random->frame_act = 0;
-    random->cptimg = 0;
+    random->depx = depx;  random->pok = pok;
+    random->frame_act = 0;
 
     if(random->pok == 0)
     {
@@ -219,11 +205,11 @@ Pokemon * PI_init_pokemon(int tx, int ty, int xdx, int posx, int posy, int pok, 
 
 void PI_remp_tab_pok(Pokemon * tab_rand[NPOK])
 {
-    tab_rand[0] = PI_init_pokemon(80, 95, 1, 0,   0, 0, 10, 5);
-    tab_rand[1] = PI_init_pokemon(80, 95, 1, 0, 0, 1, 10, 5);
-    tab_rand[2] = PI_init_pokemon(90, 95, 1, 0, 0, 2, 10, 5);
-    tab_rand[3] = PI_init_pokemon(80, 95, 1, 0, 0, 3, 10, 5);
-    tab_rand[4] = PI_init_pokemon(80, 95, 1, 0, 0, 4, 10, 5);
+    tab_rand[0] = PI_init_pokemon(0, 0, 0, 10);
+    tab_rand[1] = PI_init_pokemon(0, 0, 1, 10);
+    tab_rand[2] = PI_init_pokemon(0, 0, 2, 10);
+    tab_rand[3] = PI_init_pokemon(0, 0, 3, 10);
+    tab_rand[4] = PI_init_pokemon(0, 0, 4, 10);
 }
 
 void PI_anim_pok(Pokemon * tab_rand[NPOK], BITMAP * page)
@@ -249,9 +235,11 @@ void PI_anim_pok(Pokemon * tab_rand[NPOK], BITMAP * page)
     rest(100);
 }
 
-int PI_depla_pok(Pokemon * tab_rand[NPOK])
+int PI_depla_pok(Pokemon * tab_rand[NPOK], BITMAP * page)
 {
     int flag_PI  = 0;
+    //Animation des pokemons
+    PI_anim_pok(tab_rand, page);
 
     for (int i = 0; i < NPOK; ++i)
     {
@@ -313,7 +301,7 @@ void PI_affichage_liste(BITMAP * decor, char * liste[50], BITMAP * page)
     }
 }
 
-void PI_entree_jeu(BITMAP * decor, BITMAP * page, BITMAP * dialogue)
+void PI_entree_jeu(BITMAP * decor, BITMAP * page, BITMAP * dialogue, char * liste[50])
 {
     while(!key[KEY_SPACE])
     {
@@ -351,6 +339,15 @@ void PI_entree_jeu(BITMAP * decor, BITMAP * page, BITMAP * dialogue)
                         "Appuyer sur la barre espace pour continuer..."
                 );
     }
+
+    //Cache la phrase de continuation avant le prochain sous-programme
+    rest(200);
+    rectfill(decor, 375 - strlen("Appuyer sur la barre espace pour continuer...") / 2, 690, 720, 700,makecol(255, 255, 255));
+    rest(200);
+
+    //Affichage de la liste des pokemons combattants
+    PI_affichage_liste(decor, liste, page);
+
 }
 
 int PI_choix_pok(int y_cir)

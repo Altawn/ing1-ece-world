@@ -34,7 +34,7 @@ void print_chen(BITMAP *page,t_player* player,t_player* player2) {
     int i = 0;
     int yrec =0;
     int xrec=0;
-    char* texte[] = {"Bonjour je suis le professeur chen ","Tu vas bien?","comment t'appelles tu?","et le joueur 2","A quoi est ce que tu ressembles?","et le joueur 2","tu t'apprète a rentrer dans le parc d'atraction pokemon de l'ece", "est-tu prêts ?","c'est bien dommage","d"};
+    char* texte[] = {"Bonjour, je me presente en tant que Professeur Chene.","Votre honneur se porte-il bien ?","Puis-je vous demander comment on vous prenomme, s'il vous plait ?","Et comment votre coéquipier est il prénommé, je vous prie ?","Quelle apparence souhaiteriez-vous adopter ?","Et celle de l'autre individu, je vous prie ?","Vous allez penetrer dans le parc d'attractions Pokemon de l'ECE ?", "Etes-vous prepare(e) ?","C'est bien dommage","d"};
     bool text = true;
     bool flag = false;
     BITMAP *chen;BITMAP* lucas;BITMAP* ethan;

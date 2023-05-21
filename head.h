@@ -96,19 +96,14 @@ void tournee_debut_jackpot(int vitesse,int y[3]);
 typedef struct
 {
     int posx, posy; //posit. coin sup. gauche
-    int tx, ty; //largeur / hauteur
     int depx; //deplacement en x
     int frame_act; //frame actuelle du pokemon
-    int compdepx; //compteur pour ralentir deplacement (Randomiser la vitesse du pokemon)
-    int xdx; //ralentir dep en x
     int pok; //quel pokemon ?
-    int tmpimg; //?
-    int cptimg; //?
     BITMAP *img[NIMAGE-1];
 }Pokemon;
 
 //Allouer + Initialisation d'acteurs
-Pokemon * PI_init_pokemon(int tx, int ty, int xdx, int posx, int posxy, int pok, int depx, int tmpimg);
+Pokemon * PI_init_pokemon(int posx, int posy, int pok, int depx);
 
 //Remplir un tab avec des acteurs
 void PI_remp_tab_pok(Pokemon * tab_rand[NPOK]);
@@ -117,7 +112,7 @@ void PI_remp_tab_pok(Pokemon * tab_rand[NPOK]);
 void PI_anim_pok(Pokemon * tab_rand[NPOK], BITMAP * page);
 
 //deplacement des pokemons
-int PI_depla_pok(Pokemon * tab_rand[NPOK]);
+int PI_depla_pok(Pokemon * tab_rand[NPOK], BITMAP * page);
 
 //transcription nombres -> chaine de caracteres
 void PI_pok_gagnant(char * winner, int pok_gagnant);
@@ -126,7 +121,7 @@ void PI_pok_gagnant(char * winner, int pok_gagnant);
 void PI_affichage_liste(BITMAP * decor, char * liste[50], BITMAP * page);
 
 //Texte d'entree du jeu
-void PI_entree_jeu(BITMAP * decor, BITMAP * page, BITMAP * dialogue);
+void PI_entree_jeu(BITMAP * decor, BITMAP * page, BITMAP * dialogue, char * liste[50]);
 
 //sauvegarde des resultats des deux joueurs
 int PI_choix_pok(int y_cir);
