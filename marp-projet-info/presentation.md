@@ -35,7 +35,7 @@ Equipe 57 - TD 1
 
 # Equipe 57  :bangbang:
 
-![bg left:50%](./images/equipe.avif)
+![bg left:50%](./images/IMG-3585.jpg)
   
 - Alexandre Charvet
 - Matthias Aubert
