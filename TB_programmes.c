@@ -327,7 +327,7 @@ void TB_resultats(double tps_j1, double tps_j2, BITMAP* background, BITMAP* buff
                             -1,
                             "Bravo au joueur 1 ! Tu as gagne"
                     );
-            player2->ticket--;
+
         }
 
         else if(tps_j2 < tps_j1)
@@ -342,7 +342,7 @@ void TB_resultats(double tps_j1, double tps_j2, BITMAP* background, BITMAP* buff
                             -1,
                             "Bravo au joueur 2 ! Tu as gagne"
                     );
-            player->ticket--;
+
         }
         blit(buffer, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     }
@@ -398,4 +398,11 @@ void Tir_Ballons(t_player* player,t_player* player2)
 
     //affichage des resultats
     TB_resultats(tps_j1, tps_j2, background, buffer, dialogue, player, player2);
+
+    if(tps_j1>tps_j2){
+        player->ticket--;
+    }
+    if(tps_j1<tps_j2){
+        player2->ticket--;
+    }
 }
