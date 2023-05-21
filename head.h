@@ -72,13 +72,14 @@ void move_snake(t_liste* serpent,int mouvement);
 
 
 
-///////////jeux de matthias//////
+///////////JEUX DE MATTHIAS//////////////////
+//guitare hero
 void deplacement_guitare(int y_poke[NB_poke_guitare], int vitesse,int *perreur);
 void verification_touche_guitare(int y_poke[NB_poke_guitare],int *perreur);
 void guitar_hero(t_player* player,t_player* player2);
 double partie_guitar_hero(BITMAP* page);
 
-
+//jackpot
 void jackpot(t_player* player,t_player* player2);
 int jackpot_debut();
 void start_jackpot();

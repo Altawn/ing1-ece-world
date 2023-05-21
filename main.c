@@ -384,7 +384,10 @@ int main()
 
         }
     }
+
 clear(page);
+
+    /////AFFICHAGE ECRAN DE FIN /////////
     while(!key[KEY_ESC]){
 
         blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
