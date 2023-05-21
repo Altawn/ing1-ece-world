@@ -303,7 +303,7 @@ int main()
             }
         }
 
-        ///////declanchement jeux///////
+        ///////declenchement jeux///////
 
         if(colision(&player1,&rectangle21)|| colision(&player2,&rectangle21)){
             swap5 = true;
