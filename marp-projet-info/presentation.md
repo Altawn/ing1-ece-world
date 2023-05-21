@@ -68,7 +68,7 @@ Equipe 57 - TD 1
 <p style="text-align: center;"> * Les joueurs ont un personnage à choisir chacun sur deux présents</p>
 <p style="text-align: center;"> * Le personnage est animé sur la carte</p>
 <p style="text-align: center;"> * Saisie des noms par clavier avec readkey()</p>
-<p style="text-align: center;"> * Affichage des scores et classement...</p>
+<p style="text-align: center;"> * le score et le classement sont affichés ...</p>
 <p style="text-align: center;"> * Problemes rencontres ...</p>
 
 ---
