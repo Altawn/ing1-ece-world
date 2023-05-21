@@ -122,7 +122,6 @@ void door_two(BITMAP* bit,t_player* player1){
 void score_modif(int t, int type_jeux, const char* nom) {
     char fichier_jeux[20];
     sprintf(fichier_jeux, "../score%d.txt", type_jeux);
-
     FILE *pf = fopen(fichier_jeux, "r");
     if (pf == NULL) {
         pf = fopen(fichier_jeux, "w+");
@@ -131,9 +130,8 @@ void score_modif(int t, int type_jeux, const char* nom) {
     }
 
     int nombre_ligne = 0;
-    int *tab_tri;
-
-    int temp;
+    char **tab_tri = malloc(20 * sizeof(char*)); // Alloue de la mémoire pour le tableau de pointeurs
+    char temp[20];
     char caractere;
 
     srand(time(NULL));
@@ -146,22 +144,26 @@ void score_modif(int t, int type_jeux, const char* nom) {
     }
 
     printf("%d\n", nombre_ligne);
-    tab_tri = malloc(nombre_ligne * sizeof(int));
-    char temp_tri[nombre_ligne][4];
+    char temp_tri[nombre_ligne][20];
 
     rewind(pf);
 
     for (int i = 0; i < nombre_ligne; ++i) {
         fgets(temp_tri[i], 20, pf);
-        tab_tri[i] = atoi(temp_tri[i]);
+        tab_tri[i] = malloc(20 * sizeof(char));
+        strcpy(tab_tri[i], temp_tri[i]);
     }
 
     for (int i = 0; i < nombre_ligne - 1; ++i) {
         for (int j = 0; j < nombre_ligne - 1 - i; ++j) {
-            if (tab_tri[j] < tab_tri[j + 1]) {
-                temp = tab_tri[j];
-                tab_tri[j] = tab_tri[j + 1];
-                tab_tri[j + 1] = temp;
+            int score1, score2;
+            char nom1[20], nom2[20];
+            sscanf(tab_tri[j], "%d %s", &score1, nom1);
+            sscanf(tab_tri[j + 1], "%d %s", &score2, nom2);
+            if (score1 < score2) {
+                strcpy(temp, tab_tri[j]);
+                strcpy(tab_tri[j], tab_tri[j + 1]);
+                strcpy(tab_tri[j + 1], temp);
             }
         }
     }
@@ -170,12 +172,16 @@ void score_modif(int t, int type_jeux, const char* nom) {
     pf = fopen(fichier_jeux, "w");
 
     for (int i = 0; i < nombre_ligne; ++i) {
-        fprintf(pf, "%d %s\n", tab_tri[i], nom);
+        fprintf(pf, "%s", tab_tri[i]);
     }
 
     fclose(pf);
+    for (int i = 0; i < nombre_ligne; ++i) {
+        free(tab_tri[i]);
+    }
     free(tab_tri);
 }
+
 
 void afficher_score(){
     rest(100);

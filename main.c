@@ -114,7 +114,7 @@ int main() {
     MIDI* midi = load_midi("../music/Pokemon_sound.mid");
     play_midi(midi, true);
     clear_to_color(page, makecol(255,255,255));
-    poke_center(&player_temp,page,cent,tab_depla1);
+    //poke_center(&player_temp,page,cent,tab_depla1);
     //afficher_score(page);
     //ecran();
     print_chen(page,&player1,&player2);
