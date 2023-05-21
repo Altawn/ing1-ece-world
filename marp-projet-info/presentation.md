@@ -318,6 +318,17 @@ Pari_Hippique --> PI_print_gagnant
 
 ---
 
+![bg right:68%](images/organigramme_TP.png)
+
+# Taupe-la :hammer:
+
+## organigramme
+
+
+
+
+---
+
 ![bg right:40%](images/maptaupela.jpeg)
 
 # Taupe-la :hammer:
