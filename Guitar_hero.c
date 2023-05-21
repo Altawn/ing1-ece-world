@@ -83,7 +83,7 @@ void verification_touche_guitare(int y_poke[NB_poke_guitare],int *perreur){
 
 }
 
-double partie_guitar_hero(BITMAP* page){
+int partie_guitar_hero(BITMAP* page){
     int y_pikachu[NB_poke_guitare];
     int y_carapuce[NB_poke_guitare];
     int y_dracaufeu[NB_poke_guitare];
@@ -134,7 +134,7 @@ double partie_guitar_hero(BITMAP* page){
     }
 
     srand(time(NULL));
-    double time_spent = 0.0;
+    int time_spent = 0;
     clock_t begin = clock();
 
     while(!key[KEY_ESC] && erreur==0 ){
@@ -199,7 +199,7 @@ double partie_guitar_hero(BITMAP* page){
 
     }
     clock_t end = clock();
-    time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
+    time_spent += (int)(end - begin) / CLOCKS_PER_SEC;
 
     return time_spent;
 }
@@ -214,7 +214,7 @@ void guitar_hero(t_player* player,t_player* player2) {
     game_over2=load_bitmap("../game_over_V2.bmp",NULL);
     page=create_bitmap(SCREEN_W,SCREEN_H);
 
-    double temp[2];
+    int temp[2];
     int i;
 
     for ( i = 0; i < 2; ++i) {
@@ -226,11 +226,13 @@ void guitar_hero(t_player* player,t_player* player2) {
 
             blit(game_over,page,0,0,0,0,SCREEN_W,SCREEN_H);
             blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-            textprintf_ex(game_over, font, 140, 80, makecol(0,0,0), -1, "SCORE : %.2f secondes", temp[i]);
+            textprintf_ex(game_over, font, 140, 80, makecol(0,0,0), -1, "SCORE : %d secondes", temp[i]);
             textprintf_ex(game_over, font, 390, 450, makecol(255,0,0), -1, "CLIQUEZ SUR ENTREE POUR CONTINUER");
         }
     }
 
+    score_modif(temp[0],2,player->name);
+    score_modif(temp[1],2,player2->name);
 
     if(temp[0]>temp[1]){
      //   printf("le premier a gagne");
@@ -239,6 +241,4 @@ void guitar_hero(t_player* player,t_player* player2) {
     //    printf("le deuxieme a gagne");
         player->ticket--;
     }
-
-
 }

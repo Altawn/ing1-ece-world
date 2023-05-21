@@ -190,7 +190,8 @@ void jackpot(t_player* player,t_player* player2){
         ticket[i]=jackpot_debut();
         printf("%d\n",ticket[i]);
     }
-
+    score_modif(ticket[0],5,player->name);
+    score_modif(ticket[1],5,player2->name);
     player->ticket+=ticket[0];
     player2->ticket+=ticket[1];
 

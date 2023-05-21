@@ -210,7 +210,7 @@ void TB_entree_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, int i)
     }
 }
 
-double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pokemons[7], BITMAP* pokeball[2])
+int TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pokemons[7], BITMAP* pokeball[2])
 {
     int compteur = 0;
     int available_poke = 0;
@@ -226,7 +226,7 @@ double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pok
     blit(background, buffer, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
     blit(buffer , screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
 
-    double time_spent = 0; clock_t begin = clock();
+    int time_spent = 0; clock_t begin = clock();
 
     while(!key[KEY_ESC] && flag == 0)
     {
@@ -275,7 +275,7 @@ double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pok
     }
 
     clock_t end = clock();
-    time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
+    time_spent += (int )(end - begin) / CLOCKS_PER_SEC;
 
     while(!key[KEY_SPACE])
     {
@@ -290,7 +290,7 @@ double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pok
                         610,
                         makecol(0, 0, 0),
                         -1,
-                        "Ton temps est de %.2f secondes", time_spent
+                        "Ton temps est de %d secondes", time_spent
                 );
         textprintf_ex
                 (
@@ -350,8 +350,8 @@ void TB_resultats(double tps_j1, double tps_j2, BITMAP* background, BITMAP* buff
 
 void Tir_Ballons(t_player* player,t_player* player2)
 {
-    double tps_j1 = 0;
-    double tps_j2 = 0;
+    int tps_j1 = 0;
+    int tps_j2 = 0;
 
     ballons * pokemons[7];
     BITMAP * background = NULL;
@@ -398,6 +398,9 @@ void Tir_Ballons(t_player* player,t_player* player2)
 
     //affichage des resultats
     TB_resultats(tps_j1, tps_j2, background, buffer, dialogue, player, player2);
+
+    score_modif(tps_j1,6,player->name);
+    score_modif(tps_j2,6,player2->name);
 
     if(tps_j1>tps_j2){
         player->ticket--;

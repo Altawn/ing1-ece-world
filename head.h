@@ -77,7 +77,7 @@ void move_snake(t_liste* serpent,int mouvement);
 void deplacement_guitare(int y_poke[NB_poke_guitare], int vitesse,int *perreur);
 void verification_touche_guitare(int y_poke[NB_poke_guitare],int *perreur);
 void guitar_hero(t_player* player,t_player* player2);
-double partie_guitar_hero(BITMAP* page);
+int partie_guitar_hero(BITMAP* page);
 
 //jackpot
 void jackpot(t_player* player,t_player* player2);
@@ -165,7 +165,7 @@ int TB_condition_attrap(BITMAP* pokeball[2], BITMAP*buffer);
 
 void TB_entree_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, int i);
 
-double TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pokemons[7], BITMAP* pokeball[2]);
+int TB_jeu(BITMAP* buffer, BITMAP* background, BITMAP* dialogue, ballons* pokemons[7], BITMAP* pokeball[2]);
 
 void TB_transition(BITMAP* background, BITMAP* buffer, int i);
 

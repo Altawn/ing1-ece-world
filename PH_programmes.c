@@ -95,12 +95,22 @@ void Pari_Hippique(t_player* player,t_player* player2)
     PI_print_gagnant(decor, dialogue, pok_gagnant, choix_j1, arrivee, choix_j2);
 
     if(choix_j2 != arrivee && choix_j1 != arrivee){
+        score_modif(0,3,player->name);
+        score_modif(0,3,player2->name);
         player->ticket--;
         player2->ticket--;
     }else if(choix_j1 == arrivee){
+        score_modif(1,3,player->name);
         player2->ticket--;
     }else if(choix_j2 == arrivee){
+        score_modif(1,3,player2->name);
         player->ticket--;
+    }
+    else if(choix_j2 == arrivee && choix_j1 == arrivee){
+        score_modif(1,3,player->name);
+        score_modif(1,3,player2->name);
+        player->ticket++;
+        player2->ticket++;
     }
 
 
