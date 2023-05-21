@@ -582,10 +582,10 @@ _class: lead
 <div class = "mermaid">
 %%{init: {'theme':''}}%%
 pie title Organisation de l'équipe
-    "Maximiliano" : 15
+    "Maximiliano" : 20
     "Ronan" : 25
     "Matthias" : 25
-    "Alexandre" : 35
+    "Alexandre" : 30
 </div>
 
 ---
