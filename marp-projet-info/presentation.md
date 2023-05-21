@@ -127,21 +127,6 @@ Comment le classement est-il mis à jour ?
 
 ---
 
-# Template jeu - a enlever dans presentation finale
-
-*Réalisé par : **votre nom**.*
-
-Décrire le fonctionnement du jeu dans les grandes lignes. Comment vous l'avez conçu.
-- Les canards vont de la droite à la gauche.
-- Lorsqu'ils ont disparu, ils ont 1 chance sur 50 de réapparaitre à droite.
-- Les canards vont à une vitesse différente (tirée aléatoirement).
-- La collision des canards est détectée.
-- etc.
-Pour chaque jeu (bien détailler au moins un jeu par personne), précisez les structures de données (structures importantes, tableaux importants, listes chainées...) et les fonctions importantes (avec leur prototype).
-- ajoutez graphe d'appel->voir plus bas pour details (logigramme optionnel)
-<sup>:bulb: Remplacez les images par des captures d'écran de votre jeu.</sup>
----
-
 # <!--fit--><!--_color: black-->Attractions :tada:
 ![bg blur:5px](images/pokepark.bmp)
 
