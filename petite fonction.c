@@ -32,7 +32,7 @@ bool colision(t_player* player,t_objet* ob) {
 }
 
 
-bool bulle(t_player* player){
+bool bulle(t_objet* player){
     int pos = player->y -38;
     int yrec =0;
     int xrec=0;
@@ -98,7 +98,7 @@ void door_two(BITMAP* bit,t_player* player1){
     while(end){
         depla(player,page,fond,tab);
         if (colision(player,&pc)){
-            if(bulle(player)){
+            if(bulle(&pc)){
                 afficher_score();
             }
         }

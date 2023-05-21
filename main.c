@@ -114,7 +114,7 @@ int main() {
     clear_to_color(page, makecol(255,255,255));
     //afficher_score(page);
     //ecran();
-    print_chen(page,&player1,&player2);
+    //print_chen(page,&player1,&player2);
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
     if(player1.type == 2){
         draw_sprite(page,ts0,player1.x,player1.y);
@@ -186,7 +186,7 @@ int main() {
 
         //////condition jeux/////////
         if(colision(&player1,&snake_game) || colision(&player2,&snake_game)){
-            if(bulle(&player1)){
+            if(bulle(&snake_game)){
                 stop_midi();
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
                 draw_sprite(page,tup0,player1.x,player1.y);
@@ -202,7 +202,7 @@ int main() {
         }
 
         if(colision(&player1,&hero) || colision(&player2,&hero)){
-            if(bulle(&player1)){
+            if(bulle(&hero)){
                 stop_midi();
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
                 draw_sprite(page,tup0,player1.x,player1.y);
@@ -229,7 +229,7 @@ int main() {
             blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
         }
         if(colision(&player1,&rectangle20) || colision(&player2,&rectangle20)){
-            if(bulle(&player1)){
+            if(bulle(&rectangle20)){
                 end = false;
             }
             else{
@@ -240,7 +240,7 @@ int main() {
 
         }
         if(colision(&player1,&ballon)|| colision(&player2,&ballon)){
-            if(bulle(&player1)){
+            if(bulle(&ballon)){
                 stop_midi();
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
                 draw_sprite(page,tup0,player1.x,player1.y);
@@ -254,7 +254,7 @@ int main() {
             }
         }
         if(colision(&player1,&pari)|| colision(&player2,&pari)){
-            if(bulle(&player1)){
+            if(bulle(&pari)){
                 stop_midi();
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
                 draw_sprite(page,tup0,player1.x,player1.y);
@@ -269,7 +269,7 @@ int main() {
         }
 
         if(colision(&player1,&taupe)|| colision(&player2,&taupe)){
-            if(bulle(&player1)){
+            if(bulle(&taupe)){
                 stop_midi();
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
                 draw_sprite(page,tup0,player1.x,player1.y);
@@ -283,7 +283,7 @@ int main() {
             }
         }
         if(colision(&player1,&jackpot_o) || colision(&player2,&jackpot_o)){
-            if(bulle(&player1)){
+            if(bulle(&jackpot_o)){
                 stop_midi();
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
                 draw_sprite(page,tup0,player1.x,player1.y);

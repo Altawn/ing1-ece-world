@@ -56,7 +56,7 @@ typedef struct liste{
     t_snake* head;
 }t_liste;
 
-bool bulle(t_player* player);
+bool bulle(t_objet* player);
 bool snake_defeat(int nbpart,t_liste* serpent);
 void door_one(BITMAP* bit,t_player* player1);
 void door_two(BITMAP* bit,t_player* player1);
