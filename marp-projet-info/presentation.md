@@ -301,6 +301,14 @@ Pari_Hippique --> PI_print_gagnant
 </div>
 
 ---
+
+![bg right:50%](images/paris_hypique_histogramme.jpg)
+
+# Pari Hippique :horse_racing:
+
+## organigramme
+
+---
 ![bg right:40%](images/maptaupela.jpeg)
 
 # Taupe-la :hammer:
