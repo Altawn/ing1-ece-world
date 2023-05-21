@@ -176,13 +176,60 @@ move_snake --> end_snake --> end_
 </div>
 
 ---
-![bg right:35%](images/peche_canards.jpg)
+
+![bg right:35%](images/hero_de_la_guitare.webp)
 
 # Guitar Hero :guitar:
 
 *Réalisé par : **Matthias**.*
 
-Voir template jeu
+## Résumé :
+- 5 colonnes de pokemons qui descendent
+- Il faut cliquer sur les pokemons lorsqu'ils arrivent a la hauteur des boutons
+- Leurs vitesses  augmentent en fonction du temp
+- Defaite si un pokemon touche le bas de l'ecran
+- Defaite si on clique sur un bouton alors qu'il n'y a pas de pokemon a la hauteur du bouton
+
+---
+
+![bg right:35%](images/hero_de_la_guitare.webp)
+
+# Guitar Hero :guitar:
+
+
+
+## Structure maître :
+
+<div style="margin-left: auto;
+            margin-right: auto;
+            width: 40%">
+
+| int Y_pokemon |
+| --- | 
+| int vitesse | 
+| int aleatoire | 
+| BITMAP* poke | 
+
+
+</div>
+
+
+---
+![bg right:35%](images/hero_de_la_guitare.webp)
+# Guitar Hero :guitar:
+
+## Graphe d'appel :
+
+
+<br>
+
+<div class="mermaid">
+%%{init: {'theme':'dark'}}%%
+flowchart LR
+guitare_hero --> partie_guitare_hero--> verification_touche
+partie_guitare_hero-->deplacement
+</div>
+
 
 ---
 
@@ -298,13 +345,55 @@ Voir template jeu
 
 ---
 
-![bg right:35%](images/peche_canards.jpg)
+![bg right:35%](images/jackpot.png)
 
 # Jackpot :slot_machine:
 
 *Réalisé par : **Matthias**.*
 
-Voir template jeu
+## Résumé :
+- 3 colonnes de pokemons
+- une colonne est composé de pokemons différent
+- vitesse des colonnes aléatoires
+- arret des colonnes aléatoire
+- victoire s'il y a un meme item sur les 3 colonnes
+
+---
+
+![bg right:35%](images/jackpot.png)
+# Jackpot :slot_machine:
+
+
+## Structure maître :
+
+<div style="margin-left: auto;
+            margin-right: auto;
+            width: 40%">
+
+| Y_pokemon |
+| --- | 
+| int vitesse | 
+| int alea | 
+| BITMAP* poke | 
+
+</div>
+
+---
+![bg right:35%](images/jackpot.png)
+# Jackpot :slot_machine:
+
+## Graphe d'appel :
+
+<br>
+
+<div class="mermaid">
+%%{init: {'theme':'dark'}}%%
+flowchart LR
+   jackpot-->jackpot_debut-->start_jackpot
+   jackpot_debut-->tournee_debut_jackpot
+   jackpot_debut-->arret_tour_jackpot
+   
+</div>
 
 ---
 
