@@ -105,7 +105,6 @@ void Pari_Hippique(t_player* player,t_player* player2)
     //Affichage du pokemon victorieux et du resultat du pari
     PI_print_gagnant(decor, dialogue, pok_gagnant, choix_j1, arrivee, choix_j2);
 
-
     if(choix_j2 != arrivee && choix_j1 != arrivee){
         player->ticket--;
         player2->ticket--;
@@ -114,6 +113,7 @@ void Pari_Hippique(t_player* player,t_player* player2)
     }else if(choix_j2 == arrivee){
         player->ticket--;
     }
+
 
     //Libere la memoire
     for (i = 0; i < NPOK; ++i)
