@@ -76,6 +76,12 @@ void verification_touche_guitare(int y_poke[NB_poke_guitare],int *perreur);
 void guitar_hero(t_player* player,t_player* player2);
 double partie_guitar_hero(BITMAP* page);
 
+
+void jackpot(t_player* player,t_player* player2);
+int jackpot_debut();
+void start_jackpot();
+void arret_tour_jackpot(int vitesse,int y[3],int *arret);
+void tournee_debut_jackpot(int vitesse,int y[3]);
 //////////////////////////////////////////////////////////////////////////////////////////////////JEUX DU RORO//////////////////////////////////////////////////////////////////////////////////////////////////
 /*
  *
