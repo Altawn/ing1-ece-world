@@ -62,6 +62,7 @@ int main() {
     BITMAP* e1;BITMAP* e2;BITMAP* e3;BITMAP* e_s1;BITMAP* e_s2;BITMAP* e_s3;BITMAP* e_u1;BITMAP* e_u2;BITMAP* e_u3;
     BITMAP* quoi;
     BITMAP* cent;
+    BITMAP* fin_jeu_final;
     player1.x=270;
     player1.y=700;
     player1.mouv=0;
@@ -74,7 +75,7 @@ int main() {
     player_temp.y=489;
     player_temp.mouv=0;
 
-    player1.ticket=5;
+    player1.ticket= 5;
     player2.ticket=5;
     //////////////////BITMAP/////////////////
     page2 = create_bitmap(1024,768);
@@ -82,6 +83,7 @@ int main() {
     cent = load_bitmap("../présentation+fond/poke_center.bmp",NULL);
     fond = load_bitmap("../présentation+fond/fond_park.bmp",NULL);
     fond2 = load_bitmap("../présentation+fond/fond_park.bmp",NULL);
+    fin_jeu_final=load_bitmap("../end_jeu_final.bmp",NULL);
 
     t0 = load_bitmap("../image_deplacement/t1.bmp",NULL);
     t1 = load_bitmap("../image_deplacement/t2.bmp",NULL);
@@ -114,7 +116,7 @@ int main() {
     clear_to_color(page, makecol(255,255,255));
     //afficher_score(page);
     //ecran();
-    //print_chen(page,&player1,&player2);
+    print_chen(page,&player1,&player2);
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
     if(player1.type == 2){
         draw_sprite(page,ts0,player1.x,player1.y);
@@ -124,7 +126,7 @@ int main() {
     }
 
     blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-    while (end)
+    while (end==true)
     {
         //////AFFICHAGE TICKET/////
         blit(fond2,fond,0,0,0,0,SCREEN_W,SCREEN_H);
@@ -376,7 +378,20 @@ int main() {
 
         if(player1.ticket == 0 || player2.ticket == 0){
             end = false;
+
         }
+    }
+clear(page);
+    while(!key[KEY_ESC]){
+
+        blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        blit(fin_jeu_final,page,0,0,0,0,SCREEN_W,SCREEN_H);
+        if(player1.ticket==0){
+        textprintf_ex(fin_jeu_final,font,470,260,makecol(255,0,0),-1,"BRAVO %s",player2.name);}
+        else if (player2.ticket==0){
+            textprintf_ex(fin_jeu_final,font,470,260,makecol(255,0,0),-1,"BRAVO %s",player1.name);
+        }
+
     }
     allegro_exit();
     return 0;
