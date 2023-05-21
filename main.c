@@ -12,6 +12,7 @@ int main()
     t_objet pari        = {862,624,890,632};
     t_objet taupe       = {640,620,670,638};
     t_objet jackpot_o   = {110,340,140,360};
+    t_objet pfc_o=       { 390,610,412,620};
     t_objet rectangle3  = {0,85,1024,85};
     t_objet rectangle4  = {55,0,55,768};
     t_objet rectangle5  = {965,0,965,768};
@@ -43,6 +44,7 @@ int main()
     bool swap5 = false;
     bool swap6 = false;
     bool swap7 = false;
+    bool swap8 = false;
     bool end   = true;
 
     //initialisation allegro et srand
@@ -61,12 +63,13 @@ int main()
     player2.x=270;
     player2.y=670;
     player2.mouv=0;
+    player2.ticket=5;
 
     //initialisation player temporaire
     player_temp.x=501;
     player_temp.y=489;
     player_temp.mouv=0;
-    player2.ticket=5;
+
 
     //////////////////BITMAP/////////////////
     //initialisation BITMAP
@@ -114,6 +117,7 @@ int main()
 
     //affichage de Chen qui demande nom + skin
     //print_chen(page,&player1,&player2);
+    //pfc(&player1,&player2);
 
     blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
 
@@ -293,7 +297,6 @@ int main()
                 blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
                 draw_sprite(page,tup0,player1.x,player1.y);
                 blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
-                door_one(tup0,&player1);
                 swap7= true;
             }
             else{
@@ -301,6 +304,14 @@ int main()
                 draw_sprite(page,tup0,player1.x,player1.y);
                 blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
             }
+        }
+
+        if(colision(&player1,&pfc_o) || colision(&player2,&pfc_o)){
+                stop_midi();
+                blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+                draw_sprite(page,tup0,player1.x,player1.y);
+                blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+                swap8= true;
         }
 
         ///////declenchement jeux///////
@@ -379,13 +390,27 @@ int main()
             swap7 = false;
         }
 
+        if (swap8 == true)
+        {
+            clear(page);
+            pfc(&player1,&player2);
+            blit(fond,page,0,0,0,0,SCREEN_W,SCREEN_H);
+            draw_sprite(page,tup0,player1.x,player1.y);
+            blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+            play_midi(midi, true);
+            player1.y = 650;
+            player1.x = 400;
+            player1.y = 650;
+            player1.x = 380;
+            swap8 = false;
+        }
+
         if(player1.ticket == 0 || player2.ticket == 0){
             end = false;
-
         }
     }
 
-clear(page);
+    clear(page);
 
     /////AFFICHAGE ECRAN DE FIN /////////
     while(!key[KEY_ESC]){

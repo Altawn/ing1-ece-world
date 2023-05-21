@@ -3,5 +3,5 @@ project(PROJET C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(PROJET main.c print_chen.c head.h deplacement.c "petite fonction.c" Snake_programmes.c Snake_programmes.c Guitar_hero.c TP_programmes.c PH_programmes.c TB_programmes.c jackpot.c jackpot.c)
+add_executable(PROJET main.c print_chen.c head.h deplacement.c "petite fonction.c" Snake_programmes.c Snake_programmes.c Guitar_hero.c TP_programmes.c PH_programmes.c TB_programmes.c jackpot.c jackpot.c pfc.c)
 target_link_libraries(PROJET -lmingw32 -lalleg44)

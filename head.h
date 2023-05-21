@@ -12,12 +12,23 @@
 
 //////////BASE + INTRO/////////
 
+typedef struct t_pokemon{
+    int id;
+    int type;
+    int attack1;
+    int attack2;
+    int attack3;
+    BITMAP* sprite[2];
+    double speed_modif;
+    BITMAP* sprite_f[2];
+}pokemon;
 
 typedef struct player{
     int x;
     int y;
     int mouv;
     char name[50];
+    pokemon* pokemon1;
     int ticket;
     int type;
 }t_player;
@@ -40,6 +51,7 @@ void depla2(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]);
 
 /////////JEUX DE ALEXANDRE///////////
 
+
 typedef struct pomme{
     int x;
     int y;
@@ -58,6 +70,9 @@ typedef struct liste{
     t_snake* head;
 }t_liste;
 
+void pfc(t_player* player1,t_player* player2);
+void fight(pokemon* s,pokemon* c,BITMAP* page,t_player* player1,t_player* player2);
+void slashed(BITMAP* page,BITMAP*fond,BITMAP*bar_menu,pokemon* s,pokemon* c,int x,int y,BITMAP* slash[5]);
 bool bulle(t_objet* player);
 bool snake_defeat(int nbpart,t_liste* serpent);
 void door_one(BITMAP* bit,t_player* player1);
