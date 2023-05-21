@@ -78,7 +78,7 @@ Equipe 57 - TD 1
 # <p style="text-align: center;">Carte :sparkler: `2/2`</p>
 
 <p style="text-align: center;"> * La carte est le menu</p>
-<p style="text-align: center;"> * Statistiques par attraction ?</p>
+<p style="text-align: center;"> * les statistiques des jeux sont affichés dans le centre pokémon</p>
 <p style="text-align: center;"> * Les joueurs ont 5 tickets au départ</p>
 <p style="text-align: center;"> * A chaque jeu gagné par un joueur, l'autre perd un ticket</p>
 
