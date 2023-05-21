@@ -1,4 +1,3 @@
-
 #include "head.h"
 
 
@@ -77,6 +76,7 @@ int main() {
     page = create_bitmap(1024,768);
     cent = load_bitmap("../présentation+fond/poke_center.bmp",NULL);
     fond = load_bitmap("../présentation+fond/fond_park.bmp",NULL);
+    fond2 = load_bitmap("../présentation+fond/fond_park.bmp",NULL);
 
     t0 = load_bitmap("../image_deplacement/t1.bmp",NULL);
     t1 = load_bitmap("../image_deplacement/t2.bmp",NULL);
@@ -121,9 +121,12 @@ int main() {
     blit(page,screen,0,0,0,0,SCREEN_W,SCREEN_H);
     while (end)
     {
-        //////colision///////
+        //////AFFICHAGE TICKET/////
+        blit(fond2,fond,0,0,0,0,SCREEN_W,SCREEN_H);
         textprintf_ex(fond,font,920,30,makecol(255,0,0),-1,"%s : %d",player1.name,player1.ticket);
         textprintf_ex(fond,font,920,40,makecol(255,0,0),-1,"%s : %d",player2.name,player2.ticket);
+
+        //////colision///////
         colision(&player1,&rectangle3);
         colision(&player1,&rectangle4);
         colision(&player1,&rectangle5);
