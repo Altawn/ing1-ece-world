@@ -190,7 +190,15 @@ move_snake --> end_snake --> end_
 - Defaite si un pokemon touche le bas de l'ecran
 - Defaite si on clique sur un bouton alors qu'il n'y a pas de pokemon a la hauteur du bouton
 
+
 ---
+# Guitar Hero :guitar:
+## organnigramme :
+
+
+![bg right:50%](images/organigramme_guitare_hero.png)
+---
+
 
 ![bg right:35%](images/hero_de_la_guitare.png)
 
@@ -406,6 +414,13 @@ flowchart LR
 - vitesse des colonnes aléatoires
 - arret des colonnes aléatoire
 - victoire s'il y a un meme item sur les 3 colonnes
+
+
+---
+
+![bg right:50%](images/organigrame_jackpot.png)
+# Jackpot :slot_machine:
+## organnigramme :
 
 ---
 
