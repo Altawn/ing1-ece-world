@@ -346,13 +346,51 @@ jeu_maximiliano-->fond_ecran-->jeu_maximiliano
 
 ---
 
-![bg left:35%](images/peche_canards.jpg)
+![bg left:35%](images/pokemon_lab.bmp)
 
 # Pierre:rock: - Feuille:page_facing_up: - Cisaux:scissors:
 
 *Réalisé par : **Alexandre**.*
 
-Voir template jeu
+## Résumé :
+- les joueurs choisissent leur pokemon chacun leur tour (uniquement esthétique)
+- Une fois en combat ils sont animés
+- On chois entre tranche,protect et spéciale
+- Respectivement pierre,feuille et ciseaux
+- Le premier a perdre 4 fois a perdu
+- On peut voir combien de fois on peut encore perdre grâce a la bare de PV
+---
+
+
+![bg right:35%](images/pokemon_lab.bmp)
+
+# Pierre:rock: - Feuille:page_facing_up: - Cisaux:scissors:
+
+## structure et programme
+typedef struct t_pokemon{
+    int attack1;
+    int attack2;
+    int attack3;
+    BITMAP* sprite[2];
+    BITMAP* sprite_f[2];
+}pokemon;
+
+void pfc(t_player* player1,t_player* player2);
+void fight(pokemon* s,pokemon* c,BITMAP* page,t_player* player1,t_player* player2);
+
+---
+![bg left:35%](images/pokemon_lab.bmp)
+# Pierre:rock: - Feuille:page_facing_up: - Cisaux:scissors:
+## Graphe d'appel :
+
+<br>
+
+<div class="mermaid">
+%%{init: {'theme':'dark'}}%%
+flowchart LR
+   pfc-->fight-->pv_down-->defeat
+   
+</div>
 
 ---
 
