@@ -36,7 +36,7 @@ void start_jackpot(){
 
     BITMAP* start;
 
-    start=load_bitmap("../start_jackpot.bmp",NULL);
+    start=load_bitmap("../assets/images/start_jackpot.bmp",NULL);
 
     while(!key[KEY_ENTER]){
         blit(start,screen,0,0,0,0,SCREEN_W,SCREEN_H);
@@ -57,20 +57,20 @@ int jackpot_debut(){
 
 
 
-    fond_ecran=load_bitmap("../fond_ecran_jackpot.bmp",NULL);
+    fond_ecran=load_bitmap("../assets/images/fond_ecran_jackpot.bmp",NULL);
 
     page=create_bitmap(SCREEN_W,SCREEN_W);
-    gauche[0]=load_bitmap("../tete_carapuce_jackpot.bmp",NULL);
-    gauche[1]=load_bitmap("../tete_dracaufeu_jackpot.bmp",NULL);
-    gauche[2]=load_bitmap("../tete_rondoudou_jackpot.bmp",NULL);
+    gauche[0]=load_bitmap("../assets/images/tete_carapuce_jackpot.bmp",NULL);
+    gauche[1]=load_bitmap("../assets/images/tete_dracaufeu_jackpot.bmp",NULL);
+    gauche[2]=load_bitmap("../assets/images/tete_rondoudou_jackpot.bmp",NULL);
 
-    milieu[0]=load_bitmap("../tete_carapuce_jackpot.bmp",NULL);
-    milieu[1]=load_bitmap("../tete_dracaufeu_jackpot.bmp",NULL);
-    milieu[2]=load_bitmap("../tete_rondoudou_jackpot.bmp",NULL);
+    milieu[0]=load_bitmap("../assets/images/tete_carapuce_jackpot.bmp",NULL);
+    milieu[1]=load_bitmap("../assets/images/tete_dracaufeu_jackpot.bmp",NULL);
+    milieu[2]=load_bitmap("../assets/images/tete_rondoudou_jackpot.bmp",NULL);
 
-    droite[0]=load_bitmap("../tete_carapuce_jackpot.bmp",NULL);
-    droite[1]=load_bitmap("../tete_dracaufeu_jackpot.bmp",NULL);
-    droite[2]=load_bitmap("../tete_rondoudou_jackpot.bmp",NULL);
+    droite[0]=load_bitmap("../assets/images/tete_carapuce_jackpot.bmp",NULL);
+    droite[1]=load_bitmap("../assets/images/tete_dracaufeu_jackpot.bmp",NULL);
+    droite[2]=load_bitmap("../assets/images/tete_rondoudou_jackpot.bmp",NULL);
 
     clear_to_color(page,makecol(255,255,255));
 

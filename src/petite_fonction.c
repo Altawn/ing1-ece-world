@@ -123,7 +123,7 @@ void poke_center(t_player* player,BITMAP* page, BITMAP* fond,BITMAP* tab[9]){
 
 void score_modif(int t, int type_jeux, const char* nom) {
     char fichier_jeux[20];
-    sprintf(fichier_jeux, "../score%d.txt", type_jeux);
+    sprintf(fichier_jeux, "../data/scores/score%d.txt", type_jeux);
     FILE *pf = fopen(fichier_jeux, "r");
     if (pf == NULL) {
         pf = fopen(fichier_jeux, "w+");
@@ -192,7 +192,7 @@ void afficher_score(){
     char fichier_jeux[20];
     bool end = true;
     clear_to_color(page, makecol(255,255,255));
-    sprintf(fichier_jeux, "../score%d.txt", number);
+    sprintf(fichier_jeux, "../data/scores/score%d.txt", number);
     FILE *pf = fopen(fichier_jeux, "r");
     while(end){
         if(number == 1){
@@ -217,14 +217,14 @@ void afficher_score(){
         if (key[KEY_RIGHT]){
             clear_to_color(page, makecol(255,255,255));
             if(number<6){number++;}
-            sprintf(fichier_jeux, "../score%d.txt", number);
+            sprintf(fichier_jeux, "../data/scores/score%d.txt", number);
             pf = fopen(fichier_jeux, "r");
             rest(500);
         }
         if (key[KEY_LEFT]){
             clear_to_color(page, makecol(255,255,255));
             if(number>1){number--;}
-            sprintf(fichier_jeux, "../score%d.txt", number);
+            sprintf(fichier_jeux, "../data/scores/score%d.txt", number);
             pf = fopen(fichier_jeux, "r");
             rest(500);
         }

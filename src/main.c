@@ -79,35 +79,35 @@ int main()
     //declaration BITMAP
     page2         = create_bitmap(1024,768);
     page          = create_bitmap(1024,768); clear_to_color(page, makecol(255,255,255));
-    cent          = load_bitmap("../présentation+fond/poke_center.bmp",NULL);
-    fond          = load_bitmap("../présentation+fond/fond_park.bmp",NULL);
-    fond2         = load_bitmap("../présentation+fond/fond_park.bmp",NULL);
-    fin_jeu_final = load_bitmap("../end_jeu_final.bmp",NULL);
-    t0            = load_bitmap("../image_deplacement/t1.bmp",NULL);
-    t1            = load_bitmap("../image_deplacement/t2.bmp",NULL);
-    t2            = load_bitmap("../image_deplacement/t3.bmp",NULL);
-    ts0           = load_bitmap("../image_deplacement/ts1.bmp",NULL);
-    ts1           = load_bitmap("../image_deplacement/ts2.bmp",NULL);
-    ts2           = load_bitmap("../image_deplacement/ts3.bmp",NULL);
-    tup0          = load_bitmap("../image_deplacement/tu1.bmp",NULL);
-    tup1          = load_bitmap("../image_deplacement/tu2.bmp",NULL);
-    tup2          = load_bitmap("../image_deplacement/tu3.bmp",NULL);
-    e1            = load_bitmap("../image_deplacement/img8.bmp",NULL);
-    e2            = load_bitmap("../image_deplacement/img7.bmp",NULL);
-    e3            = load_bitmap("../image_deplacement/img9.bmp",NULL);
-    e_s1          = load_bitmap("../image_deplacement/img5.bmp",NULL);
-    e_s2          = load_bitmap("../image_deplacement/img6.bmp",NULL);
-    e_s3          = load_bitmap("../image_deplacement/img4.bmp",NULL);
-    e_u1          = load_bitmap("../image_deplacement/img2.bmp",NULL);
-    e_u2          = load_bitmap("../image_deplacement/img1.bmp",NULL);
-    e_u3          = load_bitmap("../image_deplacement/img3.bmp",NULL);
-    quoi          = load_bitmap("../présentation+fond/quoi.bmp",NULL);
+    cent          = load_bitmap("../assets/images/presentation/poke_center.bmp",NULL);
+    fond          = load_bitmap("../assets/images/presentation/fond_park.bmp",NULL);
+    fond2         = load_bitmap("../assets/images/presentation/fond_park.bmp",NULL);
+    fin_jeu_final = load_bitmap("../assets/images/end_jeu_final.bmp",NULL);
+    t0            = load_bitmap("../assets/images/deplacement/t1.bmp",NULL);
+    t1            = load_bitmap("../assets/images/deplacement/t2.bmp",NULL);
+    t2            = load_bitmap("../assets/images/deplacement/t3.bmp",NULL);
+    ts0           = load_bitmap("../assets/images/deplacement/ts1.bmp",NULL);
+    ts1           = load_bitmap("../assets/images/deplacement/ts2.bmp",NULL);
+    ts2           = load_bitmap("../assets/images/deplacement/ts3.bmp",NULL);
+    tup0          = load_bitmap("../assets/images/deplacement/tu1.bmp",NULL);
+    tup1          = load_bitmap("../assets/images/deplacement/tu2.bmp",NULL);
+    tup2          = load_bitmap("../assets/images/deplacement/tu3.bmp",NULL);
+    e1            = load_bitmap("../assets/images/deplacement/img8.bmp",NULL);
+    e2            = load_bitmap("../assets/images/deplacement/img7.bmp",NULL);
+    e3            = load_bitmap("../assets/images/deplacement/img9.bmp",NULL);
+    e_s1          = load_bitmap("../assets/images/deplacement/img5.bmp",NULL);
+    e_s2          = load_bitmap("../assets/images/deplacement/img6.bmp",NULL);
+    e_s3          = load_bitmap("../assets/images/deplacement/img4.bmp",NULL);
+    e_u1          = load_bitmap("../assets/images/deplacement/img2.bmp",NULL);
+    e_u2          = load_bitmap("../assets/images/deplacement/img1.bmp",NULL);
+    e_u3          = load_bitmap("../assets/images/deplacement/img3.bmp",NULL);
+    quoi          = load_bitmap("../assets/images/presentation/quoi.bmp",NULL);
 
     BITMAP* tab_depla1[] = {t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2,};
     BITMAP* tab_depla2[] = {e1,e2,e3,e_u1,e_u2,e_u3,e_s1,e_s2,e_s3};
 
     //partie musique :
-    MIDI* midi           = load_midi("../music/Pokemon_sound.mid"); play_midi(midi, true);
+    MIDI* midi           = load_midi("../assets/sounds/Pokemon_sound.mid"); play_midi(midi, true);
     ecran();
     //affichage de Chen qui demande nom + skin
     print_chen(page,&player1,&player2);

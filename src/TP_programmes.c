@@ -22,13 +22,13 @@ int jeu_maximiliano()
     clear(page);
 
 
-    sprite_tiplouf_tete = load_bitmap("../tetedetiplouf.bmp", NULL);
+    sprite_tiplouf_tete = load_bitmap("../assets/images/tetedetiplouf.bmp", NULL);
     if(!sprite_tiplouf_tete){
         allegro_message("l'image ne charge pas");
         exit(1);
     }
 
-    fond_d_ecran = load_bitmap("../map_taupe_la.bmp", NULL);
+    fond_d_ecran = load_bitmap("../assets/images/map_taupe_la.bmp", NULL);
     if (!fond_d_ecran)
     {
         allegro_message("erreur de chargement");
@@ -139,7 +139,7 @@ void ecran_d_accueil(){
     BITMAP *ecran_accueil;
     BITMAP *page = create_bitmap(1024, 768);
     clear_bitmap(page);
-    ecran_accueil = load_bitmap("../ecranaccueil.bmp", NULL);
+    ecran_accueil = load_bitmap("../assets/images/ecranaccueil.bmp", NULL);
     if (!ecran_accueil)
     {
         allegro_message("erreur de chargement");

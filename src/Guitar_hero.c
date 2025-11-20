@@ -114,15 +114,15 @@ int partie_guitar_hero(BITMAP* page){
     clear_bitmap(screen);
     for ( i = 0; i < NB_poke_guitare; ++i) {
 
-        pikachu[i]=load_bitmap("../tete_pikachu.bmp",NULL);
-        carapuce[i]= load_bitmap("../tete_carapuce.bmp",NULL);
-        dracaufeu[i]= load_bitmap("../tete_dracaufeu.bmp",NULL);
-        evoli[i]= load_bitmap("../tete_evoli.bmp",NULL);
-        rondoudou[i]= load_bitmap("../tete_rondoudou.bmp",NULL);
+        pikachu[i]=load_bitmap("../assets/images/tete_pikachu.bmp",NULL);
+        carapuce[i]= load_bitmap("../assets/images/tete_carapuce.bmp",NULL);
+        dracaufeu[i]= load_bitmap("../assets/images/tete_dracaufeu.bmp",NULL);
+        evoli[i]= load_bitmap("../assets/images/tete_evoli.bmp",NULL);
+        rondoudou[i]= load_bitmap("../assets/images/tete_rondoudou.bmp",NULL);
     }
 
-    fond_ecran=load_bitmap("../fond_ecran_guitarre_heroo_1024.bmp",NULL);
-    fond_ecran2=load_bitmap("../fond_ecran_guitarre_heroo_1024.bmp",NULL);
+    fond_ecran=load_bitmap("../assets/images/fond_ecran_guitarre_heroo_1024.bmp",NULL);
+    fond_ecran2=load_bitmap("../assets/images/fond_ecran_guitarre_heroo_1024.bmp",NULL);
 
 
     for ( i = 0; i < NB_poke_guitare; ++i) {
@@ -210,8 +210,8 @@ void guitar_hero(t_player* player,t_player* player2) {
     BITMAP* game_over2;
     BITMAP* page=NULL;
 
-    game_over=load_bitmap("../game_over_V2.bmp",NULL);
-    game_over2=load_bitmap("../game_over_V2.bmp",NULL);
+    game_over=load_bitmap("../assets/images/game_over_V2.bmp",NULL);
+    game_over2=load_bitmap("../assets/images/game_over_V2.bmp",NULL);
     page=create_bitmap(SCREEN_W,SCREEN_H);
 
     int temp[2];

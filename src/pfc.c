@@ -17,19 +17,19 @@ void slashed(BITMAP* page,BITMAP*fond,BITMAP*bar_menu,pokemon* s,pokemon* c,int 
 void fight(pokemon* s,pokemon* c,BITMAP* page,t_player* player1,t_player* player2) {
 
     BITMAP* slash1;BITMAP* slash2;BITMAP* slash3;BITMAP* slash4;BITMAP* slash5;
-    slash1 = load_bitmap("../image/Classic_19.bmp",NULL);slash2 = load_bitmap("../image/Classic_20.bmp",NULL);
-    slash3 = load_bitmap("../image/Classic_21.bmp",NULL);slash4 = load_bitmap("../image/Classic_22.bmp",NULL);
-    slash5 = load_bitmap("../image/Classic_23.bmp",NULL);
+    slash1 = load_bitmap("../assets/images/pfc/Classic_19.bmp",NULL);slash2 = load_bitmap("../assets/images/pfc/Classic_20.bmp",NULL);
+    slash3 = load_bitmap("../assets/images/pfc/Classic_21.bmp",NULL);slash4 = load_bitmap("../assets/images/pfc/Classic_22.bmp",NULL);
+    slash5 = load_bitmap("../assets/images/pfc/Classic_23.bmp",NULL);
     BITMAP* slash[5] ={slash1,slash2,slash3,slash4,slash5};
     BITMAP* bar1; BITMAP* bar2;BITMAP* bar_menu;BITMAP* fond;BITMAP* sword;BITMAP* shield;BITMAP* staff;
     s->attack1 =0;s->attack2 =0;s->attack3 =0;c->attack1 =0;c->attack2 =0;c->attack3 =0;
-    shield = load_bitmap("../image/shield.bmp",NULL);
-    sword = load_bitmap("../image/sword.bmp",NULL);
-    staff = load_bitmap("../image/staff2.bmp",NULL);
-    bar_menu = load_bitmap("../image/bar_menu.bmp",NULL);
-    bar1 = load_bitmap("../image/bar1.bmp",NULL);
-    bar2 = load_bitmap("../image/bar2.bmp",NULL);
-    fond = load_bitmap("../image/b1.bmp",NULL);
+    shield = load_bitmap("../assets/images/pfc/shield.bmp",NULL);
+    sword = load_bitmap("../assets/images/pfc/sword.bmp",NULL);
+    staff = load_bitmap("../assets/images/pfc/staff2.bmp",NULL);
+    bar_menu = load_bitmap("../assets/images/pfc/bar_menu.bmp",NULL);
+    bar1 = load_bitmap("../assets/images/pfc/bar1.bmp",NULL);
+    bar2 = load_bitmap("../assets/images/pfc/bar2.bmp",NULL);
+    fond = load_bitmap("../assets/images/pfc/b1.bmp",NULL);
     int pv1 =0;int barx = -200;int bar2x = 900;int bar_my = 978; int pv2 =0;
     while(barx != 610){
         blit(fond, page, 0, 0, 0, 0, SCREEN_W, SCREEN_H);
@@ -191,36 +191,36 @@ void pfc(t_player* player1,t_player* player2)  {
     BITMAP*face_c;BITMAP* face2_c;
     BITMAP*face_b;BITMAP* face2_b;
 
-    MIDI* snake_music = load_midi("../music/snake_music.mid");
-    t0            = load_bitmap("../image_deplacement/t1.bmp",NULL);
-    t1            = load_bitmap("../image_deplacement/t2.bmp",NULL);
-    t2            = load_bitmap("../image_deplacement/t3.bmp",NULL);
-    ts0           = load_bitmap("../image_deplacement/ts1.bmp",NULL);
-    ts1           = load_bitmap("../image_deplacement/ts2.bmp",NULL);
-    ts2           = load_bitmap("../image_deplacement/ts3.bmp",NULL);
-    tup0          = load_bitmap("../image_deplacement/tu1.bmp",NULL);
-    tup1          = load_bitmap("../image_deplacement/tu2.bmp",NULL);
-    tup2          = load_bitmap("../image_deplacement/tu3.bmp",NULL);
-    e1            = load_bitmap("../image_deplacement/img8.bmp",NULL);
-    e2            = load_bitmap("../image_deplacement/img7.bmp",NULL);
-    e3            = load_bitmap("../image_deplacement/img9.bmp",NULL);
-    e_s1          = load_bitmap("../image_deplacement/img5.bmp",NULL);
-    e_s2          = load_bitmap("../image_deplacement/img6.bmp",NULL);
-    e_s3          = load_bitmap("../image_deplacement/img4.bmp",NULL);
-    e_u1          = load_bitmap("../image_deplacement/img2.bmp",NULL);
-    e_u2          = load_bitmap("../image_deplacement/img1.bmp",NULL);
-    e_u3          = load_bitmap("../image_deplacement/img3.bmp",NULL);
+    MIDI* snake_music = load_midi("../assets/sounds/snake_music.mid");
+    t0            = load_bitmap("../assets/images/deplacement/t1.bmp",NULL);
+    t1            = load_bitmap("../assets/images/deplacement/t2.bmp",NULL);
+    t2            = load_bitmap("../assets/images/deplacement/t3.bmp",NULL);
+    ts0           = load_bitmap("../assets/images/deplacement/ts1.bmp",NULL);
+    ts1           = load_bitmap("../assets/images/deplacement/ts2.bmp",NULL);
+    ts2           = load_bitmap("../assets/images/deplacement/ts3.bmp",NULL);
+    tup0          = load_bitmap("../assets/images/deplacement/tu1.bmp",NULL);
+    tup1          = load_bitmap("../assets/images/deplacement/tu2.bmp",NULL);
+    tup2          = load_bitmap("../assets/images/deplacement/tu3.bmp",NULL);
+    e1            = load_bitmap("../assets/images/deplacement/img8.bmp",NULL);
+    e2            = load_bitmap("../assets/images/deplacement/img7.bmp",NULL);
+    e3            = load_bitmap("../assets/images/deplacement/img9.bmp",NULL);
+    e_s1          = load_bitmap("../assets/images/deplacement/img5.bmp",NULL);
+    e_s2          = load_bitmap("../assets/images/deplacement/img6.bmp",NULL);
+    e_s3          = load_bitmap("../assets/images/deplacement/img4.bmp",NULL);
+    e_u1          = load_bitmap("../assets/images/deplacement/img2.bmp",NULL);
+    e_u2          = load_bitmap("../assets/images/deplacement/img1.bmp",NULL);
+    e_u3          = load_bitmap("../assets/images/deplacement/img3.bmp",NULL);
 
     BITMAP* tab_depla1[] = {t0,t1,t2,tup0,tup1,tup2,ts0,ts1,ts2,};
     BITMAP* tab_depla2[] = {e1,e2,e3,e_u1,e_u2,e_u3,e_s1,e_s2,e_s3};
 
-    frame1_s = load_bitmap("../image/frame1_s.bmp",NULL);frame2_s = load_bitmap("../image/frame2_s.bmp",NULL);
-    frame1_c = load_bitmap("../image/frame1_c.bmp",NULL);frame2_c = load_bitmap("../image/frame2_c.bmp",NULL);
-    frame1_b = load_bitmap("../image/frame1_b.bmp",NULL);frame2_b = load_bitmap("../image/frame_2b.bmp",NULL);
+    frame1_s = load_bitmap("../assets/images/pfc/frame1_s.bmp",NULL);frame2_s = load_bitmap("../assets/images/pfc/frame2_s.bmp",NULL);
+    frame1_c = load_bitmap("../assets/images/pfc/frame1_c.bmp",NULL);frame2_c = load_bitmap("../assets/images/pfc/frame2_c.bmp",NULL);
+    frame1_b = load_bitmap("../assets/images/pfc/frame1_b.bmp",NULL);frame2_b = load_bitmap("../assets/images/pfc/frame_2b.bmp",NULL);
 
-    face_s = load_bitmap("../image/face1_s.bmp",NULL);face2_s = load_bitmap("../image/face2_s.bmp",NULL);
-    face_c = load_bitmap("../image/face1_c.bmp",NULL);face2_c = load_bitmap("../image/face2_c.bmp",NULL);
-    face_b = load_bitmap("../image/face1_b.bmp",NULL);face2_b = load_bitmap("../image/face2_b.bmp",NULL);
+    face_s = load_bitmap("../assets/images/pfc/face1_s.bmp",NULL);face2_s = load_bitmap("../assets/images/pfc/face2_s.bmp",NULL);
+    face_c = load_bitmap("../assets/images/pfc/face1_c.bmp",NULL);face2_c = load_bitmap("../assets/images/pfc/face2_c.bmp",NULL);
+    face_b = load_bitmap("../assets/images/pfc/face1_b.bmp",NULL);face2_b = load_bitmap("../assets/images/pfc/face2_b.bmp",NULL);
 
     pokemon s = {1,1,1,2,3,frame1_s,frame2_s,0.7,face_s,face2_s};
     pokemon b = {2,2,4,5,6,frame1_b,frame2_b,0.6,face_b,face2_b};
@@ -229,10 +229,10 @@ void pfc(t_player* player1,t_player* player2)  {
     BITMAP* salameche;BITMAP* carapuce;BITMAP* bulbizarre;
 
     page = create_bitmap(1024,768);
-    salameche = load_bitmap("../image/salamèche.bmp",NULL);
-    carapuce = load_bitmap("../image/Carapuce.bmp",NULL);
-    bulbizarre = load_bitmap("../image/Bulbizarre.bmp",NULL);
-    fond = load_bitmap("../image/pokemon_lab.bmp",NULL);
+    salameche = load_bitmap("../assets/images/pfc/salamèche.bmp",NULL);
+    carapuce = load_bitmap("../assets/images/pfc/Carapuce.bmp",NULL);
+    bulbizarre = load_bitmap("../assets/images/pfc/Bulbizarre.bmp",NULL);
+    fond = load_bitmap("../assets/images/pfc/pokemon_lab.bmp",NULL);
     player1->x=510;
     player1->y=535;
     player1->mouv=0;

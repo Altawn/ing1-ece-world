@@ -186,15 +186,15 @@ bool snake_defeat(int nbpart, t_liste* serpent) {
 
 void snake(t_player* player,t_player* player2) {
 
-    MIDI* snake_music = load_midi("../music/snake_music.mid");
+    MIDI* snake_music = load_midi("../assets/sounds/snake_music.mid");
     play_midi(snake_music, true);
-    BITMAP* over = load_bitmap("../snake_image/game-over1.bmp",NULL);
-   BITMAP* fond = load_bitmap("../snake_image/cave_background.bmp",NULL);
-   BITMAP* head1= load_bitmap("../snake_image/onyx_head1.bmp",NULL);
-   BITMAP* head2= load_bitmap("../snake_image/onyx_head2.bmp",NULL);
-   BITMAP* head3= load_bitmap("../snake_image/onyx_head3.bmp",NULL);
-   BITMAP* head4= load_bitmap("../snake_image/onyx_head4.bmp",NULL);
-    BITMAP* base = load_bitmap("../snake_image/onyx_part.bmp",NULL);
+    BITMAP* over = load_bitmap("../assets/images/snake/game-over1.bmp",NULL);
+   BITMAP* fond = load_bitmap("../assets/images/snake/cave_background.bmp",NULL);
+   BITMAP* head1= load_bitmap("../assets/images/snake/onyx_head1.bmp",NULL);
+   BITMAP* head2= load_bitmap("../assets/images/snake/onyx_head2.bmp",NULL);
+   BITMAP* head3= load_bitmap("../assets/images/snake/onyx_head3.bmp",NULL);
+   BITMAP* head4= load_bitmap("../assets/images/snake/onyx_head4.bmp",NULL);
+    BITMAP* base = load_bitmap("../assets/images/snake/onyx_part.bmp",NULL);
     BITMAP* base2 = create_bitmap(64,64);
     BITMAP* page = create_bitmap(1024,768);
     clear_to_color(base2, makecol(255,0,0));
