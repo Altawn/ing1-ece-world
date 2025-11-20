@@ -1,5 +1,32 @@
-cmake-build-debug
-.idea
+# Build directories
+cmake-build-debug/
+build/
+out/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Compiled files
+*.o
+*.obj
+*.exe
+*.out
+*.app
+
+# OS files
 .DS_Store
+Thumbs.db
+
+# Generated documentation
 *.html
 *.pdf
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+
